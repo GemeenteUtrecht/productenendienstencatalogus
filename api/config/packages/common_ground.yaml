@@ -15,6 +15,9 @@ parameters:
             -
               description: OAS Documentatie
               url: 'http://pdc.zaakonline.nl'  
+            -
+              description: Repository
+              url: 'https://github.com/ConductionNL/productenendienstencatalogus'  
     common_ground.oas.developers:
             -
               name: Conduction
