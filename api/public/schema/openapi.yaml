@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: 'Common Ground Component'
+  title: 'Producten en Diensten Catalogus (PDC)'
   version: 0.0.1
   description: |
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar. 
@@ -27,69 +27,57 @@ info:
     Let er bij het meegeven van JWT tokens op dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
     
 paths:
-  /example_entities:
+  /groups:
     get:
       tags:
-        - ExampleEntity
-      operationId: getExampleEntityCollection
-      summary: 'Retrieves the collection of ExampleEntity resources.'
+        - Group
+      operationId: getGroupCollection
+      summary: 'Retrieves the collection of Group resources.'
       responses:
         200:
-          description: 'ExampleEntity collection response'
+          description: 'Group collection response'
           content:
             application/hal+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExampleEntity'
+                  $ref: '#/components/schemas/Group-read'
       parameters:
-        -
-          name: like_name
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: like_description
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -99,43 +87,43 @@ paths:
             type: integer
     post:
       tags:
-        - ExampleEntity
-      operationId: postExampleEntityCollection
-      summary: 'Creates a ExampleEntity resource.'
+        - Group
+      operationId: postGroupCollection
+      summary: 'Creates a Group resource.'
       responses:
         201:
-          description: 'ExampleEntity resource created'
+          description: 'Group resource created'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
           links:
-            GetExampleEntityItem:
+            GetGroupItem:
               parameters:
                 id: '$response.body#/id'
-              operationId: getExampleEntityItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /example_entities/{id}`.'
+              operationId: getGroupItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /groups/{id}`.'
         400:
           description: 'Invalid input'
         404:
@@ -144,35 +132,35 @@ paths:
         content:
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
-        description: 'The new ExampleEntity resource'
-  '/example_entities/{id}':
+              $ref: '#/components/schemas/Group-write'
+        description: 'The new Group resource'
+  '/groups/{id}':
     get:
       tags:
-        - ExampleEntity
-      operationId: getExampleEntityItem
-      summary: 'Retrieves a ExampleEntity resource.'
+        - Group
+      operationId: getGroupItem
+      summary: 'Retrieves a Group resource.'
       parameters:
         -
           name: id
@@ -182,42 +170,42 @@ paths:
             type: string
       responses:
         200:
-          description: 'ExampleEntity resource response'
+          description: 'Group resource response'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
         404:
           description: 'Resource not found'
     delete:
       tags:
-        - ExampleEntity
-      operationId: deleteExampleEntityItem
-      summary: 'Removes the ExampleEntity resource.'
+        - Group
+      operationId: deleteGroupItem
+      summary: 'Removes the Group resource.'
       responses:
         204:
-          description: 'ExampleEntity resource deleted'
+          description: 'Group resource deleted'
         404:
           description: 'Resource not found'
       parameters:
@@ -229,9 +217,9 @@ paths:
             type: string
     put:
       tags:
-        - ExampleEntity
-      operationId: putExampleEntityItem
-      summary: 'Replaces the ExampleEntity resource.'
+        - Group
+      operationId: putGroupItem
+      summary: 'Replaces the Group resource.'
       parameters:
         -
           name: id
@@ -241,32 +229,32 @@ paths:
             type: string
       responses:
         200:
-          description: 'ExampleEntity resource updated'
+          description: 'Group resource updated'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
         400:
           description: 'Invalid input'
         404:
@@ -275,34 +263,34 @@ paths:
         content:
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
-        description: 'The updated ExampleEntity resource'
+              $ref: '#/components/schemas/Group-write'
+        description: 'The updated Group resource'
     patch:
       tags:
-        - ExampleEntity
-      operationId: patchExampleEntityItem
-      summary: 'Updates the ExampleEntity resource.'
+        - Group
+      operationId: patchGroupItem
+      summary: 'Updates the Group resource.'
       parameters:
         -
           name: id
@@ -312,32 +300,32 @@ paths:
             type: string
       responses:
         200:
-          description: 'ExampleEntity resource updated'
+          description: 'Group resource updated'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/ExampleEntity'
+                $ref: '#/components/schemas/Group-read'
         400:
           description: 'Invalid input'
         404:
@@ -346,52 +334,1153 @@ paths:
         content:
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
+              $ref: '#/components/schemas/Group-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/ExampleEntity'
-        description: 'The updated ExampleEntity resource'
+              $ref: '#/components/schemas/Group-write'
+        description: 'The updated Group resource'
+  /products:
+    get:
+      tags:
+        - Product
+      operationId: getProductCollection
+      summary: 'Retrieves the collection of Product resources.'
+      responses:
+        200:
+          description: 'Product collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+    post:
+      tags:
+        - Product
+      operationId: postProductCollection
+      summary: 'Creates a Product resource.'
+      responses:
+        201:
+          description: 'Product resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+          links:
+            GetProductItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getProductItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /products/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: 'The new Product resource'
+  '/products/{id}':
+    get:
+      tags:
+        - Product
+      operationId: getProductItem
+      summary: 'Retrieves a Product resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Product resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Product
+      operationId: deleteProductItem
+      summary: 'Removes the Product resource.'
+      responses:
+        204:
+          description: 'Product resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Product
+      operationId: putProductItem
+      summary: 'Replaces the Product resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Product resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: 'The updated Product resource'
+    patch:
+      tags:
+        - Product
+      operationId: patchProductItem
+      summary: 'Updates the Product resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Product resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: 'The updated Product resource'
+  /services:
+    get:
+      tags:
+        - Service
+      operationId: getServiceCollection
+      summary: 'Retrieves the collection of Service resources.'
+      responses:
+        200:
+          description: 'Service collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+    post:
+      tags:
+        - Service
+      operationId: postServiceCollection
+      summary: 'Creates a Service resource.'
+      responses:
+        201:
+          description: 'Service resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+          links:
+            GetServiceItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getServiceItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /services/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+        description: 'The new Service resource'
+  '/services/{id}':
+    get:
+      tags:
+        - Service
+      operationId: getServiceItem
+      summary: 'Retrieves a Service resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Service resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Service
+      operationId: deleteServiceItem
+      summary: 'Removes the Service resource.'
+      responses:
+        204:
+          description: 'Service resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Service
+      operationId: putServiceItem
+      summary: 'Replaces the Service resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Service resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+        description: 'The updated Service resource'
+    patch:
+      tags:
+        - Service
+      operationId: patchServiceItem
+      summary: 'Updates the Service resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Service resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Service-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Service-write'
+        description: 'The updated Service resource'
+  /suppliers:
+    get:
+      tags:
+        - Supplier
+      operationId: getSupplierCollection
+      summary: 'Retrieves the collection of Supplier resources.'
+      responses:
+        200:
+          description: 'Supplier collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+    post:
+      tags:
+        - Supplier
+      operationId: postSupplierCollection
+      summary: 'Creates a Supplier resource.'
+      responses:
+        201:
+          description: 'Supplier resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+          links:
+            GetSupplierItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSupplierItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /suppliers/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: 'The new Supplier resource'
+  '/suppliers/{id}':
+    get:
+      tags:
+        - Supplier
+      operationId: getSupplierItem
+      summary: 'Retrieves a Supplier resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Supplier resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Supplier
+      operationId: deleteSupplierItem
+      summary: 'Removes the Supplier resource.'
+      responses:
+        204:
+          description: 'Supplier resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Supplier
+      operationId: putSupplierItem
+      summary: 'Replaces the Supplier resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Supplier resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: 'The updated Supplier resource'
+    patch:
+      tags:
+        - Supplier
+      operationId: patchSupplierItem
+      summary: 'Updates the Supplier resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Supplier resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: 'The updated Supplier resource'
 components:
   schemas:
-    ExampleEntity:
+    Group-read:
       type: object
       description: ''
       properties:
         id:
           readOnly: true
-          type: integer
+          type: string
         name:
           type: string
         description:
           type: string
-        in_onderzoek: {  }
-        ingangs_datum: {  }
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service-read'
+        organisation:
+          type: string
+    Group-write:
+      type: object
+      description: ''
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-write'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service-write'
+        organisation:
+          type: string
+    Product-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        organisation:
+          type: string
+        price: {  }
+    Product-write:
+      type: object
+      description: ''
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        organisation:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-write'
+        price: {  }
+    Service-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        organisation:
+          type: string
+        children:
+          $ref: '#/components/schemas/Service-read'
+        price: {  }
+    Service-write:
+      type: object
+      description: ''
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        organisation:
+          type: string
+        children:
+          $ref: '#/components/schemas/Service-write'
+        parent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service-write'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-write'
+        price: {  }
+    Supplier-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: string
+        kvk:
+          type: string
+        logo:
+          type: string
+    Supplier-write:
+      type: object
+      description: ''
+      properties:
+        kvk:
+          type: string
+        logo:
+          type: string
 servers:
   -
     description: 'Demo Omgeving'
-    url: 'http://proto.demo.common-ground.dev'
+    url: 'http://pdc.zaakonline.nl'
 externalDocs:
   -
     description: 'OAS Documentatie'
-    url: 'http://proto.demo.common-ground.dev'
+    url: 'http://pdc.zaakonline.nl'
 x-commonground:
   type: tool
   developers:
