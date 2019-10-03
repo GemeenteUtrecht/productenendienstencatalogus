@@ -10,11 +10,14 @@ parameters:
     common_ground.oas.servers:
             -
               description: Demo Omgeving
-              url: 'http://proto.demo.common-ground.dev'       
+              url: 'http://pdc.zaakonline.nl'       
     common_ground.oas.externalDocs:
             -
               description: OAS Documentatie
-              url: 'http://proto.demo.common-ground.dev'  
+              url: 'http://pdc.zaakonline.nl'  
+            -
+              description: Repository
+              url: 'https://github.com/ConductionNL/productenendienstencatalogus'  
     common_ground.oas.developers:
             -
               name: Conduction

@@ -7,6 +7,13 @@ What do you need for this tutorial?
 * docker account
 * docker for desktop
 
+* Browser
+* Github account
+* Git client
+* Docker account
+* Docker for desktop
+
+
 ## Generating your component (repository/codebase)
 Starting up your first Common Ground component is extremely easy, al you need is a GitHub account and go the link below and fill in the form, press create and press to we have a component!
 
@@ -35,7 +42,7 @@ $ docker-compose up
 
 Your computer should now start up your local development environment. Don't worry about al the code coming by, let's just wait until it finishes. You're free to watch along and see what exactly docker is doing, you will know when it's finished when it tells you that it is ready to handle connections. 
 
-Open your browser type http://localhost/ as address and hit enter, you should now see your common ground component up and running.
+Open your browser type <http://localhost/> as address and hit enter, you should now see your common ground component up and running.
 
 **What are we looking at?**
 The Common Ground base component provides a bit more than just a development interface, it also includes an example application and a backend that automatically hooks into your api. For now we're just going to focus on our api, but is good to read up on all the features of the Common Ground base component here.  
@@ -56,7 +63,8 @@ We should now see a wizward that allows us to either make new entities, or add p
 
 ## Keeping your repository up to date with the Conduction Common Ground component 
 
-There are basically three reasons why you should want to keep your repository up to date with the Conduction proto component
+There are basically three reasons why you should want to keep your repository up to date with the Conduction proto component:
+
 * Security, Conduction performs regular security updates on 
 * Functionality we strive to make regular 
 * Compliance, as discussions in the broader Common Ground community progress API standars might advance or change. Conduction will regularly update the Common Ground component with those changes. 
