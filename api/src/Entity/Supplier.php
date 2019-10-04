@@ -4,8 +4,15 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
@@ -37,23 +44,100 @@ class Supplier
 	 * @ORM\GeneratedValue(strategy="CUSTOM")
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 */
-	private $id;
+    private $id;
+    
+    /**
+     * @var string $name The name of this RequestType
+     * @example My RequestType
+     *
+     * @ApiProperty(
+     * 	   iri="http://schema.org/name",
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The name of this RequestType",
+     *             "type"="string",
+     *             "example"="My RequestType",
+     *             "maxLength"="255",
+     *             "required" = true
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     /**
+     * @var string $kvk The number under wich the suplier is registerd at the chamber of comerce
+     * @example 30280353
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The number under wich the suplier is registerd at the chamber of comerce",
+     *             "type"="string",
+     *             "example"="30280353",
+     *             "maxLength"="255",
+     *             "required" = true
+     *         }
+     *     }
+     * )
+     * 
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
     private $kvk;
-
+    
     /**
+     * @var string $logo The logo for this component
+     * @example https://www.my-organisation.com/logo.png
+     *
+     * @ApiProperty(
+     * 	   iri="https://schema.org/logo",
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The logo for this component",
+     *             "type"="string",
+     *             "format"="url",
+     *             "example"="https://www.my-organisation.com/logo.png",
+     *             "maxLength"=255
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255
+     * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+    
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        
+        return $this;
     }
 
     public function getKvk(): ?string

@@ -27,6 +27,352 @@ info:
     Let er bij het meegeven van JWT tokens op dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
     
 paths:
+  /cataloguses:
+    get:
+      tags:
+        - Catalogus
+      operationId: getCatalogusCollection
+      summary: 'Retrieves the collection of Catalogus resources.'
+      responses:
+        200:
+          description: 'Catalogus collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalogus-read'
+      parameters:
+        -
+          name: rsin
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'rsin[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+    post:
+      tags:
+        - Catalogus
+      operationId: postCatalogusCollection
+      summary: 'Creates a Catalogus resource.'
+      responses:
+        201:
+          description: 'Catalogus resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+          links:
+            GetCatalogusItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getCatalogusItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /cataloguses/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+        description: 'The new Catalogus resource'
+  '/cataloguses/{id}':
+    get:
+      tags:
+        - Catalogus
+      operationId: getCatalogusItem
+      summary: 'Retrieves a Catalogus resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Catalogus resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Catalogus
+      operationId: deleteCatalogusItem
+      summary: 'Removes the Catalogus resource.'
+      responses:
+        204:
+          description: 'Catalogus resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Catalogus
+      operationId: putCatalogusItem
+      summary: 'Replaces the Catalogus resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Catalogus resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+        description: 'The updated Catalogus resource'
+    patch:
+      tags:
+        - Catalogus
+      operationId: patchCatalogusItem
+      summary: 'Updates the Catalogus resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Catalogus resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Catalogus-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Catalogus-write'
+        description: 'The updated Catalogus resource'
   /groups:
     get:
       tags:
@@ -78,6 +424,22 @@ paths:
                 items:
                   $ref: '#/components/schemas/Group-read'
       parameters:
+        -
+          name: rsin
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'rsin[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -409,6 +771,60 @@ paths:
                   $ref: '#/components/schemas/Product-read'
       parameters:
         -
+          name: sku
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'sku[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: rsin
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'rsin[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: 'order[type]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
           name: page
           in: query
           required: false
@@ -687,336 +1103,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Product-write'
         description: 'The updated Product resource'
-  /services:
-    get:
-      tags:
-        - Service
-      operationId: getServiceCollection
-      summary: 'Retrieves the collection of Service resources.'
-      responses:
-        200:
-          description: 'Service collection response'
-          content:
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            application/ld+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            application/vnd.api+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            application/x-yaml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            text/csv:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Service-read'
-      parameters:
-        -
-          name: page
-          in: query
-          required: false
-          description: 'The collection page number'
-          schema:
-            type: integer
-    post:
-      tags:
-        - Service
-      operationId: postServiceCollection
-      summary: 'Creates a Service resource.'
-      responses:
-        201:
-          description: 'Service resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-          links:
-            GetServiceItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getServiceItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /services/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-        description: 'The new Service resource'
-  '/services/{id}':
-    get:
-      tags:
-        - Service
-      operationId: getServiceItem
-      summary: 'Retrieves a Service resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'Service resource response'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-        404:
-          description: 'Resource not found'
-    delete:
-      tags:
-        - Service
-      operationId: deleteServiceItem
-      summary: 'Removes the Service resource.'
-      responses:
-        204:
-          description: 'Service resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-    put:
-      tags:
-        - Service
-      operationId: putServiceItem
-      summary: 'Replaces the Service resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'Service resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-        description: 'The updated Service resource'
-    patch:
-      tags:
-        - Service
-      operationId: patchServiceItem
-      summary: 'Updates the Service resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'Service resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Service-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Service-write'
-        description: 'The updated Service resource'
   /suppliers:
     get:
       tags:
@@ -1349,6 +1435,56 @@ paths:
         description: 'The updated Supplier resource'
 components:
   schemas:
+    Catalogus-read:
+      type: object
+      description: ''
+      required:
+        - name
+        - rsin
+      properties:
+        name:
+          description: 'The name of this Catalogus'
+          type: string
+        description:
+          description: 'An short description of this Catalogus'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          type: string
+        rsin:
+          description: 'The RSIN of the organisation that provides this catalogus'
+          type: string
+        groups:
+          readOnly: true
+          description: 'The groups that are a part of this catalogus'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
+        products:
+          readOnly: true
+          description: 'The groups that are a part of this catalogus'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+    Catalogus-write:
+      type: object
+      description: ''
+      required:
+        - name
+        - rsin
+      properties:
+        name:
+          description: 'The name of this Catalogus'
+          type: string
+        description:
+          description: 'An short description of this Catalogus'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          type: string
+        rsin:
+          description: 'The RSIN of the organisation that provides this catalogus'
+          type: string
     Group-read:
       type: object
       description: ''
@@ -1357,103 +1493,237 @@ components:
           readOnly: true
           type: string
         name:
+          readOnly: true
+          description: 'The name of this product group'
           type: string
         description:
+          readOnly: true
+          description: 'An short description of this product group'
+          type: string
+        logo:
+          readOnly: true
+          description: 'The logo for this component'
           type: string
         products:
+          description: 'The groups that are a part of this product group'
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service-read'
-        organisation:
+        rsin:
+          description: 'The RSIN of the organisation that ownes this group'
           type: string
+        catalogus:
+          description: 'The Catalogus that this product group belongs to'
+          $ref: '#/components/schemas/Catalogus-read'
+      required:
+        - rsin
     Group-write:
       type: object
       description: ''
       properties:
-        name:
-          type: string
-        description:
-          type: string
         products:
+          description: 'The groups that are a part of this product group'
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service-write'
-        organisation:
+        rsin:
+          description: 'The RSIN of the organisation that ownes this group'
           type: string
+        catalogus:
+          description: 'The Catalogus that this product group belongs to'
+          $ref: '#/components/schemas/Catalogus-write'
+      required:
+        - rsin
     Product-read:
       type: object
       description: ''
       properties:
-        id:
-          readOnly: true
+        sku:
+          description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
           type: string
         name:
+          description: 'The name of this Product'
           type: string
         description:
+          description: 'An short description of this Product'
           type: string
-        organisation:
+        logo:
+          description: 'The logo for this product'
           type: string
-        price: {  }
+        movie:
+          description: 'The movie for this product'
+          type: string
+        rsin:
+          description: 'The RSIN of the organisation that ownes this product'
+          type: string
+        groups:
+          description: 'The product groups that this product is a part of'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={              
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        tax_percentage:
+          description: |
+            The tax percentage for this product as an integer e.g. 9% makes 9
+             @example 9
+             
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={     
+                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        variations:
+          readOnly: true
+          description: 'The diverend variations that a available of this product'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+        type:
+          type: string
+          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          enum:
+            - simple
+            - set
+            - virtual
+            - external
+            - ticket
+            - variable
+            - subscription
+            - person
+            - location
+            - service
+          example: simple
+          required: 'true'
+        grouped_products:
+          readOnly: true
+          description: 'If the product type is a **set** this contains the products that are part of that set'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+      required:
+        - name
+        - rsin
+        - price
+        - tax_percentage
+        - type
     Product-write:
       type: object
       description: ''
       properties:
+        sku:
+          description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
+          type: string
         name:
+          description: 'The name of this Product'
           type: string
         description:
+          description: 'An short description of this Product'
           type: string
-        organisation:
+        logo:
+          description: 'The logo for this product'
+          type: string
+        movie:
+          description: 'The movie for this product'
+          type: string
+        rsin:
+          description: 'The RSIN of the organisation that ownes this product'
           type: string
         groups:
+          description: 'The product groups that this product is a part of'
           type: array
           items:
             $ref: '#/components/schemas/Group-write'
-        price: {  }
-    Service-read:
-      type: object
-      description: ''
-      properties:
-        id:
-          readOnly: true
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={              
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
           type: string
-        name:
-          type: string
-        description:
-          type: string
-        organisation:
-          type: string
-        children:
-          $ref: '#/components/schemas/Service-read'
-        price: {  }
-    Service-write:
-      type: object
-      description: ''
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        organisation:
-          type: string
-        children:
-          $ref: '#/components/schemas/Service-write'
+        tax_percentage:
+          description: |
+            The tax percentage for this product as an integer e.g. 9% makes 9
+             @example 9
+             
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={     
+                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
         parent:
+          description: 'The product that this product is a variation of'
+          $ref: '#/components/schemas/Product-write'
+        type:
+          type: string
+          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          enum:
+            - simple
+            - set
+            - virtual
+            - external
+            - ticket
+            - variable
+            - subscription
+            - person
+            - location
+            - service
+          example: simple
+          required: 'true'
+        sets:
+          description: 'The sets thats this product is a part of'
           type: array
           items:
-            $ref: '#/components/schemas/Service-write'
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group-write'
-        price: {  }
+            $ref: '#/components/schemas/Product-write'
+      required:
+        - name
+        - rsin
+        - price
+        - tax_percentage
+        - type
     Supplier-read:
       type: object
       description: ''
@@ -1461,17 +1731,33 @@ components:
         id:
           readOnly: true
           type: string
+        name:
+          description: 'The name of this RequestType'
+          type: string
         kvk:
+          description: 'The number under wich the suplier is registerd at the chamber of comerce'
           type: string
         logo:
+          description: 'The logo for this component'
           type: string
+      required:
+        - name
+        - kvk
     Supplier-write:
       type: object
       description: ''
+      required:
+        - name
+        - kvk
       properties:
+        name:
+          description: 'The name of this RequestType'
+          type: string
         kvk:
+          description: 'The number under wich the suplier is registerd at the chamber of comerce'
           type: string
         logo:
+          description: 'The logo for this component'
           type: string
 servers:
   -

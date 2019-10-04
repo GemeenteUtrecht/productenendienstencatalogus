@@ -4,15 +4,20 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
- *     normalizationContext={"groups"={"read"}},
- *     denormalizationContext={"groups"={"write"}}
+ *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
+ *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  * @ORM\Table(name="productorservicegroup")
@@ -41,36 +46,127 @@ class Group
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 */
 	private $id;
+		
+	/**
+	 * @var string $name The name of this product group
+	 * @example My Group
+	 *
+	 * @ApiProperty(
+	 * 	   iri="http://schema.org/name",
+	 *     attributes={
+	 *         "swagger_context"={
+	 *         	   "description" = "The name of this product group",
+	 *             "type"="string",
+	 *             "example"="My Group",
+	 *             "maxLength"="255",
+	 *             "required" = true
+	 *         }
+	 *     }
+	 * )
+	 *
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      max = 255
+	 * )
+	 * @Groups({"read"})
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $name;
+	
+	/**
+	 * @var string $description An short description of this product group
+	 * @example This is the best group ever
+	 *
+	 * @ApiProperty(
+	 * 	   iri="https://schema.org/description",
+	 *     attributes={
+	 *         "swagger_context"={
+	 *         	   "description" = "An short description of this product group",
+	 *             "type"="string",
+	 *             "example"="This is the best group ever",
+	 *             "maxLength"="2550"
+	 *         }
+	 *     }
+	 * )
+	 *
+	 * @Assert\Length(
+	 *      max = 2550
+	 * )
+	 * @Groups({"read"})
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $description;
+	
+	/**
+	 * @var string $logo The logo for this component
+	 * @example https://www.my-organisation.com/logo.png
+	 *
+	 * @ApiProperty(
+	 * 	   iri="https://schema.org/logo",
+	 *     attributes={
+	 *         "swagger_context"={
+	 *         	   "description" = "The logo for this component",
+	 *             "type"="string",
+	 *             "format"="url",
+	 *             "example"="https://www.my-organisation.com/logo.png",
+	 *             "maxLength"=255
+	 *         }
+	 *     }
+	 * )
+	 *
+	 * @Assert\Url
+	 * @Assert\Length(
+	 *      max = 255
+	 * )
+	 * @Groups({"read"})
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $logo;
 
     /**
-     * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @Groups({"read","write"})
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
+     * @var ArrayCollection $products The groups that are a part of this product group
+     * 
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="groups")
      */
-    private $products;
-
+    private $products;     
+    
     /**
-     * @Groups({"read","write"})
-     * @ORM\ManyToMany(targetEntity="App\Entity\Service", inversedBy="groups")
-     */
-    private $services;
-
-    /**
-     * @Groups({"read","write"})
+     * @var string $rsin The RSIN of the organisation that ownes this group
+     * @example 002851234
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The RSIN of the organisation that ownes this group",
+     *             "type"="string",
+     *             "example"="002851234",
+     *              "maxLength"="255",
+	 *             "required" = true
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
+     * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $organisation;
+    private $rsin;
+
+    /**
+     * @var Catalogus $catalogus The Catalogus that this product group belongs to
+     * 
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogus", inversedBy="groups")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $catalogus;
 
     public function __construct()
     {
@@ -106,6 +202,18 @@ class Group
 
         return $this;
     }
+    
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+    
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+        
+        return $this;
+    }
 
     /**
      * @return Collection|Product[]
@@ -132,41 +240,27 @@ class Group
 
         return $this;
     }
-
-    /**
-     * @return Collection|Service[]
-     */
-    public function getServices(): Collection
+    
+    public function getRsin(): ?string
     {
-        return $this->services;
+        return $this->rsin;
     }
-
-    public function addService(Service $service): self
+    
+    public function setRsin(string $rsin): self
     {
-        if (!$this->services->contains($service)) {
-            $this->services[] = $service;
-        }
-
+        $this->rsin = $rsin;
+        
         return $this;
     }
 
-    public function removeService(Service $service): self
+    public function getCatalogus(): ?Catalogus
     {
-        if ($this->services->contains($service)) {
-            $this->services->removeElement($service);
-        }
-
-        return $this;
+        return $this->catalogus;
     }
 
-    public function getOrganisation(): ?string
+    public function setCatalogus(?Catalogus $catalogus): self
     {
-        return $this->organisation;
-    }
-
-    public function setOrganisation(string $organisation): self
-    {
-        $this->organisation = $organisation;
+        $this->catalogus = $catalogus;
 
         return $this;
     }
