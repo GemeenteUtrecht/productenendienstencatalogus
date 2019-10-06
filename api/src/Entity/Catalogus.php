@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
-/**
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
@@ -49,16 +48,16 @@ class Catalogus
     private $id;
     
     /**
-     * @var string $name The name of this Catalogus
-     * @example My Catalogus
+     * @var string $name The name of this Catalogue
+     * @example My Catalogue
      *
      * @ApiProperty(
      * 	   iri="http://schema.org/name",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The name of this Catalogus",
+     *         	   "description" = "The name of this Catalogue",
      *             "type"="string",
-     *             "example"="My Catalogus",
+     *             "example"="My Catalogue",
      *             "maxLength"="255",
      *             "required" = true
      *         }
@@ -75,16 +74,16 @@ class Catalogus
     private $name;
     
     /**
-     * @var string $description An short description of this Catalogus
-     * @example This is the best catalogus ever
+     * @var string $description An short description of this Catalogue
+     * @example This is the best catalogue ever
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/description",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "An short description of this Catalogus",
+     *         	   "description" = "An short description of this Catalogue",
      *             "type"="string",
-     *             "example"="This is the best catalogus ever",
+     *             "example"="This is the best catalogue ever",
      *             "maxLength"="2550"
      *         }
      *     }
@@ -125,13 +124,13 @@ class Catalogus
     private $logo;
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that provides this catalogus
+     * @var string $sourceOrganisation The RSIN of the organization that provides this catalogue
      * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organisation that provides this catalogus",
+     *         	   "description" = "The RSIN of the organization that provides this catalogue",
      *             "type"="string",
      *             "example"="002851234",
      *              "maxLength"="255",
@@ -152,7 +151,7 @@ class Catalogus
     private $sourceOrganisation;
 
     /**
-     * @var ArrayCollection $groups The groups that are a part of this catalogus
+     * @var ArrayCollection $groups The groups that are a part of this catalogue
      * 
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -161,7 +160,7 @@ class Catalogus
     private $groups;
 
     /**
-     * @var ArrayCollection $products The groups that are a part of this catalogus
+     * @var ArrayCollection $products The groups that are a part of this catalogue
      * 
      * @MaxDepth(1)
      * @Groups({"read"})

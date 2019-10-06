@@ -47,13 +47,13 @@ class Supplier
 	private $id;
 	
 	/**
-	 * @var string $sourceOrganisation The RSIN of the organisation that ownes this proces
+	 * @var string $sourceOrganisation The RSIN of the organisation that owns this process
 	 * @example 002851234
 	 *
 	 * @ApiProperty(
 	 *     attributes={
 	 *         "swagger_context"={
-	 *         	   "description" = "The RSIN of the organisation that ownes this proces",
+	 *         	   "description" = "The RSIN of the organisation that owns this process",
 	 *             "type"="string",
 	 *             "example"="002851234",
 	 *              "maxLength"="255"
@@ -99,13 +99,13 @@ class Supplier
     private $name;
 
     /**
-     * @var string $kvk The number under wich the suplier is registerd at the chamber of comerce
+     * @var string $kvk The number under which the supplier is registered at the chamber of commerce
      * @example 30280353
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The number under wich the suplier is registerd at the chamber of comerce",
+     *         	   "description" = "The number under which the supplier is registered at the chamber of commerce",
      *             "type"="string",
      *             "example"="30280353",
      *             "maxLength"="255",

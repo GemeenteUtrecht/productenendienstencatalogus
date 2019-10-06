@@ -132,13 +132,13 @@ class Group
     private $products;     
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that ownes this group
+     * @var string $sourceOrganisation The RSIN of the organisation that owns this group
      * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organisation that ownes this group",
+     *         	   "description" = "The RSIN of the organisation that owns this group",
      *             "type"="string",
      *             "example"="002851234",
      *              "maxLength"="255",
@@ -159,7 +159,7 @@ class Group
     private $sourceOrganisation;
 
     /**
-     * @var Catalogus $catalogus The Catalogus that this product group belongs to
+     * @var Catalogus $catalogus The Catalogue that this product group belongs to
      * 
      * @MaxDepth(1)
      * @Groups({"read", "write"})

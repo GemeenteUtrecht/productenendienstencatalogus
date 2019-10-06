@@ -70,7 +70,7 @@ class Product
     private $sku;
     
     /**
-     * @var string $referenceId The autoincrementing id part of the reference, unique on a organisation-year-id basis
+     * @var string $referenceId The auto-incrementing id part of the reference, unique on a organisation-year-id basis
      *
      * @ORM\Column(type="integer", length=11, nullable=true)
      */
@@ -127,14 +127,14 @@ class Product
     private $description;
     
     /**
-     * @var string $logo The logo for this product
+     * @var string $logo The logo of this product
      * @example https://www.my-organisation.com/logo.png
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/logo",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The logo for this product",
+     *         	   "description" = "The logo of this product",
      *             "type"="string",
      *             "format"="url",
      *             "example"="https://www.my-organisation.com/logo.png",
@@ -179,13 +179,13 @@ class Product
     private $movie;
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that ownes this product
+     * @var string $sourceOrganisation The RSIN of the organisation that owns this product
      * @example 002851234
      * 
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
- 	 *         	   "description" = "The RSIN of the organisation that ownes this product",
+ 	 *         	   "description" = "The RSIN of the organisation that owns this product",
      *             "type"="string",
      *             "example"="002851234",
  	*              "maxLength"="255",
@@ -295,7 +295,7 @@ class Product
     private $parent;
 
     /**
-     * @var ArrayCollection $variations The diverend variations that a available of this product
+     * @var ArrayCollection $variations The different variations that are available of this product
      * 
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -348,7 +348,7 @@ class Product
     private $sets;
 
     /**
-     * @var Catalogus $catalogus The Catalogus that this product belongs to
+     * @var Catalogus $catalogus The Catalogue that this product belongs to
      * 
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Catalogus", inversedBy="products")
