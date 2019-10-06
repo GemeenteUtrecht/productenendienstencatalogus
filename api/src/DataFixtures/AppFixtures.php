@@ -53,25 +53,25 @@ class AppFixtures extends Fixture
     	$utrecht->setRsin('002220647');
     	$manager->persist($utrecht);
     	
-    	// Dan wat productgropeen    	
+    	// Dan wat productgroepen    	
     	$group = new Group();
     	$group->setRsin('001709124'); // 's-Hertogenbosch
     	$group->setName('Burgerzaken');
-    	$group->setDescription('Producten en diensten rondom burgerzaken');
+    	$group->setDescription('Producten en diensten binnen burgerzaken');
     	$group->setCatalogus($denbosch);
     	$manager->persist($group);
     	
     	$group = new Group();
     	$group->setRsin('001902763'); // Eindhoven
     	$group->setName('Burgerzaken');
-    	$group->setDescription('Producten en diensten rondom burgerzaken');
+    	$group->setDescription('Producten en diensten binnen burgerzaken');
     	$group->setCatalogus($eindhoven);
     	$manager->persist($group);    	
     	
     	$trouwproducten = new Group();
     	$trouwproducten->setRsin('002220647'); // Utrecht
     	$trouwproducten->setName('Trouwproducten');
-    	$trouwproducten->setDescription('Producten en diensten rondom het trouw proces');
+    	$trouwproducten->setDescription('Producten en diensten binnen het trouw proces');
     	$trouwproducten->setCatalogus($utrecht);
     	$manager->persist($trouwproducten);
     	
@@ -115,7 +115,7 @@ class AppFixtures extends Fixture
     	$trouwambtenaar = new Product();
     	$trouwambtenaar->setRsin('002220647');
     	$trouwambtenaar->setName('Trouwambtenaar');
-    	$trouwambtenaar->setDescription('En wie gaat u helpen met het ja woord?');
+    	$trouwambtenaar->setDescription('Wie gaat u helpen met het ja woord?');
     	$trouwambtenaar->setType('variable'); 
     	$trouwambtenaar->addGroup($trouwproducten);
     	$trouwambtenaar->setCatalogus($utrecht);
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
     	$ambtenaar->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/ike.jpg');
     	$ambtenaar->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
     	$ambtenaar->setName('Mvr Ike van den Pol');
-    	$ambtenaar->setDescription('<p>Elkaar het Ja-woord geven, de officiele ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>');
+    	$ambtenaar->setDescription('<p>Elkaar het Ja-woord geven, de officiële ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>');
     	$ambtenaar->setType('person');
     	$ambtenaar->addGroup($trouwproducten);
     	$ambtenaar->setCatalogus($utrecht);
@@ -192,7 +192,7 @@ class AppFixtures extends Fixture
     	$ambtenaar->setLogo('https://utrecht.trouwplanner.online/images/content/elements/Trouwambtenaren.png');
     	$ambtenaar->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
     	$ambtenaar->setName('Zelfgekozen BABS ');
-    	$ambtenaar->setDescription('U draagt zelf een trouwambtenaar aan en laat deze voor een dag beedigen');
+    	$ambtenaar->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beëdigen');
     	$ambtenaar->setType('simple');
     	$ambtenaar->addGroup($trouwproducten);
     	$ambtenaar->setCatalogus($utrecht);
@@ -206,7 +206,7 @@ class AppFixtures extends Fixture
     	$locatie= new Product();
     	$locatie->setRsin('002220647');
     	$locatie->setName('Locatie');
-    	$locatie->setDescription('Een mooie locatie is goud waard');
+    	$locatie->setDescription('De perfecte locatie voor een perfecte dag.');
     	$locatie->setType('variable');
     	$locatie->addGroup($trouwproducten);
     	$locatie->setCatalogus($utrecht);
@@ -241,7 +241,7 @@ class AppFixtures extends Fixture
     	$product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/kleine-trouwzaal-stadhuis-utrecht.jpg');
     	$product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
     	$product->setName('Stadhuis kleine zaal');
-    	$product->setDescription('Deze uiterst sfeervolle trouwzaal is de droom van ieder koppel');
+    	$product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
     	$product->setType('simple');
     	$product->addGroup($trouwproducten);
     	$product->setCatalogus($utrecht);
@@ -256,7 +256,7 @@ class AppFixtures extends Fixture
     	$product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/grote-trouwzaal-stadhuis-utrecht.jpg');
     	$product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
     	$product->setName('Stadhuis grote zaal');
-    	$product->setDescription('Deze uiterst sfeervolle trouwzaal is de droom van ieder koppel');
+    	$product->setDescription('Deze uiterst sfeervolle trouwzaal is perfect voor ieder koppel');
     	$product->setType('simple');
     	$product->addGroup($trouwproducten);
     	$product->setCatalogus($utrecht);
