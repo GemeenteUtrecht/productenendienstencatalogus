@@ -79,13 +79,13 @@ paths:
                   $ref: '#/components/schemas/Catalogus-read'
       parameters:
         -
-          name: rsin
+          name: sourceOrganisation
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'rsin[]'
+          name: 'sourceOrganisation[]'
           in: query
           required: false
           schema:
@@ -425,13 +425,13 @@ paths:
                   $ref: '#/components/schemas/Group-read'
       parameters:
         -
-          name: rsin
+          name: sourceOrganisation
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'rsin[]'
+          name: 'sourceOrganisation[]'
           in: query
           required: false
           schema:
@@ -787,13 +787,13 @@ paths:
           style: form
           explode: true
         -
-          name: rsin
+          name: sourceOrganisation
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'rsin[]'
+          name: 'sourceOrganisation[]'
           in: query
           required: false
           schema:
@@ -1155,6 +1155,22 @@ paths:
                   $ref: '#/components/schemas/Supplier-read'
       parameters:
         -
+          name: sourceOrganisation
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'sourceOrganisation[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -1440,7 +1456,7 @@ components:
       description: ''
       required:
         - name
-        - rsin
+        - source_organisation
       properties:
         name:
           description: 'The name of this Catalogus'
@@ -1451,7 +1467,7 @@ components:
         logo:
           description: 'The logo for this component'
           type: string
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that provides this catalogus'
           type: string
         groups:
@@ -1471,7 +1487,7 @@ components:
       description: ''
       required:
         - name
-        - rsin
+        - source_organisation
       properties:
         name:
           description: 'The name of this Catalogus'
@@ -1482,7 +1498,7 @@ components:
         logo:
           description: 'The logo for this component'
           type: string
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that provides this catalogus'
           type: string
     Group-read:
@@ -1509,14 +1525,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that ownes this group'
           type: string
         catalogus:
           description: 'The Catalogus that this product group belongs to'
           $ref: '#/components/schemas/Catalogus-read'
       required:
-        - rsin
+        - source_organisation
     Group-write:
       type: object
       description: ''
@@ -1526,14 +1542,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that ownes this group'
           type: string
         catalogus:
           description: 'The Catalogus that this product group belongs to'
           $ref: '#/components/schemas/Catalogus-write'
       required:
-        - rsin
+        - source_organisation
     Product-read:
       type: object
       description: ''
@@ -1553,7 +1569,7 @@ components:
         movie:
           description: 'The movie for this product'
           type: string
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that ownes this product'
           type: string
         groups:
@@ -1627,7 +1643,7 @@ components:
             $ref: '#/components/schemas/Product-read'
       required:
         - name
-        - rsin
+        - source_organisation
         - price
         - tax_percentage
         - type
@@ -1650,7 +1666,7 @@ components:
         movie:
           description: 'The movie for this product'
           type: string
-        rsin:
+        source_organisation:
           description: 'The RSIN of the organisation that ownes this product'
           type: string
         groups:
@@ -1720,7 +1736,7 @@ components:
             $ref: '#/components/schemas/Product-write'
       required:
         - name
-        - rsin
+        - source_organisation
         - price
         - tax_percentage
         - type
@@ -1730,6 +1746,9 @@ components:
       properties:
         id:
           readOnly: true
+          type: string
+        source_organisation:
+          description: 'The RSIN of the organisation that ownes this proces'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -1741,15 +1760,20 @@ components:
           description: 'The logo for this component'
           type: string
       required:
+        - source_organisation
         - name
         - kvk
     Supplier-write:
       type: object
       description: ''
       required:
+        - source_organisation
         - name
         - kvk
       properties:
+        source_organisation:
+          description: 'The RSIN of the organisation that ownes this proces'
+          type: string
         name:
           description: 'The name of this RequestType'
           type: string

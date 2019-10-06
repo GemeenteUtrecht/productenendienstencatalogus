@@ -132,7 +132,7 @@ class Group
     private $products;     
     
     /**
-     * @var string $rsin The RSIN of the organisation that ownes this group
+     * @var string $sourceOrganisation The RSIN of the organisation that ownes this group
      * @example 002851234
      *
      * @ApiProperty(
@@ -156,7 +156,7 @@ class Group
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $rsin;
+    private $sourceOrganisation;
 
     /**
      * @var Catalogus $catalogus The Catalogus that this product group belongs to
@@ -241,16 +241,16 @@ class Group
         return $this;
     }
     
-    public function getRsin(): ?string
+    public function getSourceOrganisation(): ?string
     {
-        return $this->rsin;
+    	return $this->sourceOrganisation;
     }
     
-    public function setRsin(string $rsin): self
+    public function setSourceOrganisation(string $sourceOrganisation): self
     {
-        $this->rsin = $rsin;
-        
-        return $this;
+    	$this->sourceOrganisation = $sourceOrganisation;
+    	
+    	return $this;
     }
 
     public function getCatalogus(): ?Catalogus
