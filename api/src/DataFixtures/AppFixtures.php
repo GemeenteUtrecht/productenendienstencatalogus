@@ -83,12 +83,21 @@ class AppFixtures extends Fixture
     	$trouwen->setTaxPercentage(0);
     	$manager->persist($trouwen);
     	
+    	
+    	$ceremonies = new Group();
+    	$ceremonies->setRsin('002220647'); // Utrecht
+    	$ceremonies->setName('Ceremonies ');
+    	$ceremonies->setDescription('Verschillende cermonies voor uw huwelijk / partnerschap');
+    	$ceremonies->setCatalogus($utrecht);
+    	$manager->persist($ceremonies);
+    	
     	$eenvoudigtrouwen = new Product();
     	$eenvoudigtrouwen->setRsin('002220647');
     	$eenvoudigtrouwen->setName('Eenvoudig trouwen');
     	$eenvoudigtrouwen->setDescription('Eenvoudig trouwen');
     	$eenvoudigtrouwen->setType('set'); 
     	$eenvoudigtrouwen->addGroup($trouwproducten);
+    	$eenvoudigtrouwen->addGroup($ceremonies);
     	$eenvoudigtrouwen->setCatalogus($utrecht);
     	$eenvoudigtrouwen->setPrice('163.00');
     	$eenvoudigtrouwen->setPriceCurency('EUR');
@@ -101,6 +110,7 @@ class AppFixtures extends Fixture
     	$gratistrouwen->setDescription('Gratis huwelijk');
     	$gratistrouwen->setType('set'); 
     	$gratistrouwen->addGroup($trouwproducten);
+    	$gratistrouwen->addGroup($ceremonies);
     	$gratistrouwen->setCatalogus($utrecht);
     	$gratistrouwen->setPrice('0.00');
     	$gratistrouwen->setPriceCurency('EUR');
@@ -113,6 +123,7 @@ class AppFixtures extends Fixture
     	$trouwambtenaar->setDescription('En wie gaat u helpen met het ja woord?');
     	$trouwambtenaar->setType('variable'); 
     	$trouwambtenaar->addGroup($trouwproducten);
+    	$trouwambtenaar->addGroup($ceremonies);
     	$trouwambtenaar->setCatalogus($utrecht);
     	$trouwambtenaar->setPrice('0.00');
     	$trouwambtenaar->setPriceCurency('EUR');
@@ -212,8 +223,13 @@ class AppFixtures extends Fixture
     	$trouwboekje->addSet($gratistrouwen);
     	$trouwboekje->setTaxPercentage('0');
     	$manager->persist($trouwboekje);
-    	
-    	
+    	   	
+    	$extras = new Group();
+    	$extras->setRsin('002220647'); // Utrecht
+    	$extras->setName('Extras ');
+    	$extras->setDescription('Aanvullende mogenlijkheden voor uw huwelijk');
+    	$extras->setCatalogus($utrecht);
+    	$manager->persist($extras);
     	
     	$trouwboekje = new Product();
     	$trouwboekje->setRsin('002220647');
