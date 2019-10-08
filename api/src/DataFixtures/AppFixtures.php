@@ -33,6 +33,11 @@ class AppFixtures extends Fixture
     	$manager->persist($supplier);
     	
     	// Catalogi
+    	$vng = new Catalogus();
+    	$vng->setName('Vereniging Nederlandse Gemeenten');
+    	$vng->setRsin('0000');
+    	$manager->persist($vng);
+    	
     	$denbosch = new Catalogus();
     	$denbosch->setName('Gemeente \'s-Hertogenbosch');
     	$denbosch->setRsin('001709124');
@@ -73,7 +78,7 @@ class AppFixtures extends Fixture
     	// Producten
     	$trouwen = new Product();
     	$trouwen->setRsin('002220647');
-    	$trouwen->setName('Trouwen');
+    	$trouwen->setName('Trouwen / Partnerschap');
     	$trouwen->setDescription('Trouwen');
     	$trouwen->setType('set'); 
     	$trouwen->addGroup($trouwproducten);
@@ -209,27 +214,70 @@ class AppFixtures extends Fixture
     	$manager->persist($ambtenaar);
     	
     	
-    	$trouwboekje = new Product();
-    	$trouwboekje->setRsin('002220647');
-    	$trouwboekje->setName('Locatie');
-    	$trouwboekje->setDescription('Een mooie locatie is goud waard');
-    	$trouwboekje->setType('location');
-    	$trouwboekje->addGroup($trouwproducten);
-    	$trouwboekje->setCatalogus($utrecht);
-    	$trouwboekje->setPrice('0.00');
-    	$trouwboekje->setPriceCurency('EUR');
-    	$trouwboekje->addSet($trouwen);
-    	$trouwboekje->addSet($eenvoudigtrouwen);
-    	$trouwboekje->addSet($gratistrouwen);
-    	$trouwboekje->setTaxPercentage('0');
-    	$manager->persist($trouwboekje);
-    	   	
-    	$extras = new Group();
-    	$extras->setRsin('002220647'); // Utrecht
-    	$extras->setName('Extras ');
-    	$extras->setDescription('Aanvullende mogenlijkheden voor uw huwelijk');
-    	$extras->setCatalogus($utrecht);
-    	$manager->persist($extras);
+    	$locatie= new Product();
+    	$locatie->setRsin('002220647');
+    	$locatie->setName('Locatie');
+    	$locatie->setDescription('Een mooie locatie is goud waard');
+    	$locatie->setType('variable');
+    	$locatie->addGroup($trouwproducten);
+    	$locatie->setCatalogus($utrecht);
+    	$locatie->setPrice('0.00');
+    	$locatie->setPriceCurency('EUR');
+    	$locatie->addSet($trouwen);
+    	$locatie->addSet($eenvoudigtrouwen);
+    	$locatie->addSet($gratistrouwen);
+    	$locatie->setTaxPercentage('0');
+    	$manager->persist($locatie);
+    	
+    	$product = new Product();
+    	$product->setRsin('123456789');
+    	$product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/Trouwzaal-Stadskantoor-Utrecht.jpg');
+    	$product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
+    	$product->setName('Stadskantoor');
+    	$product->setDescription('Deze locatie is speciaal voor eenvoudige en gratis huwelijken.
+ De zaal ligt op de 6e etage van het Stadskantoor.
+ De ruimte is eenvoudig en toch heel intiem.
+ Het licht is in te stellen op een kleur die jullie graag willen.');
+    	$product->setType('simple');
+    	$product->addGroup($trouwproducten);
+    	$product->setCatalogus($utrecht);
+    	$product->setPrice('0.00');
+    	$product->setPriceCurency('EUR');
+    	$product->setTaxPercentage(0);
+    	$product->setParent($locatie);
+    	$manager->persist($product);
+    	
+    	$product = new Product();
+    	$product->setRsin('123456789');
+    	$product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/kleine-trouwzaal-stadhuis-utrecht.jpg');
+    	$product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
+    	$product->setName('Stadhuis kleine zaal');
+    	$product->setDescription('Deze uiterst sfeervolle trouwzaal is de droom van ieder koppel');
+    	$product->setType('simple');
+    	$product->addGroup($trouwproducten);
+    	$product->setCatalogus($utrecht);
+    	$product->setPrice('0.00');
+    	$product->setPriceCurency('EUR');
+    	$product->setTaxPercentage(0);
+    	$product->setParent($locatie);
+    	$manager->persist($product);
+    	
+    	$product = new Product();
+    	$product->setRsin('123456789');
+    	$product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/grote-trouwzaal-stadhuis-utrecht.jpg');
+    	$product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
+    	$product->setName('Stadhuis grote zaal');
+    	$product->setDescription('Deze uiterst sfeervolle trouwzaal is de droom van ieder koppel');
+    	$product->setType('simple');
+    	$product->addGroup($trouwproducten);
+    	$product->setCatalogus($utrecht);
+    	$product->setPrice('0.00');
+    	$product->setPriceCurency('EUR');
+    	$product->setTaxPercentage(0);
+    	$product->setParent($locatie);
+    	$manager->persist($product);
+    	
+    	
     	
     	$trouwboekje = new Product();
     	$trouwboekje->setRsin('002220647');

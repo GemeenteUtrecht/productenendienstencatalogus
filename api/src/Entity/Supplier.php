@@ -44,7 +44,33 @@ class Supplier
 	 * @ORM\GeneratedValue(strategy="CUSTOM")
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 */
-    private $id;
+	private $id;
+	
+	/**
+	 * @var string $sourceOrganisation The RSIN of the organisation that ownes this proces
+	 * @example 002851234
+	 *
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "swagger_context"={
+	 *         	   "description" = "The RSIN of the organisation that ownes this proces",
+	 *             "type"="string",
+	 *             "example"="002851234",
+	 *              "maxLength"="255"
+	 *         }
+	 *     }
+	 * )
+	 *
+	 * @Assert\NotNull
+	 * @Assert\Length(
+	 *      min = 8,
+	 *      max = 11
+	 * )
+	 * @Groups({"read", "write"})
+	 * @ORM\Column(type="string", length=255)
+	 * @ApiFilter(SearchFilter::class, strategy="exact")
+	 */
+	private $sourceOrganisation;
     
     /**
      * @var string $name The name of this RequestType
@@ -126,6 +152,18 @@ class Supplier
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getSourceOrganisation(): ?string
+    {
+    	return $this->sourceOrganisation;
+    }
+    
+    public function setSourceOrganisation(string $sourceOrganisation): self
+    {
+    	$this->sourceOrganisation = $sourceOrganisation;
+    	
+    	return $this;
     }
     
     public function getName(): ?string

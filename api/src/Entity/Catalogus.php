@@ -125,7 +125,7 @@ class Catalogus
     private $logo;
     
     /**
-     * @var string $rsin The RSIN of the organisation that provides this catalogus
+     * @var string $sourceOrganisation The RSIN of the organisation that provides this catalogus
      * @example 002851234
      *
      * @ApiProperty(
@@ -149,7 +149,7 @@ class Catalogus
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $rsin;
+    private $sourceOrganisation;
 
     /**
      * @var ArrayCollection $groups The groups that are a part of this catalogus
@@ -215,17 +215,17 @@ class Catalogus
         
         return $this;
     }
-
-    public function getRsin(): ?string
+    
+    public function getSourceOrganisation(): ?string
     {
-        return $this->rsin;
+    	return $this->sourceOrganisation;
     }
-
-    public function setRsin(string $rsin): self
+    
+    public function setSourceOrganisation(string $sourceOrganisation): self
     {
-        $this->rsin = $rsin;
-
-        return $this;
+    	$this->sourceOrganisation = $sourceOrganisation;
+    	
+    	return $this;
     }
 
     /**

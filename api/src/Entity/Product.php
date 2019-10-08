@@ -179,7 +179,7 @@ class Product
     private $movie;
     
     /**
-     * @var string $rsin The RSIN of the organisation that ownes this product
+     * @var string $sourceOrganisation The RSIN of the organisation that ownes this product
      * @example 002851234
      * 
      * @ApiProperty(
@@ -203,7 +203,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $rsin;
+    private $sourceOrganisation;
 
     /**
      * @var ArrayCollection $groups The product groups that this product is a part of
@@ -424,18 +424,6 @@ class Product
         return $this;
     }
 
-    public function getOrganisation(): ?string
-    {
-        return $this->organisation;
-    }
-
-    public function setOrganisation(string $organisation): self
-    {
-        $this->organisation = $organisation;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Group[]
      */
@@ -512,16 +500,16 @@ class Product
         return $this;
     }
     
-    public function getRsin(): ?string
+    public function getSourceOrganisation(): ?string
     {
-        return $this->rsin;
+    	return $this->sourceOrganisation;
     }
     
-    public function setRsin(string $rsin): self
+    public function setSourceOrganisation(string $sourceOrganisation): self
     {
-        $this->rsin = $rsin;
-        
-        return $this;
+    	$this->sourceOrganisation = $sourceOrganisation;
+    	
+    	return $this;
     }
 
     public function getTaxPercentage(): ?int
