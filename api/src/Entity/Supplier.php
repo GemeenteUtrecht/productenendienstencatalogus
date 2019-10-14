@@ -38,6 +38,7 @@ class Supplier
 	 *     }
 	 * )
 	 *
+     * @Assert\Uuid
 	 * @Groups({"read"})
 	 * @ORM\Id
 	 * @ORM\Column(type="uuid", unique=true)

@@ -44,9 +44,14 @@ paths:
                   $ref: '#/components/schemas/Catalogue-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Catalogue-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Catalogue:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -79,13 +84,13 @@ paths:
                   $ref: '#/components/schemas/Catalogue-read'
       parameters:
         -
-          name: sourceOrganization
+          name: source_organization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'sourceOrganization[]'
+          name: 'source_organization[]'
           in: query
           required: false
           schema:
@@ -101,6 +106,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
     post:
       tags:
         - Catalogue
@@ -115,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/Catalogue-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Catalogue-read'
+                $ref: '#/components/schemas/Catalogue:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Catalogue-read'
@@ -151,7 +157,7 @@ paths:
               $ref: '#/components/schemas/Catalogue-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Catalogue-write'
+              $ref: '#/components/schemas/Catalogue:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Catalogue-write'
@@ -193,7 +199,7 @@ paths:
                 $ref: '#/components/schemas/Catalogue-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Catalogue-read'
+                $ref: '#/components/schemas/Catalogue:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Catalogue-read'
@@ -252,7 +258,7 @@ paths:
                 $ref: '#/components/schemas/Catalogue-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Catalogue-read'
+                $ref: '#/components/schemas/Catalogue:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Catalogue-read'
@@ -282,7 +288,7 @@ paths:
               $ref: '#/components/schemas/Catalogue-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Catalogue-write'
+              $ref: '#/components/schemas/Catalogue:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Catalogue-write'
@@ -323,7 +329,7 @@ paths:
                 $ref: '#/components/schemas/Catalogue-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Catalogue-read'
+                $ref: '#/components/schemas/Catalogue:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Catalogue-read'
@@ -348,28 +354,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Catalogue-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Catalogue-write'
         description: 'The updated Catalogue resource'
@@ -390,9 +375,14 @@ paths:
                   $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Group-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Group:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -425,13 +415,13 @@ paths:
                   $ref: '#/components/schemas/Group-read'
       parameters:
         -
-          name: sourceOrganization
+          name: source_organization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'sourceOrganization[]'
+          name: 'source_organization[]'
           in: query
           required: false
           schema:
@@ -447,6 +437,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
     post:
       tags:
         - Group
@@ -461,7 +452,7 @@ paths:
                 $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Group-read'
@@ -497,7 +488,7 @@ paths:
               $ref: '#/components/schemas/Group-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Group-write'
+              $ref: '#/components/schemas/Group:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Group-write'
@@ -539,7 +530,7 @@ paths:
                 $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Group-read'
@@ -598,7 +589,7 @@ paths:
                 $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Group-read'
@@ -628,7 +619,7 @@ paths:
               $ref: '#/components/schemas/Group-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Group-write'
+              $ref: '#/components/schemas/Group:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Group-write'
@@ -669,7 +660,7 @@ paths:
                 $ref: '#/components/schemas/Group-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Group-read'
@@ -694,28 +685,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Group-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Group-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The updated Group resource'
@@ -736,9 +706,14 @@ paths:
                   $ref: '#/components/schemas/Product-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Product:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -787,13 +762,13 @@ paths:
           style: form
           explode: true
         -
-          name: sourceOrganization
+          name: source_organization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'sourceOrganization[]'
+          name: 'source_organization[]'
           in: query
           required: false
           schema:
@@ -824,6 +799,9 @@ paths:
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: page
           in: query
@@ -831,6 +809,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
     post:
       tags:
         - Product
@@ -845,7 +824,7 @@ paths:
                 $ref: '#/components/schemas/Product-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product-read'
+                $ref: '#/components/schemas/Product:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Product-read'
@@ -881,7 +860,7 @@ paths:
               $ref: '#/components/schemas/Product-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Product-write'
+              $ref: '#/components/schemas/Product:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Product-write'
@@ -923,7 +902,7 @@ paths:
                 $ref: '#/components/schemas/Product-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product-read'
+                $ref: '#/components/schemas/Product:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Product-read'
@@ -982,7 +961,7 @@ paths:
                 $ref: '#/components/schemas/Product-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product-read'
+                $ref: '#/components/schemas/Product:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Product-read'
@@ -1012,7 +991,7 @@ paths:
               $ref: '#/components/schemas/Product-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Product-write'
+              $ref: '#/components/schemas/Product:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Product-write'
@@ -1053,7 +1032,7 @@ paths:
                 $ref: '#/components/schemas/Product-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product-read'
+                $ref: '#/components/schemas/Product:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Product-read'
@@ -1078,28 +1057,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Product-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Product-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Product-write'
         description: 'The updated Product resource'
@@ -1120,9 +1078,14 @@ paths:
                   $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Supplier-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Supplier:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -1155,13 +1118,13 @@ paths:
                   $ref: '#/components/schemas/Supplier-read'
       parameters:
         -
-          name: sourceOrganization
+          name: source_organization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'sourceOrganization[]'
+          name: 'source_organization[]'
           in: query
           required: false
           schema:
@@ -1177,6 +1140,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
     post:
       tags:
         - Supplier
@@ -1191,7 +1155,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier-read'
+                $ref: '#/components/schemas/Supplier:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -1227,7 +1191,7 @@ paths:
               $ref: '#/components/schemas/Supplier-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Supplier-write'
+              $ref: '#/components/schemas/Supplier:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Supplier-write'
@@ -1269,7 +1233,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier-read'
+                $ref: '#/components/schemas/Supplier:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -1328,7 +1292,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier-read'
+                $ref: '#/components/schemas/Supplier:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -1358,7 +1322,7 @@ paths:
               $ref: '#/components/schemas/Supplier-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Supplier-write'
+              $ref: '#/components/schemas/Supplier:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Supplier-write'
@@ -1399,7 +1363,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier-read'
+                $ref: '#/components/schemas/Supplier:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -1424,28 +1388,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Supplier-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Supplier-write'
         description: 'The updated Supplier resource'
@@ -1460,12 +1403,18 @@ components:
       properties:
         name:
           description: 'The name of this Catalogue'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
+          externalDocs:
+            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         source_organization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -1491,12 +1440,98 @@ components:
       properties:
         name:
           description: 'The name of this Catalogue'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
+          externalDocs:
+            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that provides this catalogue'
+          type: string
+    'Catalogue:jsonld-read':
+      type: object
+      description: ''
+      required:
+        - name
+        - source_organization
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of this Catalogue'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        description:
+          description: 'An short description of this Catalogue'
+          externalDocs:
+            url: 'https://schema.org/description'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that provides this catalogue'
+          type: string
+        groups:
+          readOnly: true
+          description: 'The groups that are a part of this catalogue'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
+        products:
+          readOnly: true
+          description: 'The groups that are a part of this catalogue'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+    'Catalogue:jsonld-write':
+      type: object
+      description: ''
+      required:
+        - name
+        - source_organization
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of this Catalogue'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        description:
+          description: 'An short description of this Catalogue'
+          externalDocs:
+            url: 'https://schema.org/description'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         source_organization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -1507,18 +1542,26 @@ components:
       properties:
         id:
           readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
           type: string
         name:
           readOnly: true
           description: 'The name of this product group'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         description:
           readOnly: true
           description: 'An short description of this product group'
+          externalDocs:
+            url: 'https://schema.org/description'
           type: string
         logo:
           readOnly: true
           description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -1529,6 +1572,7 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
+          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-read'
       required:
@@ -1546,28 +1590,120 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
+          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-write'
+      required:
+        - source_organization
+    'Group:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          readOnly: true
+          description: 'The name of this product group'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        description:
+          readOnly: true
+          description: 'An short description of this product group'
+          externalDocs:
+            url: 'https://schema.org/description'
+          type: string
+        logo:
+          readOnly: true
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        products:
+          description: 'The groups that are a part of this product group'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+        source_organization:
+          description: 'The RSIN of the organization that owns this group'
+          type: string
+        catalogue:
+          writeOnly: true
+          description: 'The Catalogue that this product group belongs to'
+          $ref: '#/components/schemas/Catalogue:jsonld-read'
+      required:
+        - source_organization
+    'Group:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        products:
+          description: 'The groups that are a part of this product group'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-write'
+        source_organization:
+          description: 'The RSIN of the organization that owns this group'
+          type: string
+        catalogue:
+          writeOnly: true
+          description: 'The Catalogue that this product group belongs to'
+          $ref: '#/components/schemas/Catalogue:jsonld-write'
       required:
         - source_organization
     Product-read:
       type: object
       description: ''
       properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
         sku:
           description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
           type: string
         name:
           description: 'The name of this Product'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
+          externalDocs:
+            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         movie:
           description: 'The movie for this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         source_organization:
           description: 'The RSIN of the organization that owns this product'
@@ -1656,15 +1792,23 @@ components:
           type: string
         name:
           description: 'The name of this Product'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
+          externalDocs:
+            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         movie:
           description: 'The movie for this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
         source_organization:
           description: 'The RSIN of the organization that owns this product'
@@ -1711,6 +1855,7 @@ components:
             )
           type: integer
         parent:
+          writeOnly: true
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product-write'
         type:
@@ -1730,10 +1875,243 @@ components:
           example: simple
           required: 'true'
         sets:
+          writeOnly: true
           description: 'The sets thats this product is a part of'
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
+      required:
+        - name
+        - source_organization
+        - price
+        - tax_percentage
+        - type
+    'Product:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        sku:
+          description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
+          type: string
+        name:
+          description: 'The name of this Product'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        description:
+          description: 'An short description of this Product'
+          externalDocs:
+            url: 'https://schema.org/description'
+          type: string
+        logo:
+          description: 'The logo of this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        movie:
+          description: 'The movie for this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        groups:
+          description: 'The product groups that this product is a part of'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={              
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        tax_percentage:
+          description: |
+            The tax percentage for this product as an integer e.g. 9% makes 9
+             @example 9
+             
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={     
+                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        variations:
+          readOnly: true
+          description: 'The different variations that are available of this product'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+        type:
+          type: string
+          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          enum:
+            - simple
+            - set
+            - virtual
+            - external
+            - ticket
+            - variable
+            - subscription
+            - person
+            - location
+            - service
+          example: simple
+          required: 'true'
+        grouped_products:
+          readOnly: true
+          description: 'If the product type is a **set** this contains the products that are part of that set'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+      required:
+        - name
+        - source_organization
+        - price
+        - tax_percentage
+        - type
+    'Product:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        sku:
+          description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
+          type: string
+        name:
+          description: 'The name of this Product'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        description:
+          description: 'An short description of this Product'
+          externalDocs:
+            url: 'https://schema.org/description'
+          type: string
+        logo:
+          description: 'The logo of this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        movie:
+          description: 'The movie for this product'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that owns this product'
+          type: string
+        groups:
+          description: 'The product groups that this product is a part of'
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-write'
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={              
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        tax_percentage:
+          description: |
+            The tax percentage for this product as an integer e.g. 9% makes 9
+             @example 9
+             
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={     
+                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        parent:
+          writeOnly: true
+          description: 'The product that this product is a variation of'
+          $ref: '#/components/schemas/Product:jsonld-write'
+        type:
+          type: string
+          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          enum:
+            - simple
+            - set
+            - virtual
+            - external
+            - ticket
+            - variable
+            - subscription
+            - person
+            - location
+            - service
+          example: simple
+          required: 'true'
+        sets:
+          writeOnly: true
+          description: 'The sets thats this product is a part of'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-write'
       required:
         - name
         - source_organization
@@ -1746,18 +2124,24 @@ components:
       properties:
         id:
           readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
           type: string
         source_organization:
           description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
           description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
       required:
         - source_organization
@@ -1776,12 +2160,87 @@ components:
           type: string
         name:
           description: 'The name of this RequestType'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
           description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+    'Supplier:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that owns this process'
+          type: string
+        name:
+          description: 'The name of this RequestType'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        kvk:
+          description: 'The number under which the supplier is registered at the chamber of commerce'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
+          type: string
+      required:
+        - source_organization
+        - name
+        - kvk
+    'Supplier:jsonld-write':
+      type: object
+      description: ''
+      required:
+        - source_organization
+        - name
+        - kvk
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        source_organization:
+          description: 'The RSIN of the organization that owns this process'
+          type: string
+        name:
+          description: 'The name of this RequestType'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+        kvk:
+          description: 'The number under which the supplier is registered at the chamber of commerce'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
 servers:
   -

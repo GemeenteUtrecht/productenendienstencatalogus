@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ApiFilter(SearchFilter::class, properties={"groups.id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"sourceOgranization.id": "exact"})
  */
 class Product
 {
@@ -41,6 +43,7 @@ class Product
      * )
      *
      * @Assert\Uuid
+     * @Groups({"read"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")

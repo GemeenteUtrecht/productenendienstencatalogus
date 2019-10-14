@@ -39,6 +39,7 @@ class Group
 	 *     }
 	 * )
 	 *
+     * @Assert\Uuid
 	 * @Groups({"read"})
 	 * @ORM\Id
 	 * @ORM\Column(type="uuid", unique=true)
@@ -126,6 +127,7 @@ class Group
     /**
      * @var ArrayCollection $products The groups that are a part of this product group
      * 
+     * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="groups")
      */
