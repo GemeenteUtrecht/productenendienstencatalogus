@@ -38,6 +38,7 @@ class Supplier
 	 *     }
 	 * )
 	 *
+     * @Assert\Uuid
 	 * @Groups({"read"})
 	 * @ORM\Id
 	 * @ORM\Column(type="uuid", unique=true)
@@ -47,13 +48,13 @@ class Supplier
 	private $id;
 	
 	/**
-	 * @var string $sourceOrganisation The RSIN of the organisation that ownes this proces
+	 * @var string $sourceOrganization The RSIN of the organization that owns this process
 	 * @example 002851234
 	 *
 	 * @ApiProperty(
 	 *     attributes={
 	 *         "swagger_context"={
-	 *         	   "description" = "The RSIN of the organisation that ownes this proces",
+	 *         	   "description" = "The RSIN of the organization that owns this process",
 	 *             "type"="string",
 	 *             "example"="002851234",
 	 *              "maxLength"="255"
@@ -70,7 +71,7 @@ class Supplier
 	 * @ORM\Column(type="string", length=255)
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
 	 */
-	private $sourceOrganisation;
+	private $sourceOrganization;
     
     /**
      * @var string $name The name of this RequestType
@@ -99,13 +100,13 @@ class Supplier
     private $name;
 
     /**
-     * @var string $kvk The number under wich the suplier is registerd at the chamber of comerce
+     * @var string $kvk The number under which the supplier is registered at the chamber of commerce
      * @example 30280353
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The number under wich the suplier is registerd at the chamber of comerce",
+     *         	   "description" = "The number under which the supplier is registered at the chamber of commerce",
      *             "type"="string",
      *             "example"="30280353",
      *             "maxLength"="255",
@@ -125,7 +126,7 @@ class Supplier
     
     /**
      * @var string $logo The logo for this component
-     * @example https://www.my-organisation.com/logo.png
+     * @example https://www.my-organization.com/logo.png
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/logo",
@@ -134,7 +135,7 @@ class Supplier
      *         	   "description" = "The logo for this component",
      *             "type"="string",
      *             "format"="url",
-     *             "example"="https://www.my-organisation.com/logo.png",
+     *             "example"="https://www.my-organization.com/logo.png",
      *             "maxLength"=255
      *         }
      *     }
@@ -154,14 +155,14 @@ class Supplier
         return $this->id;
     }
     
-    public function getSourceOrganisation(): ?string
+    public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganisation;
+    	return $this->sourceOrganization;
     }
     
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganisation = $sourceOrganisation;
+    	$this->sourceOrganization = $sourceOrganization;
     	
     	return $this;
     }

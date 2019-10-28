@@ -15,14 +15,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
-/**
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
- * @ORM\Entity(repositoryClass="App\Repository\CatalogusRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CatalogueRepository")
  */
-class Catalogus
+class Catalogue
 {
     /**
      * @var \Ramsey\Uuid\UuidInterface $id The UUID identifier of this object
@@ -49,16 +48,16 @@ class Catalogus
     private $id;
     
     /**
-     * @var string $name The name of this Catalogus
-     * @example My Catalogus
+     * @var string $name The name of this Catalogue
+     * @example My Catalogue
      *
      * @ApiProperty(
      * 	   iri="http://schema.org/name",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The name of this Catalogus",
+     *         	   "description" = "The name of this Catalogue",
      *             "type"="string",
-     *             "example"="My Catalogus",
+     *             "example"="My Catalogue",
      *             "maxLength"="255",
      *             "required" = true
      *         }
@@ -75,16 +74,16 @@ class Catalogus
     private $name;
     
     /**
-     * @var string $description An short description of this Catalogus
-     * @example This is the best catalogus ever
+     * @var string $description An short description of this Catalogue
+     * @example This is the best catalogue ever
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/description",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "An short description of this Catalogus",
+     *         	   "description" = "An short description of this Catalogue",
      *             "type"="string",
-     *             "example"="This is the best catalogus ever",
+     *             "example"="This is the best catalogue ever",
      *             "maxLength"="2550"
      *         }
      *     }
@@ -100,7 +99,7 @@ class Catalogus
     
     /**
      * @var string $logo The logo for this component
-     * @example https://www.my-organisation.com/logo.png
+     * @example https://www.my-organization.com/logo.png
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/logo",
@@ -109,7 +108,7 @@ class Catalogus
      *         	   "description" = "The logo for this component",
      *             "type"="string",
      *             "format"="url",
-     *             "example"="https://www.my-organisation.com/logo.png",
+     *             "example"="https://www.my-organization.com/logo.png",
      *             "maxLength"=255
      *         }
      *     }
@@ -125,13 +124,13 @@ class Catalogus
     private $logo;
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that provides this catalogus
+     * @var string $sourceOrganization The RSIN of the organization that provides this catalogue
      * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organisation that provides this catalogus",
+     *         	   "description" = "The RSIN of the organization that provides this catalogue",
      *             "type"="string",
      *             "example"="002851234",
      *              "maxLength"="255",
@@ -149,10 +148,10 @@ class Catalogus
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $sourceOrganisation;
+    private $sourceOrganization;
 
     /**
-     * @var ArrayCollection $groups The groups that are a part of this catalogus
+     * @var ArrayCollection $groups The groups that are a part of this catalogue
      * 
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -161,7 +160,7 @@ class Catalogus
     private $groups;
 
     /**
-     * @var ArrayCollection $products The groups that are a part of this catalogus
+     * @var ArrayCollection $products The groups that are a part of this catalogue
      * 
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -216,14 +215,14 @@ class Catalogus
         return $this;
     }
     
-    public function getSourceOrganisation(): ?string
+    public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganisation;
+    	return $this->sourceOrganization;
     }
     
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganisation = $sourceOrganisation;
+    	$this->sourceOrganization = $sourceOrganization;
     	
     	return $this;
     }
