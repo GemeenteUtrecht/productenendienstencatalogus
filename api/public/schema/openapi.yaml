@@ -2377,7 +2377,7 @@ externalDocs:
     description: Repository
     url: 'https://github.com/ConductionNL/productenendienstencatalogus'
 x-commonground:
-  type: tool
+  type: service
   developers:
     -
       name: Conduction
