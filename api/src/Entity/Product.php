@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ApiFilter(SearchFilter::class, properties={"groups.id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"sourceOgranization.id": "exact"})
  */
 class Product
 {
@@ -41,6 +43,7 @@ class Product
      * )
      *
      * @Assert\Uuid
+     * @Groups({"read"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -70,7 +73,7 @@ class Product
     private $sku;
     
     /**
-     * @var string $referenceId The autoincrementing id part of the reference, unique on a organisation-year-id basis
+     * @var string $referenceId The auto-incrementing id part of the reference, unique on a organization-year-id basis
      *
      * @ORM\Column(type="integer", length=11, nullable=true)
      */
@@ -127,17 +130,17 @@ class Product
     private $description;
     
     /**
-     * @var string $logo The logo for this product
-     * @example https://www.my-organisation.com/logo.png
+     * @var string $logo The logo of this product
+     * @example https://www.my-organization.com/logo.png
      *
      * @ApiProperty(
      * 	   iri="https://schema.org/logo",
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The logo for this product",
+     *         	   "description" = "The logo of this product",
      *             "type"="string",
      *             "format"="url",
-     *             "example"="https://www.my-organisation.com/logo.png",
+     *             "example"="https://www.my-organization.com/logo.png",
      *             "maxLength"=255
      *         }
      *     }
@@ -179,13 +182,13 @@ class Product
     private $movie;
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that ownes this product
+     * @var string $sourceOrganization The RSIN of the organization that owns this product
      * @example 002851234
      * 
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
- 	 *         	   "description" = "The RSIN of the organisation that ownes this product",
+ 	 *         	   "description" = "The RSIN of the organization that owns this product",
      *             "type"="string",
      *             "example"="002851234",
  	*              "maxLength"="255",
@@ -203,7 +206,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $sourceOrganisation;
+    private $sourceOrganization;
 
     /**
      * @var ArrayCollection $groups The product groups that this product is a part of
@@ -238,7 +241,7 @@ class Product
     private $price;
     
     /**
-     *  @var string $price The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *  @var string $priceCurrceny The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
      *  @example EUR
      *  
      *  @ApiProperty(
@@ -259,7 +262,7 @@ class Product
      * @Groups({"read","write"})
      * @ORM\Column(type="string") 
      */
-    private $priceCurceny = 'EUR';
+    private $priceCurrceny = 'EUR';
 
     /**
      *  @var integer $taxPercentage The tax percentage for this product as an integer e.g. 9% makes 9
@@ -295,7 +298,7 @@ class Product
     private $parent;
 
     /**
-     * @var ArrayCollection $variations The diverend variations that a available of this product
+     * @var ArrayCollection $variations The different variations that are available of this product
      * 
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -348,13 +351,13 @@ class Product
     private $sets;
 
     /**
-     * @var Catalogus $catalogus The Catalogus that this product belongs to
+     * @var Catalogue $catalogue The Catalogue that this product belongs to
      * 
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogus", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $catalogus;
+    private $catalogue;
 
     public function __construct()
     {
@@ -464,14 +467,14 @@ class Product
         return $this;
     }
     
-    public function getPriceCurency(): ?string
+    public function getPriceCurrency(): ?string
     {
-        return $this->priceCurency;
+        return $this->priceCurrency;
     }
     
-    public function setPriceCurency(?string $priceCurency): self
+    public function setPriceCurrency(?string $priceCurrency): self
     {
-        $this->priceCurency = $priceCurency;
+        $this->priceCurrency = $priceCurrency;
         
         return $this;
     }
@@ -500,14 +503,14 @@ class Product
         return $this;
     }
     
-    public function getSourceOrganisation(): ?string
+    public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganisation;
+    	return $this->sourceOrganization;
     }
     
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganisation = $sourceOrganisation;
+    	$this->sourceOrganization = $sourceOrganization;
     	
     	return $this;
     }
@@ -633,14 +636,14 @@ class Product
         return $this;
     }
 
-    public function getCatalogus(): ?Catalogus
+    public function getCatalogus(): ?Catalogue
     {
         return $this->catalogus;
     }
 
-    public function setCatalogus(?Catalogus $catalogus): self
+    public function setCatalogue(?Catalogue $catalogue): self
     {
-        $this->catalogus = $catalogus;
+    	$this->catalogue = $catalogue;
 
         return $this;
     }

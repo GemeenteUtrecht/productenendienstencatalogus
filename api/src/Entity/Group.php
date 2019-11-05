@@ -39,6 +39,7 @@ class Group
 	 *     }
 	 * )
 	 *
+     * @Assert\Uuid
 	 * @Groups({"read"})
 	 * @ORM\Id
 	 * @ORM\Column(type="uuid", unique=true)
@@ -99,7 +100,7 @@ class Group
 	
 	/**
 	 * @var string $logo The logo for this component
-	 * @example https://www.my-organisation.com/logo.png
+	 * @example https://www.my-organization.com/logo.png
 	 *
 	 * @ApiProperty(
 	 * 	   iri="https://schema.org/logo",
@@ -108,7 +109,7 @@ class Group
 	 *         	   "description" = "The logo for this component",
 	 *             "type"="string",
 	 *             "format"="url",
-	 *             "example"="https://www.my-organisation.com/logo.png",
+	 *             "example"="https://www.my-organization.com/logo.png",
 	 *             "maxLength"=255
 	 *         }
 	 *     }
@@ -126,19 +127,20 @@ class Group
     /**
      * @var ArrayCollection $products The groups that are a part of this product group
      * 
+     * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="groups")
      */
     private $products;     
     
     /**
-     * @var string $sourceOrganisation The RSIN of the organisation that ownes this group
+     * @var string $sourceOrganization The RSIN of the organization that owns this group
      * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organisation that ownes this group",
+     *         	   "description" = "The RSIN of the organization that owns this group",
      *             "type"="string",
      *             "example"="002851234",
      *              "maxLength"="255",
@@ -156,17 +158,17 @@ class Group
      * @ORM\Column(type="string", length=255)
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $sourceOrganisation;
+    private $sourceOrganization;
 
     /**
-     * @var Catalogus $catalogus The Catalogus that this product group belongs to
+     * @var Catalogue $catalogue The Catalogue that this product group belongs to
      * 
      * @MaxDepth(1)
      * @Groups({"read", "write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogus", inversedBy="groups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="groups")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $catalogus;
+    private $catalogue;
 
     public function __construct()
     {
@@ -241,27 +243,27 @@ class Group
         return $this;
     }
     
-    public function getSourceOrganisation(): ?string
+    public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganisation;
+    	return $this->sourceOrganization;
     }
     
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganisation = $sourceOrganisation;
+    	$this->sourceOrganization = $sourceOrganization;
     	
     	return $this;
     }
-
-    public function getCatalogus(): ?Catalogus
+    
+    public function getCatalogus(): ?Catalogue
     {
-        return $this->catalogus;
+    	return $this->catalogus;
     }
-
-    public function setCatalogus(?Catalogus $catalogus): self
+    
+    public function setCatalogue(?Catalogue $catalogue): self
     {
-        $this->catalogus = $catalogus;
-
-        return $this;
+    	$this->catalogue = $catalogue;
+    	
+    	return $this;
     }
 }
