@@ -15,12 +15,12 @@ Do you want to create your own Commonground component? Take a look at our in dep
 
 The commonground bundle
 -------
-This repository uses the power of conductions [commonground bundle](https://packagist.org/packages/conduction/commongroundbundle) for symfony to provide common ground specific functionality based on the [VNG Api Strategie](https://docs.geostandaarden.nl/api/API-Strategie/). Including  
+This repository uses the power of conduction's [commonground bundle](https://packagist.org/packages/conduction/commongroundbundle) for symfony to provide common ground specific functionality based on the [VNG Api Strategie](https://docs.geostandaarden.nl/api/API-Strategie/). Including  
 
-* Build in support for public API's like BAG (Kadaster), KVK (Kamer van Koophandel)
+* Build in support for public APIs like BAG (Kadaster), KVK (Kamer van Koophandel)
 * Build in validators for common dutch variables like BSN (Burger service nummer), RSIN(), KVK(), BTW()
 * AVG and VNG proof audit trails
-* And [muchs more](https://packagist.org/packages/conduction/commongroundbundle) .... 
+* And [much more](https://packagist.org/packages/conduction/commongroundbundle) .... 
 
 Be sure to read our [design considerations](/design.md) concerning the [VNG Api Strategie](https://docs.geostandaarden.nl/api/API-Strategie/). 
 
@@ -35,7 +35,7 @@ Staying up to date
 ## Features
 This repository uses the power of the [commonground proto component](https://github.com/ConductionNL/commonground-component) provide common ground specific functionality based on the [VNG Api Strategie](https://docs.geostandaarden.nl/api/API-Strategie/). Including  
 
-* Build in support for public API's like BAG (Kadaster), KVK (Kamer van Koophandel)
+* Build in support for public APIs like BAG (Kadaster), KVK (Kamer van Koophandel)
 * Build in validators for common dutch variables like BSN (Burger service nummer), RSIN(), KVK(), BTW()
 * AVG and VNG proof audit trails, Wildcard searches, handling of incomplete date's and underInvestigation objects
 * Support for NLX headers
