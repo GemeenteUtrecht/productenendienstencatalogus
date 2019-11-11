@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
     	
     	
     	$ceremonies = new Group();
-    	$ceremonies->setRsin('002220647'); // Utrecht
+    	$ceremonies->setSourceOrganization('002220647'); // Utrecht
     	$ceremonies->setName('Ceremonies ');
     	$ceremonies->setDescription('Verschillende cermonies voor uw huwelijk / partnerschap');
     	$ceremonies->setCatalogus($utrecht);
