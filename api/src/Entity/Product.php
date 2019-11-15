@@ -360,12 +360,21 @@ class Product
      */
     private $catalogue;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
+     * @Assert\Valid
+     * @MaxDepth(1)
+     * @Groups({"read", "write")}
+     */
+    private $offers;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
         $this->variations = new ArrayCollection();
         $this->groupedProducts = new ArrayCollection();
         $this->sets = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId()
@@ -645,6 +654,37 @@ class Product
     public function setCatalogue(?Catalogue $catalogue): self
     {
     	$this->catalogue = $catalogue;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getProduct() === $this) {
+                $offer->setProduct(null);
+            }
+        }
 
         return $this;
     }
