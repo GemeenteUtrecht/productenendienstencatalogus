@@ -60,18 +60,7 @@ class Offer
      * @Groups({"read","write"})
      */
     private $name;
-//
-//    /**
-//     * @var Product $product The product that is sold via this offer
-//     * @Assert\NotNull
-//     * @Assert\Valid
-//     * @Assert\Length(
-//     *     max = 255
-//     * )
-//     * @Groups({"read"})
-//     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="Offers")
-//     */
-//    private $product;
+
     /**
      * @var Product $product The product that is sold via this offer
      *
