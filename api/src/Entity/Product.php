@@ -364,9 +364,26 @@ class Product
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
      * @Assert\Valid
      * @MaxDepth(1)
-     * @Groups({"read", "write")}
+     * @Groups({"read", "write"})
      */
     private $offers;
+
+    /**
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $calendar;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\NotNull
+     * @Groups({"read", "write"})
+     */
+    private $requiresAppointment;
 
     public function __construct()
     {
@@ -685,6 +702,30 @@ class Product
                 $offer->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCalendar(): ?string
+    {
+        return $this->calendar;
+    }
+
+    public function setCalendar(?string $calendar): self
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    public function getRequiresAppointment(): ?bool
+    {
+        return $this->requiresAppointment;
+    }
+
+    public function setRequiresAppointment(bool $requiresAppointment): self
+    {
+        $this->requiresAppointment = $requiresAppointment;
 
         return $this;
     }
