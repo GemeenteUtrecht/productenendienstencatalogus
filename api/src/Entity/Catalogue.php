@@ -156,7 +156,7 @@ class Catalogue
      *
      * @MaxDepth(1)
      * @Groups({"read"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="catalogus", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="catalogue", orphanRemoval=true)
      */
     private $groups;
 
@@ -165,7 +165,7 @@ class Catalogue
      *
      * @MaxDepth(1)
      * @Groups({"read"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="catalogus", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="catalogue", orphanRemoval=true)
      */
     private $products;
 
