@@ -256,9 +256,9 @@ class Group
     	return $this;
     }
 
-    public function getCatalogus(): ?Catalogue
+    public function getCatalogue(): ?Catalogue
     {
-    	return $this->catalogus;
+    	return $this->catalogue;
     }
 
     public function setCatalogue(?Catalogue $catalogue): self

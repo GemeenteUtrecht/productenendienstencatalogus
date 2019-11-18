@@ -420,7 +420,7 @@ class Product
 
     public function getSkuId(): ?int
     {
-        return $this->skuIs;
+        return $this->skuId;
     }
 
     public function setSkuId(int $skuId): self
@@ -663,9 +663,9 @@ class Product
         return $this;
     }
 
-    public function getCatalogus(): ?Catalogue
+    public function getCatalogue(): ?Catalogue
     {
-        return $this->catalogus;
+        return $this->catalogue;
     }
 
     public function setCatalogue(?Catalogue $catalogue): self
