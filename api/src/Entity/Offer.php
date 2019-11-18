@@ -174,6 +174,16 @@ class Offer
      */
     private $taxPercentage;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\CustomerType", mappedBy="offers")
+     */
+    private $eligibleCustomerTypes;
+
+    public function __construct()
+    {
+        $this->eligibleCustomerTypes = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?string
@@ -273,6 +283,34 @@ class Offer
     public function setTaxPercentage(int $taxPercentage): self
     {
         $this->taxPercentage = $taxPercentage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CustomerType[]
+     */
+    public function getEligibleCustomerTypes(): Collection
+    {
+        return $this->eligibleCustomerTypes;
+    }
+
+    public function addEligibleCustomerType(CustomerType $eligibleCustomerType): self
+    {
+        if (!$this->eligibleCustomerTypes->contains($eligibleCustomerType)) {
+            $this->eligibleCustomerTypes[] = $eligibleCustomerType;
+            $eligibleCustomerType->addOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEligibleCustomerType(CustomerType $eligibleCustomerType): self
+    {
+        if ($this->eligibleCustomerTypes->contains($eligibleCustomerType)) {
+            $this->eligibleCustomerTypes->removeElement($eligibleCustomerType);
+            $eligibleCustomerType->removeOffer($this);
+        }
 
         return $this;
     }
