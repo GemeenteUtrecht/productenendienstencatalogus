@@ -12,16 +12,46 @@ Properties
 
 In the following table we respond to the properties used in the API by Gemeente Buren with our own decisions with argumentation.
 
-| Property        | Action         | Argumentation |
-| --------------- | -------------- | ------------- |
-| id              | In use with UUIDs instead of incremental ID | In Common Ground UUIDs are used for safety issues. |
-| title           | In use with the name "name" | Adherence to Schema.org |
-| slug            | Not used       | Assumed to be a property for internal use
-| content         | In use with the name "description" | Adherence to Schema.org|
-| excerpt         | Not used       | Not in Schema.org standard. If needed the property "slogan" could be added to serve as excerpt |
-| date            | Not used       | Ambiguous property, would, if needed, be added as "releaseDate"|
-| appointment     | In use with the name "requiresAppointment" | Ambiguous property name. This property is for products that require physical appointments, for example to request travel documents or for the booking of hotel rooms |
-| downloads       | Implemented as "documents" | We decided to use the common ground "documenten" component |
-| faq             | Not implemented at this time | In our opinion faqs should be implemented with a separate component |
+| Property          | Action         | Argumentation |
+| ----------------- | -------------- | ------------- |
+| id                | In use with UUIDs instead of incremental ID | In Common Ground UUIDs are used for safety issues. |
+| title             | In use with the name "name"  | Adherence to Schema.org |
+| slug              | Not used                     | Assumed to be a property for internal use
+| content           | In use with the name "description" | Adherence to Schema.org|
+| excerpt           | Not used                     | Not in Schema.org standard. If needed the property "slogan" could be added to serve as excerpt |
+| date              | Not used                     | Ambiguous property, would, if needed, be added as "releaseDate"|
+| appointment       | In use with the name "requiresAppointment" | Ambiguous property name. This property is for products that require physical appointments, for example to request travel documents or for the booking of hotel rooms |
+| downloads         | Implemented as "documents"   | We decided to use the common ground "documenten" component |
+| faq               | Not implemented at this time | In our opinion faqs should be implemented with a separate component |
+| forms             | Same as "downloads"          | See "downloads" |
+| image             | Implemented as "logo"        | Design choice |
+| links             |  |  |
+| locations         |  |  |
+| synonyms          | Not implemented | The use of this property is ambiguous, looking at the use it might be better to replace this property by a ManyToMany relationship to an entity "tags" |
+| pdc-doelgroep     |  |  |
+| pdc-type          | Implemented as "type" |  |
+| pdc-aspect        |  |  |
+| pdc-usage         |  |  |
+| pdc-owner         | Implemented as "sourceOrganisation" |  |
+| title_alternative | Not implemented              | If needed, we propose to implement this property as "alternateName" to keep adherence to Schema.org standards |
+
+Additionally we implemented the following properties
+
+| Property          | Function      | Argumentation |
+| ----------------- | ------------- | ------------- |
+| sku               | Human-readable product reference | Because of the use of UUIDs it is vital to also have a human-readable reference for the product. Schema.org recommends the property "sku" or stock-keeping unit to do this |
+| skuId             | Auto-incrementing id part of "sku" | - |
+| movie             | Adding a movie to the product | Some products sell better when a video is added |
+| groups            |  |  |
+| price             | The price of the product     | This PDC can also be used outside of municipalities, and hence, products can have a price |
+| priceCurrency     | The currency the price is in | When we set a price, it is theoretically possible that this price is in a different currency, hence a property to set this |
+| taxPercentage     | The tax percentage that is calculated over the product | There can be multiple levels of tax that are calculated over the price of a product (e.g. 9% or 21% in the Netherlands), this can be set with this property |
+| parent            | A parent product for complex products | Some products are complex having child-products (variations) or parent-products, this property refers to a parent product |
+| variations        | The variations of a complex product   | See above, this property refers to child products |
+| groupedProducts   | Products that are part of a set       | When the product type is a "set", this property contains the products that are in the set |
+| sets              | Sets that the product is part of      | See above, this property refers to the set the product is part of |
+| catalogue         | The catalogue the product belongs to  | A product belongs to a specified catalogue, referred to by this property |
+| offers            | The offers that are used to sell this product | The price of a product can vary over time. To prevent old orders from being corrupted by a changing price, we use offers that have a fixed price and are replaced once the price has to change. |
+| calendar          | The calendar of a product             | Some types of products, for example hotel rooms or wedding locations can be in use because of other orders. The calendar shows when this product is available |
 
 ###Offer
