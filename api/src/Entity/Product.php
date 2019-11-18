@@ -394,6 +394,25 @@ class Product
      */
     private $requiresAppointment;
 
+    /**
+     *
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $documents = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $images = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $externalDocs = [];
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -735,6 +754,42 @@ class Product
     public function setRequiresAppointment(bool $requiresAppointment): self
     {
         $this->requiresAppointment = $requiresAppointment;
+
+        return $this;
+    }
+
+    public function getDocuments(): ?array
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?array $documents): self
+    {
+        $this->documents = $documents;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    public function getExternalDocs(): ?array
+    {
+        return $this->externalDocs;
+    }
+
+    public function setExternalDocs(?array $externalDocs): self
+    {
+        $this->externalDocs = $externalDocs;
 
         return $this;
     }
