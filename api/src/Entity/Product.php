@@ -17,6 +17,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing a product
+ *
+ * This entity represents a product that can be ordered via the OrderRegistratieComponent.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
