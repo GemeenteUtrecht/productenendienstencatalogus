@@ -18,8 +18,8 @@ In the following table we respond to the properties used in the API by Gemeente 
 | title             | In use with the name "name"                      | Adherence to Schema.org |
 | slug              | Not used                                         | Assumed to be a property for internal use
 | content           | In use with the name "description"               | Adherence to Schema.org|
-| excerpt           | Not used                                         | Not in Schema.org standard. If needed the property "slogan" could be added to serve as excerpt |
-| date              | Not used                                         | Ambiguous property, would, if needed, be added as "releaseDate"|
+| excerpt           | Not implemented                                  | Not in Schema.org standard. If needed the property "slogan" could be added to serve as excerpt |
+| date              | Not implemented                                  | Ambiguous property, would, if needed, be added as "releaseDate"|
 | appointment       | In use with the name "requiresAppointment"       | Ambiguous property name. This property is for products that require physical appointments, for example to request travel documents or for the booking of hotel rooms |
 | downloads         | Implemented as "documents"                       | We decided to use the common ground "documenten" component |
 | faq               | Not implemented at this time                     | In our opinion faqs should be implemented with a separate component |
