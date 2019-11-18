@@ -18,6 +18,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing an offer
+ *
+ * This entity represents an offer that bridges products to the OrderRegistratieComponent to be able to change prices without invalidating past orders.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
@@ -121,6 +130,7 @@ class Offer
     private $priceCurrency = 'EUR';
 
     /**
+     * @var string $offeredBy The uri for the organisation that offers this offer
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Url
@@ -132,7 +142,7 @@ class Offer
     private $offeredBy;
 
     /**
-     * @var DateTime $availabilityEnds
+     * @var DateTime $availabilityEnds the date this offer ends
      * @ORM\Column(type="datetime")
      * @Assert\NotNull
      * @Assert\Date
@@ -142,7 +152,7 @@ class Offer
     private $availabilityEnds;
 
     /**
-     * @var DateTime $availabilityStarts
+     * @var DateTime $availabilityStarts the date this offer has started
      * @Assert\NotNull
      * @Assert\Date
      * @ORM\Column(type="datetime")
@@ -151,13 +161,13 @@ class Offer
     private $availabilityStarts;
 
     /**
-     *  @var integer $taxPercentage The tax percentage for this product as an integer e.g. 9% makes 9
+     *  @var integer $taxPercentage The tax percentage for this offer as an integer e.g. 9% makes 9
      *  @example 9
      *
      *  @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
+     *         	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
      *             "type"="integer",
      *             "example"="9",
      *             "maxLength"="3",
@@ -175,7 +185,10 @@ class Offer
     private $taxPercentage;
 
     /**
+     * @var ArrayCollection $eligibleCustomerTypes The customer types that are eligible for this offer
      * @ORM\ManyToMany(targetEntity="App\Entity\CustomerType", mappedBy="offers")
+     * @MaxDepth(1)
+     * @Groups({"read","write"})
      */
     private $eligibleCustomerTypes;
 
