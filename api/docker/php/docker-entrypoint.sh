@@ -59,17 +59,17 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		bin/console doctrine:schema:update --force --no-interaction			
 		
 		# If you want to retain data in your dev enviroment comment this command out
-		echo "Loading fixtures"
-		bin/console doctrine:fixtures:load  --no-interaction
+		#echo "Loading fixtures"
+		#bin/console doctrine:fixtures:load  --no-interaction
 		
-		echo "Creating OAS documentation"
+		#echo "Creating OAS documentation"
 		# Lets update the docs to show the latest chages
-		bin/console api:openapi:export --output=/srv/api/public/schema/openapi.yaml --yaml --spec-version=3		
+		#bin/console api:openapi:export --output=/srv/api/public/schema/openapi.yaml --yaml --spec-version=3		
 				
 		# this should only be done in an build		
-		echo "Updating Helm charts"
+		#echo "Updating Helm charts"
 		# Lets update the docs to show the latest chages
-		bin/console app:helm:update --location=/srv/api/helm --spec-version=3			
+		#bin/console app:helm:update --location=/srv/api/helm --spec-version=3			
 	fi
 fi
 
