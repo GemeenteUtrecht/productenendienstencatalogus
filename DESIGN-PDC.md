@@ -1,4 +1,4 @@
-#Design considerations on PDC
+# Design considerations on PDC
 
 This component was designed in line with the recommendations of [Schema.org](https://schema.org) for [Products](https://schema.org/Product) and [Offers](https://schema.org/Offer) and also to the notice by VNG [Gemeentelijk Gegevenslandschap](https://www.gemmaonline.nl/images/gemmaonline/d/dc/GEMMA_Gegevenslandschap_-_PDC_UPL_Zaaktypen_verwerkingsregister_en_adm_handelingen_v1_0.pdf) on, amongst other specifications, Product-and-Service catalogues. Not all variables mentioned in these standards are used, but the entities can be extended to fully implement these specifications.
 
@@ -8,7 +8,7 @@ Although we do not wish to make concessions to existing infrastructure we deemed
 
 Properties
 ----
-###Product
+### Product
 
 In the following table we respond to the properties used in the API by Gemeente Buren with our own decisions with argumentation.
 
@@ -54,7 +54,7 @@ Additionally we implemented the following properties
 | offers            | The offers that are used to sell this product          | The price of a product can vary over time. To prevent old orders from being corrupted by a changing price, we use offers that have a fixed price and are replaced once the price has to change. |
 | calendar          | The calendar of a product                              | Some types of products, for example hotel rooms or wedding locations can be in use because of other orders. The calendar shows when this product is available |
 
-###Offer
+### Offer
 TODO
 
 Contribute
