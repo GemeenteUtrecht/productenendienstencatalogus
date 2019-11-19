@@ -13,7 +13,7 @@ x-cache:
 services:
   php:
     &php
-    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php:${APP_ENV}
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php:dev
     build:
       context: ./api
       target: api_platform_php
@@ -50,7 +50,7 @@ services:
       - "8082:80"
 
   api:
-    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-nginx:${APP_ENV}
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-nginx:dev
     build:
       context: ./api
       target: api_platform_nginx
@@ -71,7 +71,7 @@ services:
 
   cache-proxy:
     &varnish
-    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-varnish:${APP_ENV}
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-varnish:dev
     build:
       context: ./api
       target: api_platform_varnish
