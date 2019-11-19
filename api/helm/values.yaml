@@ -4,7 +4,7 @@
 
 settings:
   registryBase: docker.io/conduction
-  projectName: pc
+  projectName: pdc
   name: pdc
   title: Producten en Diensten Catalogus
   version: V.0.1
@@ -15,7 +15,7 @@ settings:
   debug: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '^(.+\.)?common-ground\.dev$|^(.+\.)?zaakonline\.nl$|^(.+\.)?conduction\.nl$|^example\.com$|^(.+\.)?178.128.137.115$|178.128.137.115|localhost'
+  trustedHosts: '^(.+\.)?common-ground\.dev$|^(.+\.)?zaakonline\.nl$|^(.+\.)?conduction\.nl$|^example\.com$|^(.+\.)?178.128.142.152$|178.128.142.152|localhost'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:
