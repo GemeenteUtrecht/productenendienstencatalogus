@@ -3792,6 +3792,7 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The Uuid identifier of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -3858,6 +3859,7 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The Uuid identifier of this group'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -3929,6 +3931,7 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
+          description: 'The name of this offer'
           type: string
         product:
           readOnly: true
@@ -4032,6 +4035,7 @@ components:
         - taxPercentage
       properties:
         name:
+          description: 'The name of this offer'
           type: string
         price:
           description: |
@@ -4132,6 +4136,7 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
+          description: 'The name of this offer'
           type: string
         product:
           readOnly: true
@@ -4244,6 +4249,7 @@ components:
           readOnly: true
           type: string
         name:
+          description: 'The name of this offer'
           type: string
         price:
           description: |
@@ -4451,27 +4457,33 @@ components:
           items:
             $ref: '#/components/schemas/Product-read'
         offers:
+          description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer-read'
         calendar:
+          description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
           readOnly: true
+          description: 'An array of URLs pointing to documents related to this product'
           type: array
           items:
             type: string
         images:
           readOnly: true
+          description: 'An array of URLs pointing to images related to this product'
           type: array
           items:
             type: string
         externalDocs:
           readOnly: true
+          description: 'An array of URLs pointing to external documents referred to from this product'
           type: array
           items:
             type: string
@@ -4601,14 +4613,17 @@ components:
           items:
             $ref: '#/components/schemas/Product-write'
         offers:
+          description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer-write'
         calendar:
+          description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
         - name
@@ -4753,27 +4768,33 @@ components:
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
         offers:
+          description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer:jsonld-read'
         calendar:
+          description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
           readOnly: true
+          description: 'An array of URLs pointing to documents related to this product'
           type: array
           items:
             type: string
         images:
           readOnly: true
+          description: 'An array of URLs pointing to images related to this product'
           type: array
           items:
             type: string
         externalDocs:
           readOnly: true
+          description: 'An array of URLs pointing to external documents referred to from this product'
           type: array
           items:
             type: string
@@ -4912,14 +4933,17 @@ components:
           items:
             $ref: '#/components/schemas/Product:jsonld-write'
         offers:
+          description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer:jsonld-write'
         calendar:
+          description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
         - name
@@ -4934,6 +4958,7 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The Uuid identifier of this supplier'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
@@ -4996,6 +5021,7 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The Uuid identifier of this supplier'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
