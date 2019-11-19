@@ -17,6 +17,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing a product
+ *
+ * This entity represents a product that can be ordered via the OrderRegistratieComponent.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
@@ -360,12 +369,57 @@ class Product
      */
     private $catalogue;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
+     * @Assert\Valid
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     */
+    private $offers;
+
+    /**
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $calendar;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\NotNull
+     * @Groups({"read", "write"})
+     */
+    private $requiresAppointment;
+
+    /**
+     *
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $documents = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $images = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $externalDocs = [];
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
         $this->variations = new ArrayCollection();
         $this->groupedProducts = new ArrayCollection();
         $this->sets = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId()
@@ -394,7 +448,7 @@ class Product
 
     public function getSkuId(): ?int
     {
-        return $this->skuIs;
+        return $this->skuId;
     }
 
     public function setSkuId(int $skuId): self
@@ -637,14 +691,105 @@ class Product
         return $this;
     }
 
-    public function getCatalogus(): ?Catalogue
+    public function getCatalogue(): ?Catalogue
     {
-        return $this->catalogus;
+        return $this->catalogue;
     }
 
     public function setCatalogue(?Catalogue $catalogue): self
     {
     	$this->catalogue = $catalogue;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getProduct() === $this) {
+                $offer->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCalendar(): ?string
+    {
+        return $this->calendar;
+    }
+
+    public function setCalendar(?string $calendar): self
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    public function getRequiresAppointment(): ?bool
+    {
+        return $this->requiresAppointment;
+    }
+
+    public function setRequiresAppointment(bool $requiresAppointment): self
+    {
+        $this->requiresAppointment = $requiresAppointment;
+
+        return $this;
+    }
+
+    public function getDocuments(): ?array
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?array $documents): self
+    {
+        $this->documents = $documents;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    public function getExternalDocs(): ?array
+    {
+        return $this->externalDocs;
+    }
+
+    public function setExternalDocs(?array $externalDocs): self
+    {
+        $this->externalDocs = $externalDocs;
 
         return $this;
     }

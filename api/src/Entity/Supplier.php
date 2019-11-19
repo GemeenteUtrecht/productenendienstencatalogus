@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +16,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing a supplier of products
+ *
+ * This entity represents a supplier that delivers products to the seller. For example: if we are a municipality we sell passports to our inhabitants, but these passports are made by the ministry of internal affairs.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}},
  *     denormalizationContext={"groups"={"write"}}
@@ -24,7 +34,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Supplier
 {
 	/**
-	 * @var \Ramsey\Uuid\UuidInterface
+	 * @var UuidInterface
 	 *
 	 * @ApiProperty(
 	 * 	   identifier=true,
@@ -46,7 +56,7 @@ class Supplier
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 */
 	private $id;
-	
+
 	/**
 	 * @var string $sourceOrganization The RSIN of the organization that owns this process
 	 * @example 002851234
@@ -72,7 +82,7 @@ class Supplier
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
 	 */
 	private $sourceOrganization;
-    
+
     /**
      * @var string $name The name of this RequestType
      * @example My RequestType
@@ -114,7 +124,7 @@ class Supplier
      *         }
      *     }
      * )
-     * 
+     *
      * @Assert\NotNull
      * @Assert\Length(
      *      max = 255
@@ -123,7 +133,7 @@ class Supplier
      * @ORM\Column(type="string", length=255)
      */
     private $kvk;
-    
+
     /**
      * @var string $logo The logo for this component
      * @example https://www.my-organization.com/logo.png
@@ -154,28 +164,28 @@ class Supplier
     {
         return $this->id;
     }
-    
+
     public function getSourceOrganization(): ?string
     {
     	return $this->sourceOrganization;
     }
-    
+
     public function setSourceOrganization(string $sourceOrganization): self
     {
     	$this->sourceOrganization = $sourceOrganization;
-    	
+
     	return $this;
     }
-    
+
     public function getName(): ?string
     {
         return $this->name;
     }
-    
+
     public function setName(string $name): self
     {
         $this->name = $name;
-        
+
         return $this;
     }
 
