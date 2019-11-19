@@ -61,6 +61,8 @@ class Offer
     private $id;
 
     /**
+     * @var string $name The name of this offer
+     *
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Length(

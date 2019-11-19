@@ -60,17 +60,26 @@ class CustomerType
     /**
      * @var string $name The name of this CustomerType
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Assert\NotNull
      */
     private $name;
 
     /**
      * @var string $description The description for this CustomerType
      * @ORM\Column(type="string", length=2550)
+     * @Assert\Length(
+     *     max = 2550
+     * )
+     * @Assert\NotNull
      */
     private $description;
 
     /**
      * @var ArrayCollection $offers The offers that this CustomerType is eligible for
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Offer", inversedBy="eligibleCustomerTypes")
      * @MaxDepth(1)
      * @Groups({"read", "write"})
