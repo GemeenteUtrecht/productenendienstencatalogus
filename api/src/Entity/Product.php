@@ -370,6 +370,8 @@ class Product
     private $catalogue;
 
     /**
+     * @var ArrayCollection $offers The offers that refer to this product
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
      * @Assert\Valid
      * @MaxDepth(1)
@@ -378,6 +380,8 @@ class Product
     private $offers;
 
     /**
+     * @var string $calendar The uri referring to the calendar of this product.
+     *
      * @Assert\Url
      * @Assert\Length(
      *     max = 255
@@ -388,6 +392,8 @@ class Product
     private $calendar;
 
     /**
+     * @var boolean $requiresAppointment If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
+     *
      * @ORM\Column(type="boolean")
      * @Assert\NotNull
      * @Groups({"read", "write"})
@@ -395,6 +401,7 @@ class Product
     private $requiresAppointment;
 
     /**
+     * @var array $documents An array of URLs pointing to documents related to this product
      *
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
@@ -402,12 +409,16 @@ class Product
     private $documents = [];
 
     /**
+     * @var array $documents An array of URLs pointing to images related to this product
+     *
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
     private $images = [];
 
     /**
+     * @var array $documents An array of URLs pointing to external documents referred to from this product
+     *
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */

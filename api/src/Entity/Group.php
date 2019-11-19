@@ -35,7 +35,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Group
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface $id The Uuid identifier of this group
 	 *
 	 * @ApiProperty(
 	 * 	   identifier=true,

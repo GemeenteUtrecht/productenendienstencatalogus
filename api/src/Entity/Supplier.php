@@ -34,7 +34,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Supplier
 {
 	/**
-	 * @var UuidInterface
+	 * @var UuidInterface $id The Uuid identifier of this supplier
 	 *
 	 * @ApiProperty(
 	 * 	   identifier=true,
