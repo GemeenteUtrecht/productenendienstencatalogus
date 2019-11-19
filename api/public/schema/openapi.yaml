@@ -72,13 +72,13 @@ paths:
                   $ref: '#/components/schemas/Catalogue-read'
       parameters:
         -
-          name: source_organization
+          name: sourceOrganization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'source_organization[]'
+          name: 'sourceOrganization[]'
           in: query
           required: false
           schema:
@@ -1244,13 +1244,13 @@ paths:
                   $ref: '#/components/schemas/Group-read'
       parameters:
         -
-          name: source_organization
+          name: sourceOrganization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'source_organization[]'
+          name: 'sourceOrganization[]'
           in: query
           required: false
           schema:
@@ -2432,13 +2432,13 @@ paths:
           style: form
           explode: true
         -
-          name: source_organization
+          name: sourceOrganization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'source_organization[]'
+          name: 'sourceOrganization[]'
           in: query
           required: false
           schema:
@@ -3051,13 +3051,13 @@ paths:
                   $ref: '#/components/schemas/Supplier-read'
       parameters:
         -
-          name: source_organization
+          name: sourceOrganization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'source_organization[]'
+          name: 'sourceOrganization[]'
           in: query
           required: false
           schema:
@@ -3595,7 +3595,7 @@ components:
       description: 'An entity representing a product catalogue'
       required:
         - name
-        - source_organization
+        - sourceOrganization
       properties:
         name:
           description: 'The name of this Catalogue'
@@ -3612,7 +3612,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
           type: string
         groups:
@@ -3632,7 +3632,7 @@ components:
       description: 'An entity representing a product catalogue'
       required:
         - name
-        - source_organization
+        - sourceOrganization
       properties:
         name:
           description: 'The name of this Catalogue'
@@ -3649,7 +3649,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
           type: string
     'Catalogue:jsonld-read':
@@ -3657,7 +3657,7 @@ components:
       description: 'An entity representing a product catalogue'
       required:
         - name
-        - source_organization
+        - sourceOrganization
       properties:
         '@context':
           readOnly: true
@@ -3683,7 +3683,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
           type: string
         groups:
@@ -3703,7 +3703,7 @@ components:
       description: 'An entity representing a product catalogue'
       required:
         - name
-        - source_organization
+        - sourceOrganization
       properties:
         '@context':
           readOnly: true
@@ -3729,7 +3729,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
           type: string
     CustomerType-read:
@@ -3818,14 +3818,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-read'
       required:
-        - source_organization
+        - sourceOrganization
     Group-write:
       type: object
       description: 'An entity representing a product group'
@@ -3835,14 +3835,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-write'
       required:
-        - source_organization
+        - sourceOrganization
     'Group:jsonld-read':
       type: object
       description: 'An entity representing a product group'
@@ -3884,14 +3884,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-read'
       required:
-        - source_organization
+        - sourceOrganization
     'Group:jsonld-write':
       type: object
       description: 'An entity representing a product group'
@@ -3910,14 +3910,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-write'
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-write'
       required:
-        - source_organization
+        - sourceOrganization
     Offer-read:
       type: object
       description: 'An entity representing an offer'
@@ -3952,7 +3952,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -3973,24 +3973,24 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        offered_by:
+        offeredBy:
           description: 'The uri for the organisation that offers this offer'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        availability_ends:
+        availabilityEnds:
           description: 'the date this offer ends'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        availability_starts:
+        availabilityStarts:
           description: 'the date this offer has started'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this offer as an integer e.g. 9% makes 9
              @example 9
@@ -4008,7 +4008,7 @@ components:
                 }
             )
           type: integer
-        eligible_customer_types:
+        eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
           items:
@@ -4016,20 +4016,20 @@ components:
       required:
         - name
         - price
-        - offered_by
-        - availability_ends
-        - availability_starts
-        - tax_percentage
+        - offeredBy
+        - availabilityEnds
+        - availabilityStarts
+        - taxPercentage
     Offer-write:
       type: object
       description: 'An entity representing an offer'
       required:
         - name
         - price
-        - offered_by
-        - availability_ends
-        - availability_starts
-        - tax_percentage
+        - offeredBy
+        - availabilityEnds
+        - availabilityStarts
+        - taxPercentage
       properties:
         name:
           type: string
@@ -4051,7 +4051,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4072,24 +4072,24 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        offered_by:
+        offeredBy:
           description: 'The uri for the organisation that offers this offer'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        availability_ends:
+        availabilityEnds:
           description: 'the date this offer ends'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        availability_starts:
+        availabilityStarts:
           description: 'the date this offer has started'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this offer as an integer e.g. 9% makes 9
              @example 9
@@ -4107,7 +4107,7 @@ components:
                 }
             )
           type: integer
-        eligible_customer_types:
+        eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
           items:
@@ -4155,7 +4155,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4176,24 +4176,24 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        offered_by:
+        offeredBy:
           description: 'The uri for the organisation that offers this offer'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        availability_ends:
+        availabilityEnds:
           description: 'the date this offer ends'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        availability_starts:
+        availabilityStarts:
           description: 'the date this offer has started'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this offer as an integer e.g. 9% makes 9
              @example 9
@@ -4211,7 +4211,7 @@ components:
                 }
             )
           type: integer
-        eligible_customer_types:
+        eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
           items:
@@ -4219,20 +4219,20 @@ components:
       required:
         - name
         - price
-        - offered_by
-        - availability_ends
-        - availability_starts
-        - tax_percentage
+        - offeredBy
+        - availabilityEnds
+        - availabilityStarts
+        - taxPercentage
     'Offer:jsonld-write':
       type: object
       description: 'An entity representing an offer'
       required:
         - name
         - price
-        - offered_by
-        - availability_ends
-        - availability_starts
-        - tax_percentage
+        - offeredBy
+        - availabilityEnds
+        - availabilityStarts
+        - taxPercentage
       properties:
         '@context':
           readOnly: true
@@ -4263,7 +4263,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4284,24 +4284,24 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        offered_by:
+        offeredBy:
           description: 'The uri for the organisation that offers this offer'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        availability_ends:
+        availabilityEnds:
           description: 'the date this offer ends'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        availability_starts:
+        availabilityStarts:
           description: 'the date this offer has started'
           externalDocs:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this offer as an integer e.g. 9% makes 9
              @example 9
@@ -4319,7 +4319,7 @@ components:
                 }
             )
           type: integer
-        eligible_customer_types:
+        eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
           items:
@@ -4357,7 +4357,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4383,7 +4383,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4404,7 +4404,7 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
@@ -4444,7 +4444,7 @@ components:
             - service
           example: simple
           required: 'true'
-        grouped_products:
+        groupedProducts:
           readOnly: true
           description: 'If the product type is a **set** this contains the products that are part of that set'
           type: array
@@ -4458,7 +4458,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        requires_appointment:
+        requiresAppointment:
           type: boolean
         documents:
           readOnly: true
@@ -4470,18 +4470,18 @@ components:
           type: array
           items:
             type: string
-        external_docs:
+        externalDocs:
           readOnly: true
           type: array
           items:
             type: string
       required:
         - name
-        - source_organization
+        - sourceOrganization
         - price
-        - tax_percentage
+        - taxPercentage
         - type
-        - requires_appointment
+        - requiresAppointment
     Product-write:
       type: object
       description: 'An entity representing a product'
@@ -4509,7 +4509,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4535,7 +4535,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4556,7 +4556,7 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
@@ -4608,15 +4608,15 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        requires_appointment:
+        requiresAppointment:
           type: boolean
       required:
         - name
-        - source_organization
+        - sourceOrganization
         - price
-        - tax_percentage
+        - taxPercentage
         - type
-        - requires_appointment
+        - requiresAppointment
     'Product:jsonld-read':
       type: object
       description: 'An entity representing a product'
@@ -4659,7 +4659,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4685,7 +4685,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4706,7 +4706,7 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
@@ -4746,7 +4746,7 @@ components:
             - service
           example: simple
           required: 'true'
-        grouped_products:
+        groupedProducts:
           readOnly: true
           description: 'If the product type is a **set** this contains the products that are part of that set'
           type: array
@@ -4760,7 +4760,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        requires_appointment:
+        requiresAppointment:
           type: boolean
         documents:
           readOnly: true
@@ -4772,18 +4772,18 @@ components:
           type: array
           items:
             type: string
-        external_docs:
+        externalDocs:
           readOnly: true
           type: array
           items:
             type: string
       required:
         - name
-        - source_organization
+        - sourceOrganization
         - price
-        - tax_percentage
+        - taxPercentage
         - type
-        - requires_appointment
+        - requiresAppointment
     'Product:jsonld-write':
       type: object
       description: 'An entity representing a product'
@@ -4820,7 +4820,7 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4846,7 +4846,7 @@ components:
                 }
             )
           type: string
-        price_currency:
+        priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
              @example EUR
@@ -4867,7 +4867,7 @@ components:
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
-        tax_percentage:
+        taxPercentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
@@ -4919,15 +4919,15 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        requires_appointment:
+        requiresAppointment:
           type: boolean
       required:
         - name
-        - source_organization
+        - sourceOrganization
         - price
-        - tax_percentage
+        - taxPercentage
         - type
-        - requires_appointment
+        - requiresAppointment
     Supplier-read:
       type: object
       description: 'An entity representing a supplier of products'
@@ -4937,7 +4937,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this process'
           type: string
         name:
@@ -4954,18 +4954,18 @@ components:
             url: 'https://schema.org/logo'
           type: string
       required:
-        - source_organization
+        - sourceOrganization
         - name
         - kvk
     Supplier-write:
       type: object
       description: 'An entity representing a supplier of products'
       required:
-        - source_organization
+        - sourceOrganization
         - name
         - kvk
       properties:
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this process'
           type: string
         name:
@@ -4999,7 +4999,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this process'
           type: string
         name:
@@ -5016,14 +5016,14 @@ components:
             url: 'https://schema.org/logo'
           type: string
       required:
-        - source_organization
+        - sourceOrganization
         - name
         - kvk
     'Supplier:jsonld-write':
       type: object
       description: 'An entity representing a supplier of products'
       required:
-        - source_organization
+        - sourceOrganization
         - name
         - kvk
       properties:
@@ -5036,7 +5036,7 @@ components:
         '@type':
           readOnly: true
           type: string
-        source_organization:
+        sourceOrganization:
           description: 'The RSIN of the organization that owns this process'
           type: string
         name:
