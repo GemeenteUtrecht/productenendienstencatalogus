@@ -1,18 +1,18 @@
 openapi: 3.0.2
 info:
-  title: 'Producten en Diensten Catalogus (PDC)'
-  version: 0.0.1
+  title: 'Producten en Diensten Catalogus'
+  version: V.0.1
   description: |
     API Details
-    - Component: Proto Component
-    - Reference: pc
+    - Component: Producten en Diensten Catalogus
+    - Reference: pdc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/Proto-component-commonground) / [zip](https://github.com/ConductionNL/Proto-component-commonground/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pc-php) 
+    - Repository: [online](https://github.com/ConductionNL/productenendienstencatalogus) / [zip](https://github.com/ConductionNL/productenendienstencatalogus/archive/master.zip)
+    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pdc-php) 
     - Datamodel: [postman](/schema/openapi.postman_collection) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar. 
+    'This component provides a products and services catalogue that can be used by a order component in order to provide the products in the orders with better details. The design considerations are given in [DESIGN.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN.md) and [DESIGN-PDC.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN-PDC.md)'         
     
 paths:
   /catalogues:
@@ -95,6 +95,79 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Catalogue
@@ -165,6 +238,36 @@ paths:
             schema:
               $ref: '#/components/schemas/Catalogue-write'
         description: 'The new Catalogue resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   '/catalogues/{id}':
     get:
       tags:
@@ -178,6 +281,77 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Catalogue resource response'
@@ -208,6 +382,8 @@ paths:
                 $ref: '#/components/schemas/Catalogue-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Catalogue
@@ -225,6 +401,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
     put:
       tags:
         - Catalogue
@@ -237,6 +442,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Catalogue resource updated'
@@ -308,6 +542,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Catalogue resource updated'
@@ -346,6 +609,584 @@ paths:
             schema:
               $ref: '#/components/schemas/Catalogue-write'
         description: 'The updated Catalogue resource'
+  /customer_types:
+    get:
+      tags:
+        - CustomerType
+      operationId: getCustomerTypeCollection
+      summary: 'Retrieves the collection of CustomerType resources.'
+      responses:
+        200:
+          description: 'CustomerType collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/CustomerType:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerType-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - CustomerType
+      operationId: postCustomerTypeCollection
+      summary: 'Creates a CustomerType resource.'
+      responses:
+        201:
+          description: 'CustomerType resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+          links:
+            GetCustomerTypeItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getCustomerTypeItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /customer_types/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+        description: 'The new CustomerType resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/customer_types/{id}':
+    get:
+      tags:
+        - CustomerType
+      operationId: getCustomerTypeItem
+      summary: 'Retrieves a CustomerType resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'CustomerType resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - CustomerType
+      operationId: deleteCustomerTypeItem
+      summary: 'Removes the CustomerType resource.'
+      responses:
+        204:
+          description: 'CustomerType resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - CustomerType
+      operationId: putCustomerTypeItem
+      summary: 'Replaces the CustomerType resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'CustomerType resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+        description: 'The updated CustomerType resource'
+    patch:
+      tags:
+        - CustomerType
+      operationId: patchCustomerTypeItem
+      summary: 'Updates the CustomerType resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'CustomerType resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/CustomerType-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CustomerType-write'
+        description: 'The updated CustomerType resource'
   /groups:
     get:
       tags:
@@ -426,6 +1267,79 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Group
@@ -496,6 +1410,36 @@ paths:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The new Group resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   '/groups/{id}':
     get:
       tags:
@@ -509,6 +1453,77 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Group resource response'
@@ -539,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Group-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Group
@@ -556,6 +1573,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
     put:
       tags:
         - Group
@@ -568,6 +1614,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Group resource updated'
@@ -639,6 +1714,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Group resource updated'
@@ -677,6 +1781,584 @@ paths:
             schema:
               $ref: '#/components/schemas/Group-write'
         description: 'The updated Group resource'
+  /offers:
+    get:
+      tags:
+        - Offer
+      operationId: getOfferCollection
+      summary: 'Retrieves the collection of Offer resources.'
+      responses:
+        200:
+          description: 'Offer collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Offer:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Offer
+      operationId: postOfferCollection
+      summary: 'Creates a Offer resource.'
+      responses:
+        201:
+          description: 'Offer resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Offer:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+          links:
+            GetOfferItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getOfferItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /offers/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Offer:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+        description: 'The new Offer resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/offers/{id}':
+    get:
+      tags:
+        - Offer
+      operationId: getOfferItem
+      summary: 'Retrieves a Offer resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Offer resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Offer:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Offer
+      operationId: deleteOfferItem
+      summary: 'Removes the Offer resource.'
+      responses:
+        204:
+          description: 'Offer resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Offer
+      operationId: putOfferItem
+      summary: 'Replaces the Offer resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Offer resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Offer:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Offer:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+        description: 'The updated Offer resource'
+    patch:
+      tags:
+        - Offer
+      operationId: patchOfferItem
+      summary: 'Updates the Offer resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Offer resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Offer:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Offer-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Offer-write'
+        description: 'The updated Offer resource'
   /products:
     get:
       tags:
@@ -798,6 +2480,79 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Product
@@ -868,6 +2623,36 @@ paths:
             schema:
               $ref: '#/components/schemas/Product-write'
         description: 'The new Product resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   '/products/{id}':
     get:
       tags:
@@ -982,6 +2767,8 @@ paths:
                 $ref: '#/components/schemas/Product-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Product
@@ -1025,7 +2812,7 @@ paths:
           description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -1287,6 +3074,79 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Supplier
@@ -1357,6 +3217,36 @@ paths:
             schema:
               $ref: '#/components/schemas/Supplier-write'
         description: 'The new Supplier resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   '/suppliers/{id}':
     get:
       tags:
@@ -1370,6 +3260,77 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Supplier resource response'
@@ -1400,6 +3361,8 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Supplier
@@ -1417,6 +3380,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
     put:
       tags:
         - Supplier
@@ -1429,6 +3421,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Supplier resource updated'
@@ -1500,6 +3521,35 @@ paths:
           required: true
           schema:
             type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
       responses:
         200:
           description: 'Supplier resource updated'
@@ -1542,7 +3592,7 @@ components:
   schemas:
     Catalogue-read:
       type: object
-      description: ''
+      description: 'An entity representing a product catalogue'
       required:
         - name
         - source_organization
@@ -1579,7 +3629,7 @@ components:
             $ref: '#/components/schemas/Product-read'
     Catalogue-write:
       type: object
-      description: ''
+      description: 'An entity representing a product catalogue'
       required:
         - name
         - source_organization
@@ -1604,7 +3654,7 @@ components:
           type: string
     'Catalogue:jsonld-read':
       type: object
-      description: ''
+      description: 'An entity representing a product catalogue'
       required:
         - name
         - source_organization
@@ -1650,7 +3700,7 @@ components:
             $ref: '#/components/schemas/Product:jsonld-read'
     'Catalogue:jsonld-write':
       type: object
-      description: ''
+      description: 'An entity representing a product catalogue'
       required:
         - name
         - source_organization
@@ -1682,9 +3732,63 @@ components:
         source_organization:
           description: 'The RSIN of the organization that provides this catalogue'
           type: string
+    CustomerType-read:
+      type: object
+      description: 'An entity representing a type of customer'
+      properties:
+        offers:
+          description: 'The offers that this CustomerType is eligible for'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-read'
+    CustomerType-write:
+      type: object
+      description: 'An entity representing a type of customer'
+      properties:
+        offers:
+          description: 'The offers that this CustomerType is eligible for'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-write'
+    'CustomerType:jsonld-read':
+      type: object
+      description: 'An entity representing a type of customer'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        offers:
+          description: 'The offers that this CustomerType is eligible for'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-read'
+    'CustomerType:jsonld-write':
+      type: object
+      description: 'An entity representing a type of customer'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        offers:
+          description: 'The offers that this CustomerType is eligible for'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-write'
     Group-read:
       type: object
-      description: ''
+      description: 'An entity representing a product group'
       properties:
         id:
           readOnly: true
@@ -1718,14 +3822,13 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
-          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-read'
       required:
         - source_organization
     Group-write:
       type: object
-      description: ''
+      description: 'An entity representing a product group'
       properties:
         products:
           description: 'The groups that are a part of this product group'
@@ -1736,14 +3839,13 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
-          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-write'
       required:
         - source_organization
     'Group:jsonld-read':
       type: object
-      description: ''
+      description: 'An entity representing a product group'
       properties:
         '@context':
           readOnly: true
@@ -1786,14 +3888,13 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
-          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-read'
       required:
         - source_organization
     'Group:jsonld-write':
       type: object
-      description: ''
+      description: 'An entity representing a product group'
       properties:
         '@context':
           readOnly: true
@@ -1813,14 +3914,419 @@ components:
           description: 'The RSIN of the organization that owns this group'
           type: string
         catalogue:
-          writeOnly: true
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-write'
       required:
         - source_organization
+    Offer-read:
+      type: object
+      description: 'An entity representing an offer'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          type: string
+        product:
+          readOnly: true
+          description: 'The product that is sold via this offer'
+          $ref: '#/components/schemas/Product-read'
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        offered_by:
+          description: 'The uri for the organisation that offers this offer'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        availability_ends:
+          description: 'the date this offer ends'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        availability_starts:
+          description: 'the date this offer has started'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        tax_percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+             @example 9
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        eligible_customer_types:
+          description: 'The customer types that are eligible for this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerType-read'
+      required:
+        - name
+        - price
+        - offered_by
+        - availability_ends
+        - availability_starts
+        - tax_percentage
+    Offer-write:
+      type: object
+      description: 'An entity representing an offer'
+      required:
+        - name
+        - price
+        - offered_by
+        - availability_ends
+        - availability_starts
+        - tax_percentage
+      properties:
+        name:
+          type: string
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        offered_by:
+          description: 'The uri for the organisation that offers this offer'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        availability_ends:
+          description: 'the date this offer ends'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        availability_starts:
+          description: 'the date this offer has started'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        tax_percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+             @example 9
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        eligible_customer_types:
+          description: 'The customer types that are eligible for this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerType-write'
+    'Offer:jsonld-read':
+      type: object
+      description: 'An entity representing an offer'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          type: string
+        product:
+          readOnly: true
+          description: 'The product that is sold via this offer'
+          $ref: '#/components/schemas/Product:jsonld-read'
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        offered_by:
+          description: 'The uri for the organisation that offers this offer'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        availability_ends:
+          description: 'the date this offer ends'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        availability_starts:
+          description: 'the date this offer has started'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        tax_percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+             @example 9
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        eligible_customer_types:
+          description: 'The customer types that are eligible for this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerType:jsonld-read'
+      required:
+        - name
+        - price
+        - offered_by
+        - availability_ends
+        - availability_starts
+        - tax_percentage
+    'Offer:jsonld-write':
+      type: object
+      description: 'An entity representing an offer'
+      required:
+        - name
+        - price
+        - offered_by
+        - availability_ends
+        - availability_starts
+        - tax_percentage
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          type: string
+        price:
+          description: |
+            The price of this product
+             @example 50.00
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/price",
+                    	   "description" = "The price of this product",
+                        "type"="string",
+                        "example"="50.00",
+                        "maxLength"="9",
+                        "required" = true
+                    }
+                }
+            )
+          type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        offered_by:
+          description: 'The uri for the organisation that offers this offer'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        availability_ends:
+          description: 'the date this offer ends'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        availability_starts:
+          description: 'the date this offer has started'
+          externalDocs:
+            url: 'http://schema.org/Date'
+          type: string
+          format: date-time
+        tax_percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+             @example 9
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
+                        "type"="integer",
+                        "example"="9",
+                        "maxLength"="3",
+                        "minLength"="1",
+                        "required" = true
+                    }
+                }
+            )
+          type: integer
+        eligible_customer_types:
+          description: 'The customer types that are eligible for this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerType:jsonld-write'
     Product-read:
       type: object
-      description: ''
+      description: 'An entity representing a product'
       properties:
         id:
           readOnly: true
@@ -1866,7 +4372,7 @@ components:
             
              @ApiProperty(
                 attributes={
-                    "swagger_context"={              
+                    "swagger_context"={
                         "iri"="https://schema.org/price",
                     	   "description" = "The price of this product",
                         "type"="string",
@@ -1877,14 +4383,35 @@ components:
                 }
             )
           type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
         tax_percentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
-             
+            
              @ApiProperty(
                 attributes={
-                    "swagger_context"={     
+                    "swagger_context"={
                     	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
                         "type"="integer",
                         "example"="9",
@@ -1923,15 +4450,41 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-read'
+        calendar:
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        requires_appointment:
+          type: boolean
+        documents:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        images:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        external_docs:
+          readOnly: true
+          type: array
+          items:
+            type: string
       required:
         - name
         - source_organization
         - price
         - tax_percentage
         - type
+        - requires_appointment
     Product-write:
       type: object
-      description: ''
+      description: 'An entity representing a product'
       properties:
         sku:
           description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
@@ -1971,7 +4524,7 @@ components:
             
              @ApiProperty(
                 attributes={
-                    "swagger_context"={              
+                    "swagger_context"={
                         "iri"="https://schema.org/price",
                     	   "description" = "The price of this product",
                         "type"="string",
@@ -1982,14 +4535,35 @@ components:
                 }
             )
           type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
         tax_percentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
-             
+            
              @ApiProperty(
                 attributes={
-                    "swagger_context"={     
+                    "swagger_context"={
                     	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
                         "type"="integer",
                         "example"="9",
@@ -2026,15 +4600,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-write'
+        calendar:
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        requires_appointment:
+          type: boolean
       required:
         - name
         - source_organization
         - price
         - tax_percentage
         - type
+        - requires_appointment
     'Product:jsonld-read':
       type: object
-      description: ''
+      description: 'An entity representing a product'
       properties:
         '@context':
           readOnly: true
@@ -2089,7 +4674,7 @@ components:
             
              @ApiProperty(
                 attributes={
-                    "swagger_context"={              
+                    "swagger_context"={
                         "iri"="https://schema.org/price",
                     	   "description" = "The price of this product",
                         "type"="string",
@@ -2100,14 +4685,35 @@ components:
                 }
             )
           type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
         tax_percentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
-             
+            
              @ApiProperty(
                 attributes={
-                    "swagger_context"={     
+                    "swagger_context"={
                     	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
                         "type"="integer",
                         "example"="9",
@@ -2146,15 +4752,41 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-read'
+        calendar:
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        requires_appointment:
+          type: boolean
+        documents:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        images:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        external_docs:
+          readOnly: true
+          type: array
+          items:
+            type: string
       required:
         - name
         - source_organization
         - price
         - tax_percentage
         - type
+        - requires_appointment
     'Product:jsonld-write':
       type: object
-      description: ''
+      description: 'An entity representing a product'
       properties:
         '@context':
           readOnly: true
@@ -2203,7 +4835,7 @@ components:
             
              @ApiProperty(
                 attributes={
-                    "swagger_context"={              
+                    "swagger_context"={
                         "iri"="https://schema.org/price",
                     	   "description" = "The price of this product",
                         "type"="string",
@@ -2214,14 +4846,35 @@ components:
                 }
             )
           type: string
+        price_currency:
+          description: |
+            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+             @example EUR
+            
+             @ApiProperty(
+                attributes={
+                    "swagger_context"={
+                        "iri"="https://schema.org/priceCurrency",
+                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                        "type"="string",
+                        "example"="EUR",
+                        "default"="EUR",
+                        "maxLength"="3",
+                        "minLength"="3"
+                    }
+                }
+            )
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
         tax_percentage:
           description: |
             The tax percentage for this product as an integer e.g. 9% makes 9
              @example 9
-             
+            
              @ApiProperty(
                 attributes={
-                    "swagger_context"={     
+                    "swagger_context"={
                     	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
                         "type"="integer",
                         "example"="9",
@@ -2258,15 +4911,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-write'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-write'
+        calendar:
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        requires_appointment:
+          type: boolean
       required:
         - name
         - source_organization
         - price
         - tax_percentage
         - type
+        - requires_appointment
     Supplier-read:
       type: object
-      description: ''
+      description: 'An entity representing a supplier of products'
       properties:
         id:
           readOnly: true
@@ -2295,7 +4959,7 @@ components:
         - kvk
     Supplier-write:
       type: object
-      description: ''
+      description: 'An entity representing a supplier of products'
       required:
         - source_organization
         - name
@@ -2319,7 +4983,7 @@ components:
           type: string
     'Supplier:jsonld-read':
       type: object
-      description: ''
+      description: 'An entity representing a supplier of products'
       properties:
         '@context':
           readOnly: true
@@ -2357,7 +5021,7 @@ components:
         - kvk
     'Supplier:jsonld-write':
       type: object
-      description: ''
+      description: 'An entity representing a supplier of products'
       required:
         - source_organization
         - name
@@ -2388,6 +5052,44 @@ components:
           externalDocs:
             url: 'https://schema.org/logo'
           type: string
+tags:
+  -
+    name: Catalogue
+    description: |
+      An entity representing a product catalogue
+      
+      This entity represents a product catalogue that contains all products that can be ordered in a single point.
+  -
+    name: CustomerType
+    description: |
+      An entity representing a type of customer
+      
+      This entity represents a type of customer that can order offers in the OrderRegistratieComponent. This entity is linked from offer with the variable eligibleCustomerType.
+  -
+    name: Group
+    description: |
+      An entity representing a product group
+      
+      This entity represents a product group to differ between various product types.
+  -
+    name: Offer
+    description: |
+      An entity representing an offer
+      
+      This entity represents an offer that bridges products to the OrderRegistratieComponent to be able to change prices without invalidating past orders.
+  -
+    name: Product
+    description: |
+      An entity representing a product
+      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: Supplier
+    description: |
+      An entity representing a supplier of products
+      
+      This entity represents a supplier that delivers products to the seller. For example: if we are a municipality we sell passports to our inhabitants, but these passports are made by the ministry of internal affairs.
+host: irc.zaakonline.nl
 servers:
   -
     description: 'Demo Omgeving'

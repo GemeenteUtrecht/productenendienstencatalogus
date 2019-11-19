@@ -4,12 +4,12 @@
 
 settings:
   registryBase: docker.io/conduction
-  projectName: pdc
-  version: dev
-  name: pc
-  title: Proto Component
-  repro: https://github.com/ConductionNL/Proto-component-commonground
-  demo: pc.zaakonline.nl
+  projectName: pc
+  name: pdc
+  title: Producten en Diensten Catalogus
+  version: V.0.1
+  repro: https://github.com/ConductionNL/productenendienstencatalogus
+  demo: pdc.zaakonline.nl
   env: dev
   debug: 1
   replicaCount: 1
