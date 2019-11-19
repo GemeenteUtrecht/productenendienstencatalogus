@@ -9,6 +9,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +17,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing a product
+ *
+ * This entity represents a product that can be ordered via the OrderRegistratieComponent.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
@@ -27,7 +37,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Product
 {
     /**
-     * @var \Ramsey\Uuid\UuidInterface $id The UUID identifier of this object
+     * @var UuidInterface $id The UUID identifier of this object
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @ApiProperty(
@@ -50,7 +60,7 @@ class Product
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
-    
+
     /**
      * @var string $sku The human readable reference for this product, also known as Stock Keeping Unit (SKU)
      * @example 6666-2019
@@ -71,14 +81,14 @@ class Product
      * @ApiFilter(SearchFilter::class, strategy="exact")
      */
     private $sku;
-    
+
     /**
      * @var string $referenceId The auto-incrementing id part of the reference, unique on a organization-year-id basis
      *
      * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $skuId;
-    
+
     /**
      * @var string $name The name of this Product
      * @example My product
@@ -104,7 +114,7 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-    
+
     /**
      * @var string $description An short description of this Product
      * @example This is the best product ever
@@ -128,7 +138,7 @@ class Product
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-    
+
     /**
      * @var string $logo The logo of this product
      * @example https://www.my-organization.com/logo.png
@@ -153,8 +163,8 @@ class Product
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logo;    
-    
+    private $logo;
+
     /**
      * @var string $movie The movie for this product
      * @example https://www.youtube.com/embed/RkBZYoMnx5w
@@ -180,11 +190,11 @@ class Product
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $movie;
-    
+
     /**
      * @var string $sourceOrganization The RSIN of the organization that owns this product
      * @example 002851234
-     * 
+     *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
@@ -196,7 +206,7 @@ class Product
      *         }
      *     }
      * )
-     * 
+     *
      * @Assert\NotNull
      * @Assert\Length(
      *      min = 8,
@@ -210,7 +220,7 @@ class Product
 
     /**
      * @var ArrayCollection $groups The product groups that this product is a part of
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="products")
@@ -220,10 +230,10 @@ class Product
     /**
      *  @var string $price The price of this product
      *  @example 50.00
-     * 
+     *
      *  @ApiProperty(
      *     attributes={
-     *         "swagger_context"={              
+     *         "swagger_context"={
      *             "iri"="https://schema.org/price",
      *         	   "description" = "The price of this product",
      *             "type"="string",
@@ -233,20 +243,20 @@ class Product
      *         }
      *     }
      * )
-     * 
+     *
      * @Assert\NotNull
-     * @Groups({"read","write"}) 
+     * @Groups({"read","write"})
      * @ORM\Column(type="decimal", precision=8, scale=2)
      */
     private $price;
-    
+
     /**
      *  @var string $priceCurrceny The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
      *  @example EUR
-     *  
+     *
      *  @ApiProperty(
      *     attributes={
-     *         "swagger_context"={     
+     *         "swagger_context"={
      *             "iri"="https://schema.org/priceCurrency",
      *         	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
      *             "type"="string",
@@ -257,20 +267,20 @@ class Product
      *         }
      *     }
      * )
-     * 
+     *
      * @Assert\Currency
      * @Groups({"read","write"})
-     * @ORM\Column(type="string") 
+     * @ORM\Column(type="string")
      */
-    private $priceCurrceny = 'EUR';
+    private $priceCurrency = 'EUR';
 
     /**
      *  @var integer $taxPercentage The tax percentage for this product as an integer e.g. 9% makes 9
      *  @example 9
-     *  
+     *
      *  @ApiProperty(
      *     attributes={
-     *         "swagger_context"={     
+     *         "swagger_context"={
      *         	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
      *             "type"="integer",
      *             "example"="9",
@@ -280,7 +290,7 @@ class Product
      *         }
      *     }
      * )
-     * 
+     *
      * @Assert\NotBlank
      * @Assert\PositiveOrZero
      * @Groups({"read", "write"})
@@ -290,7 +300,7 @@ class Product
 
     /**
      * @var Product $parent The product that this product is a variation of
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="variations")
@@ -299,7 +309,7 @@ class Product
 
     /**
      * @var ArrayCollection $variations The different variations that are available of this product
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"read"})
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="parent")
@@ -333,8 +343,8 @@ class Product
     private $type;
 
     /**
-     * @var ArrayCollection $groupedProducts If the product type is a **set** this contains the products that are part of that set 
-     * 
+     * @var ArrayCollection $groupedProducts If the product type is a **set** this contains the products that are part of that set
+     *
      * @MaxDepth(1)
      * @Groups({"read"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="sets")
@@ -343,7 +353,7 @@ class Product
 
     /**
      * @var ArrayCollection $sets The sets thats this product is a part of
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", mappedBy="groupedProducts")
@@ -352,12 +362,56 @@ class Product
 
     /**
      * @var Catalogue $catalogue The Catalogue that this product belongs to
-     * 
+     *
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $catalogue;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
+     * @Assert\Valid
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     */
+    private $offers;
+
+    /**
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $calendar;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\NotNull
+     * @Groups({"read", "write"})
+     */
+    private $requiresAppointment;
+
+    /**
+     *
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $documents = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $images = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"read"})
+     */
+    private $externalDocs = [];
 
     public function __construct()
     {
@@ -365,44 +419,45 @@ class Product
         $this->variations = new ArrayCollection();
         $this->groupedProducts = new ArrayCollection();
         $this->sets = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function setId($id): self
     {
         $this->id = $id;
-        
+
         return $this;
     }
-    
+
     public function getSku(): ?string
     {
         return $this->sku;
     }
-    
+
     public function setSku(string $sku): self
     {
         $this->sku = $sku;
-        
+
         return $this;
     }
-    
+
     public function getSkuId(): ?int
     {
-        return $this->skuIs;
+        return $this->skuId;
     }
-    
+
     public function setSkuId(int $skuId): self
     {
         $this->skuId = $skuId;
-        
+
         return $this;
     }
-    
+
     public function getName(): ?string
     {
         return $this->name;
@@ -466,16 +521,16 @@ class Product
 
         return $this;
     }
-    
+
     public function getPriceCurrency(): ?string
     {
         return $this->priceCurrency;
     }
-    
+
     public function setPriceCurrency(?string $priceCurrency): self
     {
         $this->priceCurrency = $priceCurrency;
-        
+
         return $this;
     }
 
@@ -490,28 +545,28 @@ class Product
 
         return $this;
     }
-    
+
     public function getMovie(): ?string
     {
         return $this->movie;
     }
-    
+
     public function setMovie(?string $movie): self
     {
         $this->movie = $movie;
-        
+
         return $this;
     }
-    
+
     public function getSourceOrganization(): ?string
     {
     	return $this->sourceOrganization;
     }
-    
+
     public function setSourceOrganization(string $sourceOrganization): self
     {
     	$this->sourceOrganization = $sourceOrganization;
-    	
+
     	return $this;
     }
 
@@ -636,14 +691,105 @@ class Product
         return $this;
     }
 
-    public function getCatalogus(): ?Catalogue
+    public function getCatalogue(): ?Catalogue
     {
-        return $this->catalogus;
+        return $this->catalogue;
     }
 
     public function setCatalogue(?Catalogue $catalogue): self
     {
     	$this->catalogue = $catalogue;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getProduct() === $this) {
+                $offer->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCalendar(): ?string
+    {
+        return $this->calendar;
+    }
+
+    public function setCalendar(?string $calendar): self
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    public function getRequiresAppointment(): ?bool
+    {
+        return $this->requiresAppointment;
+    }
+
+    public function setRequiresAppointment(bool $requiresAppointment): self
+    {
+        $this->requiresAppointment = $requiresAppointment;
+
+        return $this;
+    }
+
+    public function getDocuments(): ?array
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?array $documents): self
+    {
+        $this->documents = $documents;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    public function getExternalDocs(): ?array
+    {
+        return $this->externalDocs;
+    }
+
+    public function setExternalDocs(?array $externalDocs): self
+    {
+        $this->externalDocs = $externalDocs;
 
         return $this;
     }

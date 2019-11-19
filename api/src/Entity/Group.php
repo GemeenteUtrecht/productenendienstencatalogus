@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +16,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
+ * An entity representing a product group
+ *
+ * This entity represents a product group to differ between various product types.
+ *
+ * @author Robert Zondervan <robert@conduction.nl>
+ * @category Entity
+ * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
+ * @package PDC
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
@@ -25,7 +35,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Group
 {
 	/**
-	 * @var \Ramsey\Uuid\UuidInterface
+	 * @var UuidInterface
 	 *
 	 * @ApiProperty(
 	 * 	   identifier=true,
@@ -47,7 +57,7 @@ class Group
 	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
 	 */
 	private $id;
-		
+
 	/**
 	 * @var string $name The name of this product group
 	 * @example My Group
@@ -73,7 +83,7 @@ class Group
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string $description An short description of this product group
 	 * @example This is the best group ever
@@ -97,7 +107,7 @@ class Group
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
-	
+
 	/**
 	 * @var string $logo The logo for this component
 	 * @example https://www.my-organization.com/logo.png
@@ -126,13 +136,13 @@ class Group
 
     /**
      * @var ArrayCollection $products The groups that are a part of this product group
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="groups")
      */
-    private $products;     
-    
+    private $products;
+
     /**
      * @var string $sourceOrganization The RSIN of the organization that owns this group
      * @example 002851234
@@ -162,7 +172,7 @@ class Group
 
     /**
      * @var Catalogue $catalogue The Catalogue that this product group belongs to
-     * 
+     *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="groups")
@@ -204,16 +214,16 @@ class Group
 
         return $this;
     }
-    
+
     public function getLogo(): ?string
     {
         return $this->logo;
     }
-    
+
     public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
-        
+
         return $this;
     }
 
@@ -242,28 +252,28 @@ class Group
 
         return $this;
     }
-    
+
     public function getSourceOrganization(): ?string
     {
     	return $this->sourceOrganization;
     }
-    
+
     public function setSourceOrganization(string $sourceOrganization): self
     {
     	$this->sourceOrganization = $sourceOrganization;
-    	
+
     	return $this;
     }
-    
-    public function getCatalogus(): ?Catalogue
+
+    public function getCatalogue(): ?Catalogue
     {
-    	return $this->catalogus;
+    	return $this->catalogue;
     }
-    
+
     public function setCatalogue(?Catalogue $catalogue): self
     {
     	$this->catalogue = $catalogue;
-    	
+
     	return $this;
     }
 }
