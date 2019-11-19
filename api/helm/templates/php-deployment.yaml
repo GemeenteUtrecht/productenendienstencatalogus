@@ -117,6 +117,7 @@ spec:
                   key: cors-allow-origin
             - name: VARNISH_URL
               value: {{ include "name" . }}-varnish
+            # secrets  
             - name: APP_SECRET
               valueFrom:
                 secretKeyRef:
@@ -127,21 +128,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: database-url
-            - name: MERCURE_PUBLISH_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-publish-url
-            - name: MERCURE_SUBSCRIBE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-subscribe-url
-            - name: MERCURE_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-jwt-secret
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
