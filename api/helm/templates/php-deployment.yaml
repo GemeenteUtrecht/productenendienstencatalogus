@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ include "name" . }}-php
-          image: "{{ .Values.settings.registryBase }}/{{ .Values.settings.projectName }}-php:{{ .Values.settings.env }}"
+          image: "{{ .Values.settings.registryBase }}/pdc-php:{{ .Values.settings.env }}"
           imagePullPolicy: {{ .Values.settings.pullPolicy }}
           ports:
             - containerPort: 9000
