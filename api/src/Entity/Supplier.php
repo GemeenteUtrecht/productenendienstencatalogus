@@ -44,7 +44,10 @@ class Supplier
 	 *             "type"="string",
 	 *             "format"="uuid",
 	 *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-	 *         }
+	 *         },
+     *         "openapi_context"={
+     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
+     *         }
 	 *     }
 	 * )
 	 *
@@ -68,7 +71,10 @@ class Supplier
 	 *             "type"="string",
 	 *             "example"="002851234",
 	 *              "maxLength"="255"
-	 *         }
+	 *         },
+     *         "openapi_context"={
+     *             "example"="002851234"
+     *         }
 	 *     }
 	 * )
 	 *
@@ -96,6 +102,9 @@ class Supplier
      *             "example"="My RequestType",
      *             "maxLength"="255",
      *             "required" = true
+     *         },
+     *         "openapi_context"={
+     *             "example"="My RequestType"
      *         }
      *     }
      * )
@@ -121,6 +130,9 @@ class Supplier
      *             "example"="30280353",
      *             "maxLength"="255",
      *             "required" = true
+     *         },
+     *         "openapi_context"={
+     *             "example"="30280353"
      *         }
      *     }
      * )
@@ -147,6 +159,9 @@ class Supplier
      *             "format"="url",
      *             "example"="https://www.my-organization.com/logo.png",
      *             "maxLength"=255
+     *         },
+     *         "openapi_context"={
+     *             "example"="https://www.my-organization.com/logo.png"
      *         }
      *     }
      * )

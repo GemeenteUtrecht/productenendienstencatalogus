@@ -48,7 +48,7 @@ class Catalogue
      *         }
      *     }
      * )
-     *
+     * @Groups({"read"})
      * @Assert\Uuid
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)

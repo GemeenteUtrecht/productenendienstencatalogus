@@ -62,6 +62,7 @@ class Offer
 
     /**
      * @var string $name The name of this offer
+     * @example my offer
      *
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
@@ -80,7 +81,7 @@ class Offer
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      * @MaxDepth(1)
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      */
     private $product;
 
@@ -133,6 +134,7 @@ class Offer
 
     /**
      * @var string $offeredBy The uri for the organisation that offers this offer
+     * @example(http://example.org/example/1)
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Url
@@ -145,6 +147,7 @@ class Offer
 
     /**
      * @var DateTime $availabilityEnds the date this offer ends
+     * @example 20191231
      * @ORM\Column(type="datetime")
      * @Assert\NotNull
      * @Assert\Date
@@ -155,6 +158,7 @@ class Offer
 
     /**
      * @var DateTime $availabilityStarts the date this offer has started
+     * @example 20190101
      * @Assert\NotNull
      * @Assert\Date
      * @ORM\Column(type="datetime")
