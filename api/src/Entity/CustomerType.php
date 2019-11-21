@@ -45,10 +45,14 @@ class CustomerType
      *             "type"="string",
      *             "format"="uuid",
      *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
+     *         },
+     *         "openapi_context"={
+     *              "example"="e2984465-190a-4562-829e-a8cca81aa35d"
      *         }
      *     }
      * )
      *
+     * @Groups({"read"})
      * @Assert\Uuid
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -58,7 +62,18 @@ class CustomerType
     private $id;
 
     /**
+     *
      * @var string $name The name of this CustomerType
+     * @example My CustomerType
+     *
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"="My CustomerType"
+     *          }
+     *     }
+     * )
+     * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *     max = 255
@@ -69,6 +84,17 @@ class CustomerType
 
     /**
      * @var string $description The description for this CustomerType
+     * @example this is the best customertype ever
+     *
+     *
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"="This is the best Customertype ever"
+     *          }
+     *     }
+     * )
+     * @Groups({"read","write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
      *     max = 2550

@@ -85,6 +85,7 @@ class Product
     /**
      * @var string $referenceId The auto-incrementing id part of the reference, unique on a organization-year-id basis
      *
+     * @example 000000000001
      * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $skuId;
@@ -102,7 +103,10 @@ class Product
      *             "example"="My product",
      *             "maxLength"="255",
      *             "required" = true
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="My product"
+     *          }
      *     }
      * )
      *
@@ -127,7 +131,10 @@ class Product
      *             "type"="string",
      *             "example"="This is the best product ever",
      *             "maxLength"="2550"
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="This is the best product ever"
+     *          }
      *     }
      * )
      *
@@ -152,7 +159,10 @@ class Product
      *             "format"="url",
      *             "example"="https://www.my-organization.com/logo.png",
      *             "maxLength"=255
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="https://www.my-organization.com/logo.png"
+     *          }
      *     }
      * )
      *
@@ -178,7 +188,10 @@ class Product
      *             "format"="url",
      *             "example"="https://www.youtube.com/embed/RkBZYoMnx5w",
      *             "maxLength"=255
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="https://www.youtube.com/embed/RkBZYoMnx5w"
+     *          }
      *     }
      * )
      *
@@ -203,7 +216,10 @@ class Product
      *             "example"="002851234",
  	*              "maxLength"="255",
 	 *             "required" = true
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="002851234"
+     *          }
      *     }
      * )
      *
@@ -221,6 +237,7 @@ class Product
     /**
      * @var ArrayCollection $groups The product groups that this product is a part of
      *
+     *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="products")
@@ -229,8 +246,9 @@ class Product
 
     /**
      *  @var string $price The price of this product
-     *  @example 50.00
      *
+     *  @ORM\Column(type="decimal", precision=8, scale=2)
+     *  @example 50.00
      *  @ApiProperty(
      *     attributes={
      *         "swagger_context"={
@@ -240,20 +258,24 @@ class Product
      *             "example"="50.00",
      *             "maxLength"="9",
 	 *             "required" = true
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="50.00"
+     *          }
      *     }
      * )
      *
      * @Assert\NotNull
      * @Groups({"read","write"})
-     * @ORM\Column(type="decimal", precision=8, scale=2)
+     *
      */
     private $price;
 
     /**
      *  @var string $priceCurrceny The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-     *  @example EUR
      *
+     * @ORM\Column(type="string")
+     * @example EUR
      *  @ApiProperty(
      *     attributes={
      *         "swagger_context"={
@@ -264,21 +286,23 @@ class Product
      *             "default"="EUR",
      *             "maxLength"="3",
      *             "minLength"="3"
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"="EUR"
+     *          }
      *     }
      * )
      *
      * @Assert\Currency
      * @Groups({"read","write"})
-     * @ORM\Column(type="string")
+
      */
     private $priceCurrency = 'EUR';
 
     /**
      *  @var integer $taxPercentage The tax percentage for this product as an integer e.g. 9% makes 9
-     *  @example 9
      *
-     *  @ApiProperty(
+     * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
      *         	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
@@ -287,7 +311,10 @@ class Product
      *             "maxLength"="3",
      *             "minLength"="1",
 	 *             "required" = true
-     *         }
+     *         },
+     *         "openapi_context"={
+     *              "example"=9
+     *          }
      *     }
      * )
      *
@@ -318,7 +345,8 @@ class Product
 
     /**
     * @var string The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**
-    *
+    * @example simple
+     *
     * @ORM\Column
     * @ApiProperty(
     *     attributes={
@@ -333,8 +361,8 @@ class Product
     * )
     * @Assert\NotBlank
     * @Assert\Choice(
-    *     choices = {{"simple", "set", "virtual","external","ticket","variable","subscription","person","location","service"}},
-    *     message = "Choose either simple, set, virtual, external, ticket, variable, subscription, person, location or service"
+    *     choices = { "simple", "set", "virtual","external","ticket","variable","subscription","person","location","service" },
+    *     message = "Choose either simple, set, virtual, external, ticket, variable, subscription, person, location or service, got {{ value }}"
     * )
     * @ApiFilter(SearchFilter::class, strategy="exact")
     * @ApiFilter(OrderFilter::class)
@@ -366,6 +394,8 @@ class Product
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     * @Groups({"read","write"})
      */
     private $catalogue;
 
@@ -374,6 +404,7 @@ class Product
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
      * @Assert\Valid
+     *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
      */
@@ -382,6 +413,14 @@ class Product
     /**
      * @var string $calendar The uri referring to the calendar of this product.
      *
+     * @example http://example.org/calendar/calendar
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"="http://example.org/calendar/calendar"
+     *          }
+     *     }
+     * )
      * @Assert\Url
      * @Assert\Length(
      *     max = 255
@@ -394,6 +433,14 @@ class Product
     /**
      * @var boolean $requiresAppointment If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
      *
+     * @example false
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"= false
+     *          }
+     *     }
+     * )
      * @ORM\Column(type="boolean")
      * @Assert\NotNull
      * @Groups({"read", "write"})
@@ -402,7 +449,14 @@ class Product
 
     /**
      * @var array $documents An array of URLs pointing to documents related to this product
-     *
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"= "[]"
+     *          }
+     *     }
+     * )
+     * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -411,6 +465,14 @@ class Product
     /**
      * @var array $documents An array of URLs pointing to images related to this product
      *
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"= "[]"
+     *          }
+     *     }
+     * )
+     * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -419,6 +481,14 @@ class Product
     /**
      * @var array $documents An array of URLs pointing to external documents referred to from this product
      *
+     * @ApiProperty(
+     *     attributes={
+     *          "openapi_context"={
+     *              "example"= "[]"
+     *          }
+     *     }
+     * )
+     * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
