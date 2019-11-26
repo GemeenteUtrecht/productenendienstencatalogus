@@ -2,12 +2,16 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Catalogue;
-use App\Entity\Group;
-use App\Entity\Product;
-use App\Entity\Supplier;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Money\Currency;
+use Money\Money;
+
+use App\Entity\Product;
+use App\Entity\Supplier;
+use App\Entity\Group;
+use App\Entity\Catalogue;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 class AppFixtures extends Fixture
 {
@@ -17,16 +21,15 @@ class AppFixtures extends Fixture
         string $kvk,
         ?string $logo,
         ObjectManager $manager
-    ):Supplier {
+    ):Supplier
+    {
         $supplier = new Supplier();
         $supplier->setName($name);
         $supplier->setSourceOrganization($sourceOrganisation);
         $supplier->setKvk($kvk);
-        if ($logo) {
+        if($logo)
             $supplier->setLogo($logo);
-        }
         $manager->persist($supplier);
-
         return $supplier;
     }
 
@@ -36,21 +39,18 @@ class AppFixtures extends Fixture
         ?string $description,
         ?string $logo,
         ObjectManager $manager
-    ):Catalogue {
+    ):Catalogue
+    {
         $catalogue = new Catalogue();
         $catalogue->setName($name);
         $catalogue->setSourceOrganization($sourceOrganisation);
-        if ($description) {
+        if($description)
             $catalogue->setDescription($description);
-        }
-        if ($logo) {
+        if($logo)
             $catalogue->setLogo($logo);
-        }
         $manager->persist($catalogue);
-
         return $catalogue;
     }
-
     private function loadGroup(
         string $name,
         string $sourceOrganisation,
@@ -58,22 +58,19 @@ class AppFixtures extends Fixture
         ?string $description,
         ?string $logo,
         ObjectManager $manager
-    ):Group {
+    ):Group
+    {
         $group = new Group();
         $group->setName($name);
         $group->setSourceOrganization($sourceOrganisation);
         $group->setCatalogue($catalogue);
-        if ($description) {
+        if($description)
             $group->setDescription($description);
-        }
-        if ($logo) {
+        if($logo)
             $group->setLogo($logo);
-        }
         $manager->persist($group);
-
         return $group;
     }
-
     private function loadProduct(
         string $name,
         string $sourceOrganisation,
@@ -90,62 +87,54 @@ class AppFixtures extends Fixture
         ?string $movie,
         ?Product $parent,
         ObjectManager $manager
-    ):Product {
+    ):Product
+    {
         $product = new Product();
         $product->setName($name);
         $product->setSourceOrganization($sourceOrganisation);
-        if ($description) {
+        if($description)
             $product->setDescription($description);
-        }
         $product->setType($type);
-        if ($groups) {
-            foreach ($groups as $group) {
+        if($groups)
+            foreach($groups as $group)
                 $product->addGroup($group);
-            }
-        }
-        if ($sets) {
-            foreach ($sets as $set) {
+        if($sets)
+            foreach($sets as $set)
                 $product->addSet($set);
-            }
-        }
         $product->setCatalogue($catalogue);
         $product->setPrice($price);
         $product->setPriceCurrency($currency);
         $product->setTaxPercentage($taxPercentage);
         $product->setRequiresAppointment($requiresAppointment);
-        if ($logo) {
+        if($logo)
             $product->setLogo($logo);
-        }
-        if ($movie) {
+        if($movie)
             $product->setMovie($movie);
-        }
-        if ($parent) {
+        if($parent)
             $product->setParent($parent);
-        }
 
         $manager->persist($product);
 
         return $product;
     }
-
     public function load(ObjectManager $manager)
     {
-        // Eerst een de suppliers aanmaken
+    	// Eerst een de suppliers aanmaken
         $this->loadSupplier('Gemeente \'s-Hertogenbosch', '001709124', '17278704', null, $manager);
         $this->loadSupplier('Gemeente Eindhoven', '001902763', '17272738', null, $manager);
         $this->loadSupplier('Gemeente Utrecht', '002220647', '30280353', null, $manager);
 
-        // Catalogi
-        $vng = $this->loadCatalogue('Vereniging Nederlandse Gemeenten', '0000', null, null, $manager);
-        $denbosch = $this->loadCatalogue('Gemeente \'s-Hertogenbosch', '001709124', null, null, $manager);
+    	// Catalogi
+        $vng       = $this->loadCatalogue('Vereniging Nederlandse Gemeenten', '0000', null, null, $manager);
+        $denbosch  = $this->loadCatalogue('Gemeente \'s-Hertogenbosch', '001709124', null, null, $manager);
         $eindhoven = $this->loadCatalogue('Gemeente Eindhoven', '001902763', null, null, $manager);
-        $utrecht = $this->loadCatalogue('Gemeente Utrecht', '002220647', null, null, $manager);
+        $utrecht   = $this->loadCatalogue('Gemeente Utrecht', '002220647', null, null, $manager);
 
-        // Dan wat productgroepen
+    	// Dan wat productgroepen
         $this->loadGroup('Burgerzaken', '001709124', $denbosch, 'Producten en diensten binnen burgerzaken', null, $manager);
         $this->loadGroup('Burgerzaken', '001902763', $eindhoven, 'Producten en diensten binnen burgerzaken', null, $manager);
         $trouwproducten = $this->loadGroup('Trouwproducten', '002220647', $utrecht, 'Producten en diensten binnen het trouwproces', null, $manager);
-        $trouwAmbtenaren = $this->loadGroup('Trouwambtenaren', '002220647', $utrecht, 'Door wie wilt u worden getrouwd?', null, $manager);
+        $trouwAmbtenaren = $this->loadGroup('Trouwambtenaren', '002220647', $utrecht,'Door wie wilt u worden getrouwd?', null, $manager);
         $trouwLocaties = $this->loadGroup('Trouwlocaties', '002220647', $utrecht, 'Waar wilt u trouwen?', null, $manager);
         $ceremonies = $this->loadGroup('Ceremonies', '0002220647', $utrecht, 'Verschillende ceremonies voor uw huwelijk / partnerschap', null, $manager);
 
@@ -256,7 +245,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
-        $this->loadProduct(
+         $this->loadProduct(
             'Mvr Ike van den Pol',
             '123456789',
             '<p>Elkaar het Ja-woord geven, de officiële ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>',
@@ -433,6 +422,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+
 
         $manager->flush();
     }

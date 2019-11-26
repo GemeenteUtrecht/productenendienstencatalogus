@@ -16,7 +16,7 @@ class CatalogueRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Catalogue::class);
+    	parent::__construct($registry, Catalogue::class);
     }
 
     // /**
