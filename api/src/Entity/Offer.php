@@ -222,12 +222,12 @@ class Offer
         return $this;
     }
 
-    public function getProduct(): ?string
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setProduct(string $product): self
+    public function setProduct(Product $product): self
     {
         $this->product = $product;
 
