@@ -456,7 +456,7 @@ class Product
      *          }
      *     }
      * )
-     * @example [https://example.org/1, https://example.org/2]
+     * @example [https://example.org/1]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -472,7 +472,7 @@ class Product
      *          }
      *     }
      * )
-     * @example [https://example.org/1, https://example.org/2]
+     * @example [https://example.org/1]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -488,7 +488,7 @@ class Product
      *          }
      *     }
      * )
-     * @example [https://example.org/1, https://example.org/2]
+     * @example [https://example.org/1]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
