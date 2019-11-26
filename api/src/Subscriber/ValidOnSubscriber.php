@@ -48,6 +48,11 @@ class ValidOnSubscriber implements EventSubscriberInterface
 		$geldigOp = $event->getRequest()->query->get('geldigOp', false);
 		$validOn = $event->getRequest()->query->get('validOn', $geldigOp);
 		
+		// Only do somthing if fields is query supplied
+		if (!$validOn) {
+			return $result;
+		}		
+		
 		// Lets see if this class has a Loggableannotation
 		$loggable = false;
 		$reflClass = new \ReflectionClass($result);
@@ -59,10 +64,6 @@ class ValidOnSubscriber implements EventSubscriberInterface
 			}
 		}
 		
-		// Only do somthing if fields is query supplied
-		if (!$validOn) {
-			return $result;
-		}		
 		
 		/* @todo propper error handling */
 		if(!$loggable){
@@ -97,7 +98,7 @@ class ValidOnSubscriber implements EventSubscriberInterface
 			throw new \Exception('Could not find a valid version for date: '.$date);
 		}
 				
-		// Lets use the found version to rewind the object and return is
+		// Lets use the found version to rewind the object and return it
 		$repo = $this->em->getRepository('\Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
 		$repo->revert($result, $version->getVersion());
 		
