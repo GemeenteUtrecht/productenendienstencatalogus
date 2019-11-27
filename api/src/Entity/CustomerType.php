@@ -39,21 +39,6 @@ class CustomerType
      * @var UuidInterface $id The UUID identifier of this object
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         },
-     *         "openapi_context"={
-     *              "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     *
      * @Groups({"read"})
      * @Assert\Uuid
      * @ORM\Id
@@ -67,14 +52,7 @@ class CustomerType
      *
      * @var string $name The name of this CustomerType
      * @example My CustomerType
-     *
-     * @ApiProperty(
-     *     attributes={
-     *          "openapi_context"={
-     *              "example"="My CustomerType"
-     *          }
-     *     }
-     * )
+     * 
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
@@ -87,15 +65,7 @@ class CustomerType
     /**
      * @var string $description The description for this CustomerType
      * @example this is the best customertype ever
-     *
-     *
-     * @ApiProperty(
-     *     attributes={
-     *          "openapi_context"={
-     *              "example"="This is the best Customertype ever"
-     *          }
-     *     }
-     * )
+     * 
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
