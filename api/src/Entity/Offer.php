@@ -38,18 +38,6 @@ class Offer
     /**
      * @var UuidInterface $id The UUID identifier of this object
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-     * @Assert\Uuid
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -62,6 +50,7 @@ class Offer
 
     /**
      * @var string $name The name of this offer
+     * @example my offer
      *
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
@@ -71,6 +60,18 @@ class Offer
      * @Groups({"read","write"})
      */
     private $name;
+    
+    /**
+     * @var string $description An short description of this Product
+     * @example This is the best product ever
+     *
+     * @Assert\Length(
+     *      max = 2550
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     /**
      * @var Product $product The product that is sold via this offer
@@ -80,26 +81,14 @@ class Offer
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      * @MaxDepth(1)
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      */
     private $product;
 
     /**
      *  @var string $price The price of this product
      *  @example 50.00
-     *
-     *  @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *             "iri"="https://schema.org/price",
-     *         	   "description" = "The price of this product",
-     *             "type"="string",
-     *             "example"="50.00",
-     *             "maxLength"="9",
-     *             "required" = true
-     *         }
-     *     }
-     * )
+     *  
      * @Groups({"read","write"})
      * @Assert\NotNull
      * @Groups({"read","write"})
@@ -111,20 +100,6 @@ class Offer
      *  @var string $priceCurrency The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
      *  @example EUR
      *
-     *  @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *             "iri"="https://schema.org/priceCurrency",
-     *         	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-     *             "type"="string",
-     *             "example"="EUR",
-     *             "default"="EUR",
-     *             "maxLength"="3",
-     *             "minLength"="3"
-     *         }
-     *     }
-     * )
-     *
      * @Assert\Currency
      * @Groups({"read","write"})
      * @ORM\Column(type="string")
@@ -133,6 +108,7 @@ class Offer
 
     /**
      * @var string $offeredBy The uri for the organisation that offers this offer
+     * @example(http://example.org/example/1)
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Url
@@ -145,6 +121,8 @@ class Offer
 
     /**
      * @var DateTime $availabilityEnds the date this offer ends
+     * @example 20191231
+     * 
      * @ORM\Column(type="datetime")
      * @Assert\NotNull
      * @Assert\Date
@@ -155,39 +133,28 @@ class Offer
 
     /**
      * @var DateTime $availabilityStarts the date this offer has started
+     * @example 20190101
+     * 
      * @Assert\NotNull
      * @Assert\Date
      * @ORM\Column(type="datetime")
      * @Groups({"read","write"})
      */
     private $availabilityStarts;
-
+    
     /**
-     *  @var integer $taxPercentage The tax percentage for this offer as an integer e.g. 9% makes 9
-     *  @example 9
+     * @var ArrayCollection $taxes The taxdes that affect this offer
      *
-     *  @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
-     *             "type"="integer",
-     *             "example"="9",
-     *             "maxLength"="3",
-     *             "minLength"="1",
-     *             "required" = true
-     *         }
-     *     }
-     * )
      *
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
+     * @MaxDepth(1)
      * @Groups({"read", "write"})
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Taxes", mappedBy="offers")
      */
-    private $taxPercentage;
+    private $taxes;
 
     /**
      * @var ArrayCollection $eligibleCustomerTypes The customer types that are eligible for this offer
+     * 
      * @ORM\ManyToMany(targetEntity="App\Entity\CustomerType", mappedBy="offers")
      * @MaxDepth(1)
      * @Groups({"read","write"})
@@ -216,6 +183,18 @@ class Offer
         $this->name = $name;
 
         return $this;
+    }
+    
+    public function getDescription(): ?string
+    {
+    	return $this->description;
+    }
+    
+    public function setDescription(?string $description): self
+    {
+    	$this->description = $description;
+    	
+    	return $this;
     }
 
     public function getProduct(): ?string
@@ -289,17 +268,33 @@ class Offer
 
         return $this;
     }
-
-    public function getTaxPercentage(): ?int
+    
+    /**
+     * @return Collection|Tax[]
+     */
+    public function getTaxes(): Collection
     {
-        return $this->taxPercentage;
+    	return $this->taxes;
     }
-
-    public function setTaxPercentage(int $taxPercentage): self
+    
+    public function addTax(Tax $tax): self
     {
-        $this->taxPercentage = $taxPercentage;
-
-        return $this;
+    	if (!$this->taxes->contains($tax)) {
+    		$this->taxes[] = $tax;
+    		$tax->addOffer($this);
+    	}
+    	
+    	return $this;
+    }
+    
+    public function removeTax(Tax $tax): self
+    {
+    	if ($this->taxes->contains($tax)) {
+    		$this->taxes->removeElement($tax);
+    		$gtax->removeProduct($this);
+    	}
+    	
+    	return $this;
     }
 
     /**

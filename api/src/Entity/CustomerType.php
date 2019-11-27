@@ -1,5 +1,7 @@
 <?php
 
+// src/entity/ExampleEntity.php
+
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -37,18 +39,7 @@ class CustomerType
      * @var UuidInterface $id The UUID identifier of this object
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     *
+     * @Groups({"read"})
      * @Assert\Uuid
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -58,7 +49,11 @@ class CustomerType
     private $id;
 
     /**
+     *
      * @var string $name The name of this CustomerType
+     * @example My CustomerType
+     * 
+     * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *     max = 255
@@ -69,6 +64,9 @@ class CustomerType
 
     /**
      * @var string $description The description for this CustomerType
+     * @example this is the best customertype ever
+     * 
+     * @Groups({"read","write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
      *     max = 2550

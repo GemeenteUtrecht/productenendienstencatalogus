@@ -36,19 +36,8 @@ class Catalogue
     /**
      * @var UuidInterface $id The UUID identifier of this object
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-     *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     *
+     * 
+     * @Groups({"read"})
      * @Assert\Uuid
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
