@@ -2,29 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * An entity representing a product
+ * An entity representing a product.
  *
  * This entity represents a product that can be ordered via the OrderRegistratieComponent.
  *
  * @author Robert Zondervan <robert@conduction.nl>
+ *
  * @category Entity
+ *
  * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
- * @package PDC
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -37,7 +37,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Product
 {
     /**
-     * @var UuidInterface $id The UUID identifier of this object
+     * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -50,7 +51,8 @@ class Product
     private $id;
 
     /**
-     * @var string $sku The human readable reference for this product, also known as Stock Keeping Unit (SKU)
+     * @var string The human readable reference for this product, also known as Stock Keeping Unit (SKU)
+     *
      * @example 6666-2019
      *
      * @Groups({"read","write"})
@@ -60,7 +62,7 @@ class Product
     private $sku;
 
     /**
-     * @var string $referenceId The auto-incrementing id part of the reference, unique on a organization-year-id basis
+     * @var string The auto-incrementing id part of the reference, unique on a organization-year-id basis
      *
      * @example 000000000001
      * @ORM\Column(type="integer", length=11, nullable=true)
@@ -68,7 +70,8 @@ class Product
     private $skuId;
 
     /**
-     * @var string $name The name of this Product
+     * @var string The name of this Product
+     *
      * @example My product
      *
      * @Assert\NotNull
@@ -81,7 +84,8 @@ class Product
     private $name;
 
     /**
-     * @var string $description An short description of this Product
+     * @var string An short description of this Product
+     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -93,7 +97,8 @@ class Product
     private $description;
 
     /**
-     * @var string $logo The logo of this product
+     * @var string The logo of this product
+     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -106,7 +111,8 @@ class Product
     private $logo;
 
     /**
-     * @var string $movie The movie for this product
+     * @var string The movie for this product
+     *
      * @example https://www.youtube.com/embed/RkBZYoMnx5w
      *
      * @Assert\Url
@@ -119,17 +125,18 @@ class Product
     private $movie;
 
     /**
-     * @var string $sourceOrganization The RSIN of the organization that owns this product
+     * @var string The RSIN of the organization that owns this product
+     *
      * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
- 	 *         	   "description" = "The RSIN of the organization that owns this product",
+     *         	   "description" = "The RSIN of the organization that owns this product",
      *             "type"="string",
      *             "example"="002851234",
- 	*              "maxLength"="255",
-	 *             "required" = true
+     *              "maxLength"="255",
+     *             "required" = true
      *         },
      *         "openapi_context"={
      *              "example"="002851234"
@@ -149,7 +156,7 @@ class Product
     private $sourceOrganization;
 
     /**
-     * @var ArrayCollection $groups The product groups that this product is a part of
+     * @var ArrayCollection The product groups that this product is a part of
      *
      *
      * @MaxDepth(1)
@@ -159,9 +166,10 @@ class Product
     private $groups;
 
     /**
-     *  @var string $price The price of this product
+     *  @var string The price of this product
      *
      *  @ORM\Column(type="decimal", precision=8, scale=2)
+     *
      *  @example 50.00
      *  @ApiProperty(
      *     attributes={
@@ -171,7 +179,7 @@ class Product
      *             "type"="string",
      *             "example"="50.00",
      *             "maxLength"="9",
-	 *             "required" = true
+     *             "required" = true
      *         },
      *         "openapi_context"={
      *              "example"="50.00"
@@ -181,14 +189,14 @@ class Product
      *
      * @Assert\NotNull
      * @Groups({"read","write"})
-     *
      */
     private $price;
 
     /**
-     *  @var string $priceCurrceny The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *  @var string The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
      *
      * @ORM\Column(type="string")
+     *
      * @example EUR
      *  @ApiProperty(
      *     attributes={
@@ -209,12 +217,11 @@ class Product
      *
      * @Assert\Currency
      * @Groups({"read","write"})
-
      */
     private $priceCurrency = 'EUR';
 
     /**
-     *  @var integer $taxPercentage The tax percentage for this product as an integer e.g. 9% makes 9
+     *  @var int The tax percentage for this product as an integer e.g. 9% makes 9
      *
      * @ApiProperty(
      *     attributes={
@@ -224,7 +231,7 @@ class Product
      *             "example"="9",
      *             "maxLength"="3",
      *             "minLength"="1",
-	 *             "required" = true
+     *             "required" = true
      *         },
      *         "openapi_context"={
      *              "example"=9
@@ -240,7 +247,7 @@ class Product
     private $taxPercentage;
 
     /**
-     * @var Product $parent The product that this product is a variation of
+     * @var Product The product that this product is a variation of
      *
      * @MaxDepth(1)
      * @Groups({"write"})
@@ -249,7 +256,7 @@ class Product
     private $parent;
 
     /**
-     * @var ArrayCollection $variations The different variations that are available of this product
+     * @var ArrayCollection The different variations that are available of this product
      *
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -258,34 +265,35 @@ class Product
     private $variations;
 
     /**
-    * @var string The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**
-    * @example simple
+     * @var string The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**
      *
-    * @ORM\Column
-    * @ApiProperty(
-    *     attributes={
-    *         "openapi_context"={
-    *             "type"="string",
+     * @example simple
+     *
+     * @ORM\Column
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "type"="string",
      *         	  "description" = "The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**",
-    *             "enum"={"simple", "set", "virtual","external","ticket","variable","subscription","person","location","service"},
-    *             "example"="simple",
-    *             "required"="true"
-    *         }
-    *     }
-    * )
-    * @Assert\NotBlank
-    * @Assert\Choice(
-    *     choices = { "simple", "set", "virtual","external","ticket","variable","subscription","person","location","service" },
-    *     message = "Choose either simple, set, virtual, external, ticket, variable, subscription, person, location or service, got {{ value }}"
-    * )
-    * @ApiFilter(SearchFilter::class, strategy="exact")
-    * @ApiFilter(OrderFilter::class)
-    * @Groups({"read", "write"})
-    */
+     *             "enum"={"simple", "set", "virtual","external","ticket","variable","subscription","person","location","service"},
+     *             "example"="simple",
+     *             "required"="true"
+     *         }
+     *     }
+     * )
+     * @Assert\NotBlank
+     * @Assert\Choice(
+     *     choices = { "simple", "set", "virtual","external","ticket","variable","subscription","person","location","service" },
+     *     message = "Choose either simple, set, virtual, external, ticket, variable, subscription, person, location or service, got {{ value }}"
+     * )
+     * @ApiFilter(SearchFilter::class, strategy="exact")
+     * @ApiFilter(OrderFilter::class)
+     * @Groups({"read", "write"})
+     */
     private $type;
 
     /**
-     * @var ArrayCollection $groupedProducts If the product type is a **set** this contains the products that are part of that set
+     * @var ArrayCollection If the product type is a **set** this contains the products that are part of that set
      *
      * @MaxDepth(1)
      * @Groups({"read"})
@@ -294,7 +302,7 @@ class Product
     private $groupedProducts;
 
     /**
-     * @var ArrayCollection $sets The sets thats this product is a part of
+     * @var ArrayCollection The sets thats this product is a part of
      *
      * @MaxDepth(1)
      * @Groups({"write"})
@@ -303,7 +311,7 @@ class Product
     private $sets;
 
     /**
-     * @var Catalogue $catalogue The Catalogue that this product belongs to
+     * @var Catalogue The Catalogue that this product belongs to
      *
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products")
@@ -314,7 +322,7 @@ class Product
     private $catalogue;
 
     /**
-     * @var ArrayCollection $offers The offers that refer to this product
+     * @var ArrayCollection The offers that refer to this product
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="product", orphanRemoval=true, cascade="persist")
      * @Assert\Valid
@@ -325,7 +333,7 @@ class Product
     private $offers;
 
     /**
-     * @var string $calendar The uri referring to the calendar of this product.
+     * @var string The uri referring to the calendar of this product.
      *
      * @example http://example.org/calendar/calendar
      * @ApiProperty(
@@ -345,7 +353,7 @@ class Product
     private $calendar;
 
     /**
-     * @var boolean $requiresAppointment If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
+     * @var bool If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
      *
      * @example false
      * @ApiProperty(
@@ -362,7 +370,7 @@ class Product
     private $requiresAppointment;
 
     /**
-     * @var array $documents An array of URLs pointing to documents related to this product
+     * @var array An array of URLs pointing to documents related to this product
      * @ApiProperty(
      *     attributes={
      *          "openapi_context"={
@@ -370,6 +378,7 @@ class Product
      *          }
      *     }
      * )
+     *
      * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
@@ -377,7 +386,7 @@ class Product
     private $documents = [];
 
     /**
-     * @var array $documents An array of URLs pointing to images related to this product
+     * @var array An array of URLs pointing to images related to this product
      *
      * @ApiProperty(
      *     attributes={
@@ -386,6 +395,7 @@ class Product
      *          }
      *     }
      * )
+     *
      * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
@@ -393,7 +403,7 @@ class Product
     private $images = [];
 
     /**
-     * @var array $documents An array of URLs pointing to external documents referred to from this product
+     * @var array An array of URLs pointing to external documents referred to from this product
      *
      * @ApiProperty(
      *     attributes={
@@ -402,6 +412,7 @@ class Product
      *          }
      *     }
      * )
+     *
      * @example [https://example.org/1, https://example.org/2]
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
@@ -555,14 +566,14 @@ class Product
 
     public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganization;
+        return $this->sourceOrganization;
     }
 
     public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganization = $sourceOrganization;
+        $this->sourceOrganization = $sourceOrganization;
 
-    	return $this;
+        return $this;
     }
 
     public function getTaxPercentage(): ?int
@@ -693,7 +704,7 @@ class Product
 
     public function setCatalogue(?Catalogue $catalogue): self
     {
-    	$this->catalogue = $catalogue;
+        $this->catalogue = $catalogue;
 
         return $this;
     }
