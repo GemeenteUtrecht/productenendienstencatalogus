@@ -5,27 +5,24 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * An entity representing a type of customer
+ * An entity representing a type of customer.
  *
  * This entity represents a type of customer that can order offers in the OrderRegistratieComponent. This entity is linked from offer with the variable eligibleCustomerType.
  *
  * @author Robert Zondervan <robert@conduction.nl>
+ *
  * @category Entity
+ *
  * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
- * @package PDC
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -36,7 +33,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class CustomerType
 {
     /**
-     * @var UuidInterface $id The UUID identifier of this object
+     * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
@@ -49,10 +47,10 @@ class CustomerType
     private $id;
 
     /**
+     * @var string The name of this CustomerType
      *
-     * @var string $name The name of this CustomerType
      * @example My CustomerType
-     * 
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
@@ -63,9 +61,10 @@ class CustomerType
     private $name;
 
     /**
-     * @var string $description The description for this CustomerType
+     * @var string The description for this CustomerType
+     *
      * @example this is the best customertype ever
-     * 
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
@@ -76,7 +75,7 @@ class CustomerType
     private $description;
 
     /**
-     * @var ArrayCollection $offers The offers that this CustomerType is eligible for
+     * @var ArrayCollection The offers that this CustomerType is eligible for
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Offer", inversedBy="eligibleCustomerTypes")
      * @MaxDepth(1)
