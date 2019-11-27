@@ -90,7 +90,6 @@ RUN composer dump-env prod; \
 	rm .env
 
 # copy only specifically what we need
-COPY helm helm/
 COPY bin bin/
 COPY config config/
 COPY public public/

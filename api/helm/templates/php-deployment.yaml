@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ include "name" . }}-php
-          image: "{{ .Values.settings.registryBase }}/{{ .Values.settings.projectName }}-php:{{ .Values.settings.env }}"
+          image: "{{ .Values.settings.registryBase }}/pdc-php:{{ .Values.settings.env }}"
           imagePullPolicy: {{ .Values.settings.pullPolicy }}
           ports:
             - containerPort: 9000
@@ -84,30 +84,15 @@ spec:
                   key: app-repro
             # config
             - name: AUTH_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app-auth
+              value: "false"
             - name: AUDITTRAIL_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app-audittrail
+              value: "false"
             - name: NOTIFICATION_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app-notification
+              value: "false"
             - name: HEALTH_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app-health
+              value: "false"
             - name: ARCHIVE_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app-archive
+              value: "false"
             
             # bla bla      
             - name: CORS_ALLOW_ORIGIN
@@ -127,21 +112,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: database-url
-            - name: MERCURE_PUBLISH_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-publish-url
-            - name: MERCURE_SUBSCRIBE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-subscribe-url
-            - name: MERCURE_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: mercure-jwt-secret
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
