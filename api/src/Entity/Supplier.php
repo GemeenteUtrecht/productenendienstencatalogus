@@ -35,18 +35,7 @@ class Supplier
 {
 	/**
 	 * @var UuidInterface $id The Uuid identifier of this supplier
-	 *
-	 * @ApiProperty(
-	 * 	   identifier=true,
-	 *     attributes={
-	 *         "swagger_context"={
-	 *         	   "description" = "The UUID identifier of this object",
-	 *             "type"="string",
-	 *             "format"="uuid",
-	 *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-	 *         }
-	 *     }
-	 * )
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
 	 *
      * @Assert\Uuid
 	 * @Groups({"read"})
@@ -60,17 +49,6 @@ class Supplier
 	/**
 	 * @var string $sourceOrganization The RSIN of the organization that owns this process
 	 * @example 002851234
-	 *
-	 * @ApiProperty(
-	 *     attributes={
-	 *         "swagger_context"={
-	 *         	   "description" = "The RSIN of the organization that owns this process",
-	 *             "type"="string",
-	 *             "example"="002851234",
-	 *              "maxLength"="255"
-	 *         }
-	 *     }
-	 * )
 	 *
 	 * @Assert\NotNull
 	 * @Assert\Length(
@@ -87,19 +65,6 @@ class Supplier
      * @var string $name The name of this RequestType
      * @example My RequestType
      *
-     * @ApiProperty(
-     * 	   iri="http://schema.org/name",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The name of this RequestType",
-     *             "type"="string",
-     *             "example"="My RequestType",
-     *             "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
-     *
      * @Assert\NotNull
      * @Assert\Length(
      *      max = 255
@@ -113,18 +78,6 @@ class Supplier
      * @var string $kvk The number under which the supplier is registered at the chamber of commerce
      * @example 30280353
      *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The number under which the supplier is registered at the chamber of commerce",
-     *             "type"="string",
-     *             "example"="30280353",
-     *             "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
-     *
      * @Assert\NotNull
      * @Assert\Length(
      *      max = 255
@@ -137,19 +90,6 @@ class Supplier
     /**
      * @var string $logo The logo for this component
      * @example https://www.my-organization.com/logo.png
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/logo",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The logo for this component",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="https://www.my-organization.com/logo.png",
-     *             "maxLength"=255
-     *         }
-     *     }
-     * )
      *
      * @Assert\Url
      * @Assert\Length(
