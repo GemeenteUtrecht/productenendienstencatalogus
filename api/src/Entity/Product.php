@@ -41,18 +41,6 @@ class Product
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     *
      * @Assert\Uuid
      * @Groups({"read"})
      * @ORM\Id
@@ -66,17 +54,6 @@ class Product
      * @var string The human readable reference for this product, also known as Stock Keeping Unit (SKU)
      *
      * @example 6666-2019
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The human readable reference for this product, also known as Stock Keeping Unit (SKU)",
-     *             "type"="string",
-     *             "example"="6666-2019",
-     *             "maxLength"="255"
-     *         }
-     *     }
-     * )
      *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true) //, unique=true
@@ -97,22 +74,6 @@ class Product
      *
      * @example My product
      *
-     * @ApiProperty(
-     * 	   iri="http://schema.org/name",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The name of this Product",
-     *             "type"="string",
-     *             "example"="My product",
-     *             "maxLength"="255",
-     *             "required" = true
-     *         },
-     *         "openapi_context"={
-     *              "example"="My product"
-     *          }
-     *     }
-     * )
-     *
      * @Assert\NotNull
      * @Assert\Length(
      *      max = 255
@@ -127,21 +88,6 @@ class Product
      *
      * @example This is the best product ever
      *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/description",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "An short description of this Product",
-     *             "type"="string",
-     *             "example"="This is the best product ever",
-     *             "maxLength"="2550"
-     *         },
-     *         "openapi_context"={
-     *              "example"="This is the best product ever"
-     *          }
-     *     }
-     * )
-     *
      * @Assert\Length(
      *      max = 2550
      * )
@@ -154,22 +100,6 @@ class Product
      * @var string The logo of this product
      *
      * @example https://www.my-organization.com/logo.png
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/logo",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The logo of this product",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="https://www.my-organization.com/logo.png",
-     *             "maxLength"=255
-     *         },
-     *         "openapi_context"={
-     *              "example"="https://www.my-organization.com/logo.png"
-     *          }
-     *     }
-     * )
      *
      * @Assert\Url
      * @Assert\Length(
@@ -184,22 +114,6 @@ class Product
      * @var string The movie for this product
      *
      * @example https://www.youtube.com/embed/RkBZYoMnx5w
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/logo",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The movie for this product",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="https://www.youtube.com/embed/RkBZYoMnx5w",
-     *             "maxLength"=255
-     *         },
-     *         "openapi_context"={
-     *              "example"="https://www.youtube.com/embed/RkBZYoMnx5w"
-     *          }
-     *     }
-     * )
      *
      * @Assert\Url
      * @Assert\Length(
