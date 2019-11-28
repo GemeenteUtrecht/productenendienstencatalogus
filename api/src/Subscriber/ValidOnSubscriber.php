@@ -88,7 +88,7 @@ class ValidOnSubscriber implements EventSubscriberInterface
             throw new \Exception('Could not find a valid version for date: '.$date);
         }
 
-        // Lets use the found version to rewind the object and return is
+        // Lets use the found version to rewind the object and return it
         $repo = $this->em->getRepository('\Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
         $repo->revert($result, $version->getVersion());
 
