@@ -91,7 +91,6 @@ class Supplier
      * @var string The name of this RequestType
      *
      * @example My RequestType
-     *
      * @example 002851234
      *
      * @Assert\NotNull
