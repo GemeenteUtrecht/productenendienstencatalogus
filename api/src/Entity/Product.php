@@ -372,7 +372,6 @@ class Product
     /**
      * @var array An array of URLs pointing to documents related to this product
      *
-     * @example ['first', 'second']
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -381,7 +380,6 @@ class Product
     /**
      * @var array An array of URLs pointing to images related to this product
      *
-     * @example ['first', 'second']
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */
@@ -390,7 +388,6 @@ class Product
     /**
      * @var array An array of URLs pointing to external documents referred to from this product
      *
-     * @example ['first', 'second']
      * @ORM\Column(type="simple_array", nullable=true)
      * @Groups({"read"})
      */

@@ -61,7 +61,7 @@ class Offer
     private $name;
 
     /**
-     * @var string An short description of this Product
+     * @var string An short description of this offer
      *
      * @example This is the best product ever
      *
@@ -152,7 +152,7 @@ class Offer
      *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
-     * @ORM\ManyToMany(targetEntity="App\Entity\Taxes", mappedBy="offers")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tax", mappedBy="offers")
      */
     private $taxes;
 

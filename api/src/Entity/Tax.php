@@ -45,7 +45,7 @@ class Tax
     private $id;
 
     /**
-     * @var string The name of this offer
+     * @var string The name of this tax
      *
      * @example my offer
      *
@@ -59,7 +59,7 @@ class Tax
     private $name;
 
     /**
-     * @var string An short description of this Product
+     * @var string An short description of this tax
      *
      * @example This is the best product ever
      *
@@ -84,7 +84,7 @@ class Tax
     private $price;
 
     /**
-     *  @var string The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *  @var string The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
      *
      *  @example EUR
      *
