@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +33,20 @@ class Supplier
     /**
      * @var UuidInterface The Uuid identifier of this supplier
      *
-     * @example e2984465-190a-4562-829e-a8cca81aa35d
+     * @ApiProperty(
+     * 	   identifier=true,
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The UUID identifier of this object",
+     *             "type"="string",
+     *             "format"="uuid",
+     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
+     *         },
+     *         "openapi_context"={
+     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
+     *         }
+     *     }
+     * )
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -46,6 +60,37 @@ class Supplier
     /**
      * @var string The RSIN of the organization that owns this process
      *
+     * @example 002851234
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The RSIN of the organization that owns this process",
+     *             "type"="string",
+     *             "example"="002851234",
+     *              "maxLength"="255"
+     *         },
+     *         "openapi_context"={
+     *             "example"="002851234"
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 11
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     * @ApiFilter(SearchFilter::class, strategy="exact")
+     */
+    private $sourceOrganization;
+
+    /**
+     * @var string The name of this RequestType
+     *
+     * @example My RequestType
      * @example 002851234
      *
      * @Assert\NotNull
