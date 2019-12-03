@@ -127,8 +127,13 @@ final class SwaggerDecorator implements NormalizerInterface
         // Oke dit is echt but lelijk
         $schemas = (array) $docs['definitions'];
         foreach ($schemas as $schemaName => $schema) {
-            $additionalDocs[$schemaName] = array_merge((array) $schema, $additionalDocs[$schemaName]);
 
+            // We can only merge if we actually have content
+            if (!in_array($schemaName, $additionalDocs)) {
+                continue;
+            }
+
+            $additionalDocs[$schemaName] = array_merge((array) $schema, $additionalDocs[$schemaName]);
             $properties = (array) $schema['properties'];
             foreach ($properties as $propertyName => $property) {
                 $additionalDocs[$schemaName]['properties'][$propertyName] = array_merge((array) $property, $additionalDocs[$schemaName]['properties'][$propertyName]);
@@ -407,6 +412,7 @@ final class SwaggerDecorator implements NormalizerInterface
             $docblock = $factory->create($property->getDocComment());
             $tags = $docblock->getTags();
             $atributes = [];
+            $groups = [];
 
             foreach ($tags as $tag) {
                 $name = $tag->getName();
