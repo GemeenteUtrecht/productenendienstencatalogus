@@ -3,29 +3,24 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * An entity representing an tax
+ * An entity representing an tax.
  *
  * This entity represents an offer that bridges products to the OrderRegistratieComponent to be able to change prices without invalidating past orders.
  *
  * @author Ruben van der Linde <ruben@conduction.nl>
+ *
  * @category Entity
+ *
  * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
- * @package PDC
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -36,7 +31,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Tax
 {
     /**
-     * @var UuidInterface $id The UUID identifier of this object
+     * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -49,7 +45,8 @@ class Tax
     private $id;
 
     /**
-     * @var string $name The name of this offer
+     * @var string The name of this tax
+     *
      * @example my offer
      *
      * @ORM\Column(type="string", length=255)
@@ -60,9 +57,10 @@ class Tax
      * @Groups({"read","write"})
      */
     private $name;
-    
+
     /**
-     * @var string $description An short description of this Product
+     * @var string An short description of this tax
+     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -74,7 +72,8 @@ class Tax
     private $description;
 
     /**
-     * @var string $price The price of this tax
+     * @var string The price of this tax
+     *
      * @example 50.00
      *
      * @Groups({"read","write"})
@@ -85,7 +84,8 @@ class Tax
     private $price;
 
     /**
-     *  @var string $priceCurrency The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *  @var string The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *
      *  @example EUR
      *
      * @Assert\Currency
@@ -95,7 +95,8 @@ class Tax
     private $priceCurrency = 'EUR';
 
     /**
-     *  @var integer $percentage The tax percentage for this offer as an integer e.g. 9% makes 9
+     *  @var int The tax percentage for this offer as an integer e.g. 9% makes 9
+     *
      *  @example 9
      *
      * @Assert\NotBlank
@@ -104,9 +105,9 @@ class Tax
      * @ORM\Column(type="integer")
      */
     private $percentage;
-    
+
     /**
-     * @var ArrayCollection $offers The offers that use this tax
+     * @var ArrayCollection The offers that use this tax
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
@@ -135,17 +136,17 @@ class Tax
 
         return $this;
     }
-    
+
     public function getDescription(): ?string
     {
-    	return $this->description;
+        return $this->description;
     }
-    
+
     public function setDescription(?string $description): self
     {
-    	$this->description = $description;
-    	
-    	return $this;
+        $this->description = $description;
+
+        return $this;
     }
 
     public function getPrice(): ?int
@@ -183,31 +184,30 @@ class Tax
 
         return $this;
     }
-    
+
     /**
      * @return Collection|Offer[]
      */
     public function getOffers(): Collection
     {
-    	return $this->products;
-    }
-    
-    public function addOffer(Offer $offer): self
-    {
-    	if (!$this->offers->contains($offer)) {
-    		$this->offers[] = $offer;
-    	}
-    	
-    	return $this;
-    }
-    
-    public function removeOffer(Offer $product): self
-    {
-    	if ($this->offers->contains($offer)) {
-    		$this->offers->removeElement($offer);
-    	}
-    	
-    	return $this;
+        return $this->products;
     }
 
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $product): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+        }
+
+        return $this;
+    }
 }

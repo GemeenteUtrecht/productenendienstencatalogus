@@ -2,28 +2,28 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * An entity representing a product group
+ * An entity representing a product group.
  *
  * This entity represents a product group to differ between various product types.
  *
  * @author Robert Zondervan <robert@conduction.nl>
+ *
  * @category Entity
+ *
  * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
- * @package PDC
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -34,59 +34,111 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  */
 class Group
 {
-	/**
-	 * @var UuidInterface $id The Uuid identifier of this group
-     * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
+    /**
+     * @var UuidInterface The Uuid identifier of this group
+     *
+     * @ApiProperty(
+     * 	   identifier=true,
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The UUID identifier of this object",
+     *             "type"="string",
+     *             "format"="uuid",
+     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
+     *         }
+     *     }
+     * )
+     *
      * @Assert\Uuid
-	 * @Groups({"read"})
-	 * @ORM\Id
-	 * @ORM\Column(type="uuid", unique=true)
-	 * @ORM\GeneratedValue(strategy="CUSTOM")
-	 * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-	 */
-	private $id;
-
-	/**
-	 * @var string $name The name of this product group
-	 * @example My Group
-	 *
-	 * @Assert\NotNull
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read", "write"})
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $name;
-
-	/**
-	 * @var string $description An short description of this product group
-	 * @example This is the best group ever
-	 *
-	 * @Assert\Length(
-	 *      max = 2550
-	 * )
-	 * @Groups({"read"})
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
-
-	/**
-	 * @var string $logo The logo for this component
-	 * @example https://www.my-organization.com/logo.png
-	 *
-	 * @Assert\Url
-	 * @Assert\Length(
-	 *      max = 255
-	 * )
-	 * @Groups({"read"})
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $logo;
+     * @Groups({"read"})
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     */
+    private $id;
 
     /**
-     * @var ArrayCollection $products The groups that are a part of this product group
+     * @var string The name of this product group
+     *
+     * @example My Group
+     *
+     * @ApiProperty(
+     * 	   iri="http://schema.org/name",
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The name of this product group",
+     *             "type"="string",
+     *             "example"="My Group",
+     *             "maxLength"="255",
+     *             "required" = true
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string An short description of this product group
+     *
+     * @example This is the best group ever
+     *
+     * @ApiProperty(
+     * 	   iri="https://schema.org/description",
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "An short description of this product group",
+     *             "type"="string",
+     *             "example"="This is the best group ever",
+     *             "maxLength"="2550"
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\Length(
+     *      max = 2550
+     * )
+     * @Groups({"read"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string The logo for this component
+     *
+     * @example https://www.my-organization.com/logo.png
+     *
+     * @ApiProperty(
+     * 	   iri="https://schema.org/logo",
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The logo for this component",
+     *             "type"="string",
+     *             "format"="url",
+     *             "example"="https://www.my-organization.com/logo.png",
+     *             "maxLength"=255
+     *         }
+     *     }
+     * )
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $logo;
+
+    /**
+     * @var ArrayCollection The groups that are a part of this product group
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
@@ -95,9 +147,22 @@ class Group
     private $products;
 
     /**
-     * @var string $sourceOrganization The RSIN of the organization that owns this group
+     * @var string The RSIN of the organization that owns this group
+     *
      * @example 002851234
-     * 
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "swagger_context"={
+     *         	   "description" = "The RSIN of the organization that owns this group",
+     *             "type"="string",
+     *             "example"="002851234",
+     *              "maxLength"="255",
+     *             "required" = true
+     *         }
+     *     }
+     * )
+     *
      * @Assert\NotNull
      * @Assert\Length(
      *      min = 8,
@@ -110,7 +175,7 @@ class Group
     private $sourceOrganization;
 
     /**
-     * @var Catalogue $catalogue The Catalogue that this product group belongs to
+     * @var Catalogue The Catalogue that this product group belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read", "write"})
@@ -194,25 +259,25 @@ class Group
 
     public function getSourceOrganization(): ?string
     {
-    	return $this->sourceOrganization;
+        return $this->sourceOrganization;
     }
 
     public function setSourceOrganization(string $sourceOrganization): self
     {
-    	$this->sourceOrganization = $sourceOrganization;
+        $this->sourceOrganization = $sourceOrganization;
 
-    	return $this;
+        return $this;
     }
 
     public function getCatalogue(): ?Catalogue
     {
-    	return $this->catalogue;
+        return $this->catalogue;
     }
 
     public function setCatalogue(?Catalogue $catalogue): self
     {
-    	$this->catalogue = $catalogue;
+        $this->catalogue = $catalogue;
 
-    	return $this;
+        return $this;
     }
 }
