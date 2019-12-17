@@ -10,7 +10,7 @@ info:
     - Version: V.0.1
     - Repository: [online](https://github.com/ConductionNL/productenendienstencatalogus) / [zip](https://github.com/ConductionNL/productenendienstencatalogus/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pdc-php) 
-    - Datamodel: [postman](/schema/openapi.postman_collection) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
+    - Datamodel: [postman](/schema/pdc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'This component provides a products and services catalogue that can be used by a order component in order to provide the products in the orders with better details. The design considerations are given in [DESIGN.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN.md) and [DESIGN-PDC.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN-PDC.md)'         
     
@@ -4886,25 +4886,6 @@ components:
           example: '50.00'
           description: |
             The price of this product
-            
-             @ORM\Column(type="decimal", precision=8, scale=2)
-            
-             @example 50.00
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    },
-                    "openapi_context"={
-                         "example"="50.00"
-                     }
-                }
-            )
           type: string
         priceCurrency:
           example: EUR
@@ -5398,7 +5379,8 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         sourceOrganization:
-          description: 'The name of this RequestType'
+          example: '002851234'
+          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5424,7 +5406,8 @@ components:
         - kvk
       properties:
         sourceOrganization:
-          description: 'The name of this RequestType'
+          example: '002851234'
+          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5458,7 +5441,8 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         sourceOrganization:
-          description: 'The name of this RequestType'
+          example: '002851234'
+          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5493,7 +5477,8 @@ components:
           readOnly: true
           type: string
         sourceOrganization:
-          description: 'The name of this RequestType'
+          example: '002851234'
+          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
