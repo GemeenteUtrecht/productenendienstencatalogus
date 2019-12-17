@@ -4886,25 +4886,6 @@ components:
           example: '50.00'
           description: |
             The price of this product
-            
-             @ORM\Column(type="decimal", precision=8, scale=2)
-            
-             @example 50.00
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    },
-                    "openapi_context"={
-                         "example"="50.00"
-                     }
-                }
-            )
           type: string
         priceCurrency:
           example: EUR
