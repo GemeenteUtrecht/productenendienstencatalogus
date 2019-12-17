@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @license EUPL <https://github.com/ConductionNL/productenendienstencatalogus/blob/master/LICENSE.md>
  *
  * @ApiResource(
- *     normalizationContext={"groups"={"read"}}, "enable_max_depth"=true},
+ *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\SupplierRepository")
