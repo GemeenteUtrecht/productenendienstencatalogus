@@ -3592,10 +3592,7 @@ components:
   schemas:
     Catalogue-read:
       type: object
-      description: 'An entity representing a product catalogue'
-      required:
-        - name
-        - sourceOrganization
+      description: 'This is an example entity.'
       properties:
         name:
           description: 'The name of this Catalogue'
@@ -3808,23 +3805,9 @@ components:
           externalDocs:
             url: 'https://schema.org/description'
           type: string
-        logo:
-          readOnly: true
-          description: 'The logo for this component'
-          externalDocs:
-            url: 'https://schema.org/logo'
+        camelCase:
+          description: 'Proof that we camel case our api'
           type: string
-        products:
-          description: 'The groups that are a part of this product group'
-          type: array
-          items:
-            $ref: '#/components/schemas/Product-read'
-        sourceOrganization:
-          description: 'The RSIN of the organization that owns this group'
-          type: string
-        catalogue:
-          description: 'The Catalogue that this product group belongs to'
-          $ref: '#/components/schemas/Catalogue-read'
       required:
         - sourceOrganization
     Group-write:
@@ -4025,7 +4008,7 @@ components:
         - taxPercentage
     Offer-write:
       type: object
-      description: 'An entity representing an offer'
+      description: 'This is an example entity.'
       required:
         - name
         - price
