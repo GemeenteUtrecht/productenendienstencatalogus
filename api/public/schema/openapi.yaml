@@ -3588,12 +3588,596 @@ paths:
             schema:
               $ref: '#/components/schemas/Supplier-write'
         description: 'The updated Supplier resource'
+  /taxes:
+    get:
+      tags:
+        - Tax
+      operationId: getTaxCollection
+      summary: 'Retrieves the collection of Tax resources.'
+      responses:
+        200:
+          description: 'Tax collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Tax:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Tax
+      operationId: postTaxCollection
+      summary: 'Creates a Tax resource.'
+      responses:
+        201:
+          description: 'Tax resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tax:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+          links:
+            GetTaxItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getTaxItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /taxes/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Tax:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+        description: 'The new Tax resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/taxes/{id}':
+    get:
+      tags:
+        - Tax
+      operationId: getTaxItem
+      summary: 'Retrieves a Tax resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Tax resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tax:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Tax
+      operationId: deleteTaxItem
+      summary: 'Removes the Tax resource.'
+      responses:
+        204:
+          description: 'Tax resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Tax
+      operationId: putTaxItem
+      summary: 'Replaces the Tax resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Tax resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tax:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Tax:jsonld-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+        description: 'The updated Tax resource'
+    patch:
+      tags:
+        - Tax
+      operationId: patchTaxItem
+      summary: 'Updates the Tax resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Tax resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tax:jsonld-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tax-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Tax-write'
+        description: 'The updated Tax resource'
 components:
   schemas:
     Catalogue-read:
       type: object
-      description: 'This is an example entity.'
+      description: 'An entity representing a product catalogue.'
       properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
         name:
           description: 'The name of this Catalogue'
           externalDocs:
@@ -3624,9 +4208,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
+      required:
+        - name
+        - sourceOrganization
     Catalogue-write:
       type: object
-      description: 'An entity representing a product catalogue'
+      description: 'An entity representing a product catalogue.'
       required:
         - name
         - sourceOrganization
@@ -3651,10 +4238,7 @@ components:
           type: string
     'Catalogue:jsonld-read':
       type: object
-      description: 'An entity representing a product catalogue'
-      required:
-        - name
-        - sourceOrganization
+      description: 'An entity representing a product catalogue.'
       properties:
         '@context':
           readOnly: true
@@ -3664,6 +4248,12 @@ components:
           type: string
         '@type':
           readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
           type: string
         name:
           description: 'The name of this Catalogue'
@@ -3695,9 +4285,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
+      required:
+        - name
+        - sourceOrganization
     'Catalogue:jsonld-write':
       type: object
-      description: 'An entity representing a product catalogue'
+      description: 'An entity representing a product catalogue.'
       required:
         - name
         - sourceOrganization
@@ -3731,17 +4324,41 @@ components:
           type: string
     CustomerType-read:
       type: object
-      description: 'An entity representing a type of customer'
+      description: 'An entity representing a type of customer.'
       properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          description: 'The name of this CustomerType'
+          type: string
+        description:
+          description: 'The description for this CustomerType'
+          type: string
         offers:
           description: 'The offers that this CustomerType is eligible for'
           type: array
           items:
             $ref: '#/components/schemas/Offer-read'
+      required:
+        - name
+        - description
     CustomerType-write:
       type: object
-      description: 'An entity representing a type of customer'
+      description: 'An entity representing a type of customer.'
+      required:
+        - name
+        - description
       properties:
+        name:
+          description: 'The name of this CustomerType'
+          type: string
+        description:
+          description: 'The description for this CustomerType'
+          type: string
         offers:
           description: 'The offers that this CustomerType is eligible for'
           type: array
@@ -3749,7 +4366,7 @@ components:
             $ref: '#/components/schemas/Offer-write'
     'CustomerType:jsonld-read':
       type: object
-      description: 'An entity representing a type of customer'
+      description: 'An entity representing a type of customer.'
       properties:
         '@context':
           readOnly: true
@@ -3759,15 +4376,33 @@ components:
           type: string
         '@type':
           readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          description: 'The name of this CustomerType'
+          type: string
+        description:
+          description: 'The description for this CustomerType'
           type: string
         offers:
           description: 'The offers that this CustomerType is eligible for'
           type: array
           items:
             $ref: '#/components/schemas/Offer:jsonld-read'
+      required:
+        - name
+        - description
     'CustomerType:jsonld-write':
       type: object
-      description: 'An entity representing a type of customer'
+      description: 'An entity representing a type of customer.'
+      required:
+        - name
+        - description
       properties:
         '@context':
           readOnly: true
@@ -3777,6 +4412,12 @@ components:
           type: string
         '@type':
           readOnly: true
+          type: string
+        name:
+          description: 'The name of this CustomerType'
+          type: string
+        description:
+          description: 'The description for this CustomerType'
           type: string
         offers:
           description: 'The offers that this CustomerType is eligible for'
@@ -3785,7 +4426,7 @@ components:
             $ref: '#/components/schemas/Offer:jsonld-write'
     Group-read:
       type: object
-      description: 'An entity representing a product group'
+      description: 'An entity representing a product group.'
       properties:
         id:
           readOnly: true
@@ -3794,7 +4435,6 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
-          readOnly: true
           description: 'The name of this product group'
           externalDocs:
             url: 'http://schema.org/name'
@@ -3805,15 +4445,38 @@ components:
           externalDocs:
             url: 'https://schema.org/description'
           type: string
-        camelCase:
-          description: 'Proof that we camel case our api'
+        logo:
+          readOnly: true
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'https://schema.org/logo'
           type: string
+        products:
+          description: 'The groups that are a part of this product group'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+        sourceOrganization:
+          description: 'The RSIN of the organization that owns this group'
+          type: string
+        catalogue:
+          description: 'The Catalogue that this product group belongs to'
+          $ref: '#/components/schemas/Catalogue-read'
       required:
+        - name
         - sourceOrganization
     Group-write:
       type: object
-      description: 'An entity representing a product group'
+      description: 'An entity representing a product group.'
+      required:
+        - name
+        - sourceOrganization
       properties:
+        name:
+          description: 'The name of this product group'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
         products:
           description: 'The groups that are a part of this product group'
           type: array
@@ -3825,11 +4488,9 @@ components:
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue-write'
-      required:
-        - sourceOrganization
     'Group:jsonld-read':
       type: object
-      description: 'An entity representing a product group'
+      description: 'An entity representing a product group.'
       properties:
         '@context':
           readOnly: true
@@ -3847,7 +4508,6 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
-          readOnly: true
           description: 'The name of this product group'
           externalDocs:
             url: 'http://schema.org/name'
@@ -3876,10 +4536,14 @@ components:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-read'
       required:
+        - name
         - sourceOrganization
     'Group:jsonld-write':
       type: object
-      description: 'An entity representing a product group'
+      description: 'An entity representing a product group.'
+      required:
+        - name
+        - sourceOrganization
       properties:
         '@context':
           readOnly: true
@@ -3889,6 +4553,11 @@ components:
           type: string
         '@type':
           readOnly: true
+          type: string
+        name:
+          description: 'The name of this product group'
+          externalDocs:
+            url: 'http://schema.org/name'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -3901,11 +4570,9 @@ components:
         catalogue:
           description: 'The Catalogue that this product group belongs to'
           $ref: '#/components/schemas/Catalogue:jsonld-write'
-      required:
-        - sourceOrganization
     Offer-read:
       type: object
-      description: 'An entity representing an offer'
+      description: 'An entity representing an offer.'
       properties:
         id:
           readOnly: true
@@ -3916,46 +4583,23 @@ components:
         name:
           description: 'The name of this offer'
           type: string
+        description:
+          description: 'An short description of this offer'
+          type: string
         product:
-          readOnly: true
           description: 'The product that is sold via this offer'
           $ref: '#/components/schemas/Product-read'
         price:
           description: |
             The price of this product
-             @example 50.00
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    }
-                }
-            )
+            @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+            @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
@@ -3976,24 +4620,11 @@ components:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        taxPercentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
-          type: integer
+        taxes:
+          description: 'The taxdes that affect this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax-read'
         eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
@@ -4001,61 +4632,42 @@ components:
             $ref: '#/components/schemas/CustomerType-read'
       required:
         - name
+        - product
         - price
         - offeredBy
         - availabilityEnds
         - availabilityStarts
-        - taxPercentage
     Offer-write:
       type: object
-      description: 'This is an example entity.'
+      description: 'An entity representing an offer.'
       required:
         - name
+        - product
         - price
         - offeredBy
         - availabilityEnds
         - availabilityStarts
-        - taxPercentage
       properties:
         name:
           description: 'The name of this offer'
           type: string
+        description:
+          description: 'An short description of this offer'
+          type: string
+        product:
+          description: 'The product that is sold via this offer'
+          $ref: '#/components/schemas/Product-write'
         price:
           description: |
             The price of this product
-             @example 50.00
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    }
-                }
-            )
+            @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+            @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
@@ -4076,24 +4688,11 @@ components:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        taxPercentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
-          type: integer
+        taxes:
+          description: 'The taxdes that affect this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax-write'
         eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
@@ -4101,7 +4700,7 @@ components:
             $ref: '#/components/schemas/CustomerType-write'
     'Offer:jsonld-read':
       type: object
-      description: 'An entity representing an offer'
+      description: 'An entity representing an offer.'
       properties:
         '@context':
           readOnly: true
@@ -4121,46 +4720,23 @@ components:
         name:
           description: 'The name of this offer'
           type: string
+        description:
+          description: 'An short description of this offer'
+          type: string
         product:
-          readOnly: true
           description: 'The product that is sold via this offer'
           $ref: '#/components/schemas/Product:jsonld-read'
         price:
           description: |
             The price of this product
-             @example 50.00
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    }
-                }
-            )
+            @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+            @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
@@ -4181,24 +4757,11 @@ components:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        taxPercentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
-          type: integer
+        taxes:
+          description: 'The taxdes that affect this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax:jsonld-read'
         eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
@@ -4206,21 +4769,21 @@ components:
             $ref: '#/components/schemas/CustomerType:jsonld-read'
       required:
         - name
+        - product
         - price
         - offeredBy
         - availabilityEnds
         - availabilityStarts
-        - taxPercentage
     'Offer:jsonld-write':
       type: object
-      description: 'An entity representing an offer'
+      description: 'An entity representing an offer.'
       required:
         - name
+        - product
         - price
         - offeredBy
         - availabilityEnds
         - availabilityStarts
-        - taxPercentage
       properties:
         '@context':
           readOnly: true
@@ -4234,42 +4797,23 @@ components:
         name:
           description: 'The name of this offer'
           type: string
+        description:
+          description: 'An short description of this offer'
+          type: string
+        product:
+          description: 'The product that is sold via this offer'
+          $ref: '#/components/schemas/Product:jsonld-write'
         price:
           description: |
             The price of this product
-             @example 50.00
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    }
-                }
-            )
+            @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
             
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+            @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
@@ -4290,24 +4834,11 @@ components:
             url: 'http://schema.org/Date'
           type: string
           format: date-time
-        taxPercentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this offer as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
-          type: integer
+        taxes:
+          description: 'The taxdes that affect this offer'
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax:jsonld-write'
         eligibleCustomerTypes:
           description: 'The customer types that are eligible for this offer'
           type: array
@@ -4315,7 +4846,7 @@ components:
             $ref: '#/components/schemas/CustomerType:jsonld-write'
     Product-read:
       type: object
-      description: 'An entity representing a product'
+      description: 'An entity representing a product.'
       properties:
         id:
           readOnly: true
@@ -4328,25 +4859,22 @@ components:
           type: string
         name:
           description: 'The name of this Product'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         movie:
           description: 'The movie for this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
+          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4355,10 +4883,13 @@ components:
           items:
             $ref: '#/components/schemas/Group-read'
         price:
+          example: '50.00'
           description: |
             The price of this product
-             @example 50.00
             
+             @ORM\Column(type="decimal", precision=8, scale=2)
+            
+             @example 50.00
              @ApiProperty(
                 attributes={
                     "swagger_context"={
@@ -4368,48 +4899,22 @@ components:
                         "example"="50.00",
                         "maxLength"="9",
                         "required" = true
-                    }
+                    },
+                    "openapi_context"={
+                         "example"="50.00"
+                     }
                 }
             )
           type: string
         priceCurrency:
-          description: |
-            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+          example: EUR
+          description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          description: |
-            The tax percentage for this product as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
+          example: 9
+          description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         variations:
           readOnly: true
@@ -4439,17 +4944,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
+        catalogue:
+          description: 'The Catalogue that this product belongs to'
+          $ref: '#/components/schemas/Catalogue-read'
         offers:
           description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer-read'
         calendar:
+          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
@@ -4476,35 +4986,33 @@ components:
         - price
         - taxPercentage
         - type
+        - catalogue
         - requiresAppointment
     Product-write:
       type: object
-      description: 'An entity representing a product'
+      description: 'An entity representing a product.'
       properties:
         sku:
           description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
           type: string
         name:
           description: 'The name of this Product'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         movie:
           description: 'The movie for this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
+          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4513,10 +5021,13 @@ components:
           items:
             $ref: '#/components/schemas/Group-write'
         price:
+          example: '50.00'
           description: |
             The price of this product
-             @example 50.00
             
+             @ORM\Column(type="decimal", precision=8, scale=2)
+            
+             @example 50.00
              @ApiProperty(
                 attributes={
                     "swagger_context"={
@@ -4526,48 +5037,22 @@ components:
                         "example"="50.00",
                         "maxLength"="9",
                         "required" = true
-                    }
+                    },
+                    "openapi_context"={
+                         "example"="50.00"
+                     }
                 }
             )
           type: string
         priceCurrency:
-          description: |
-            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+          example: EUR
+          description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          description: |
-            The tax percentage for this product as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
+          example: 9
+          description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         parent:
           writeOnly: true
@@ -4595,17 +5080,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
+        catalogue:
+          description: 'The Catalogue that this product belongs to'
+          $ref: '#/components/schemas/Catalogue-write'
         offers:
           description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer-write'
         calendar:
+          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
@@ -4614,10 +5104,11 @@ components:
         - price
         - taxPercentage
         - type
+        - catalogue
         - requiresAppointment
     'Product:jsonld-read':
       type: object
-      description: 'An entity representing a product'
+      description: 'An entity representing a product.'
       properties:
         '@context':
           readOnly: true
@@ -4639,25 +5130,22 @@ components:
           type: string
         name:
           description: 'The name of this Product'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         movie:
           description: 'The movie for this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
+          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4666,10 +5154,13 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
         price:
+          example: '50.00'
           description: |
             The price of this product
-             @example 50.00
             
+             @ORM\Column(type="decimal", precision=8, scale=2)
+            
+             @example 50.00
              @ApiProperty(
                 attributes={
                     "swagger_context"={
@@ -4679,48 +5170,22 @@ components:
                         "example"="50.00",
                         "maxLength"="9",
                         "required" = true
-                    }
+                    },
+                    "openapi_context"={
+                         "example"="50.00"
+                     }
                 }
             )
           type: string
         priceCurrency:
-          description: |
-            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+          example: EUR
+          description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          description: |
-            The tax percentage for this product as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
+          example: 9
+          description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         variations:
           readOnly: true
@@ -4750,17 +5215,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
+        catalogue:
+          description: 'The Catalogue that this product belongs to'
+          $ref: '#/components/schemas/Catalogue:jsonld-read'
         offers:
           description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer:jsonld-read'
         calendar:
+          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
@@ -4787,10 +5257,11 @@ components:
         - price
         - taxPercentage
         - type
+        - catalogue
         - requiresAppointment
     'Product:jsonld-write':
       type: object
-      description: 'An entity representing a product'
+      description: 'An entity representing a product.'
       properties:
         '@context':
           readOnly: true
@@ -4806,25 +5277,22 @@ components:
           type: string
         name:
           description: 'The name of this Product'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Product'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo of this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         movie:
           description: 'The movie for this product'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
+          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4833,10 +5301,13 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
         price:
+          example: '50.00'
           description: |
             The price of this product
-             @example 50.00
             
+             @ORM\Column(type="decimal", precision=8, scale=2)
+            
+             @example 50.00
              @ApiProperty(
                 attributes={
                     "swagger_context"={
@@ -4846,48 +5317,22 @@ components:
                         "example"="50.00",
                         "maxLength"="9",
                         "required" = true
-                    }
+                    },
+                    "openapi_context"={
+                         "example"="50.00"
+                     }
                 }
             )
           type: string
         priceCurrency:
-          description: |
-            The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-             @example EUR
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/priceCurrency",
-                    	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                        "type"="string",
-                        "example"="EUR",
-                        "default"="EUR",
-                        "maxLength"="3",
-                        "minLength"="3"
-                    }
-                }
-            )
+          example: EUR
+          description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          description: |
-            The tax percentage for this product as an integer e.g. 9% makes 9
-             @example 9
-            
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                    	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
-                        "type"="integer",
-                        "example"="9",
-                        "maxLength"="3",
-                        "minLength"="1",
-                        "required" = true
-                    }
-                }
-            )
+          example: 9
+          description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         parent:
           writeOnly: true
@@ -4915,17 +5360,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-write'
+        catalogue:
+          description: 'The Catalogue that this product belongs to'
+          $ref: '#/components/schemas/Catalogue:jsonld-write'
         offers:
           description: 'The offers that refer to this product'
           type: array
           items:
             $ref: '#/components/schemas/Offer:jsonld-write'
         calendar:
+          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
+          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
@@ -4934,24 +5384,24 @@ components:
         - price
         - taxPercentage
         - type
+        - catalogue
         - requiresAppointment
     Supplier-read:
       type: object
-      description: 'An entity representing a supplier of products'
+      description: 'An entity representing a supplier of products.'
       properties:
         id:
+          example: e2984465-190a-4562-829e-a8cca81aa35d
           readOnly: true
           description: 'The Uuid identifier of this supplier'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         sourceOrganization:
-          description: 'The RSIN of the organization that owns this process'
+          description: 'The name of this RequestType'
           type: string
         name:
           description: 'The name of this RequestType'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
@@ -4959,7 +5409,7 @@ components:
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
       required:
         - sourceOrganization
@@ -4967,19 +5417,17 @@ components:
         - kvk
     Supplier-write:
       type: object
-      description: 'An entity representing a supplier of products'
+      description: 'An entity representing a supplier of products.'
       required:
         - sourceOrganization
         - name
         - kvk
       properties:
         sourceOrganization:
-          description: 'The RSIN of the organization that owns this process'
+          description: 'The name of this RequestType'
           type: string
         name:
           description: 'The name of this RequestType'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
@@ -4987,11 +5435,158 @@ components:
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
     'Supplier:jsonld-read':
       type: object
-      description: 'An entity representing a supplier of products'
+      description: 'An entity representing a supplier of products.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          example: e2984465-190a-4562-829e-a8cca81aa35d
+          readOnly: true
+          description: 'The Uuid identifier of this supplier'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        sourceOrganization:
+          description: 'The name of this RequestType'
+          type: string
+        name:
+          description: 'The name of this RequestType'
+          type: string
+        kvk:
+          description: 'The number under which the supplier is registered at the chamber of commerce'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+      required:
+        - sourceOrganization
+        - name
+        - kvk
+    'Supplier:jsonld-write':
+      type: object
+      description: 'An entity representing a supplier of products.'
+      required:
+        - sourceOrganization
+        - name
+        - kvk
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        sourceOrganization:
+          description: 'The name of this RequestType'
+          type: string
+        name:
+          description: 'The name of this RequestType'
+          type: string
+        kvk:
+          description: 'The number under which the supplier is registered at the chamber of commerce'
+          type: string
+        logo:
+          description: 'The logo for this component'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+    Tax-read:
+      type: object
+      description: 'An entity representing an tax.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        name:
+          description: 'The name of this tax'
+          type: string
+        description:
+          description: 'An short description of this tax'
+          type: string
+        price:
+          description: 'The price of this tax'
+          type: string
+        priceCurrency:
+          description: |
+            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+            
+            @example EUR
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+            
+            @example 9
+          type: integer
+        offers:
+          description: 'The offers that use this tax'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-read'
+      required:
+        - name
+        - price
+        - percentage
+    Tax-write:
+      type: object
+      description: 'An entity representing an tax.'
+      required:
+        - name
+        - price
+        - percentage
+      properties:
+        name:
+          description: 'The name of this tax'
+          type: string
+        description:
+          description: 'An short description of this tax'
+          type: string
+        price:
+          description: 'The price of this tax'
+          type: string
+        priceCurrency:
+          description: |
+            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+            
+            @example EUR
+          externalDocs:
+            url: 'http://schema.org/priceCurrency'
+          type: string
+        percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+            
+            @example 9
+          type: integer
+        offers:
+          description: 'The offers that use this tax'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer-write'
+    'Tax:jsonld-read':
+      type: object
+      description: 'An entity representing an tax.'
       properties:
         '@context':
           readOnly: true
@@ -5004,37 +5599,49 @@ components:
           type: string
         id:
           readOnly: true
-          description: 'The Uuid identifier of this supplier'
+          description: 'The UUID identifier of this object'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        sourceOrganization:
-          description: 'The RSIN of the organization that owns this process'
-          type: string
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this tax'
+          type: string
+        description:
+          description: 'An short description of this tax'
+          type: string
+        price:
+          description: 'The price of this tax'
+          type: string
+        priceCurrency:
+          description: |
+            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+            
+            @example EUR
           externalDocs:
-            url: 'http://schema.org/name'
+            url: 'http://schema.org/priceCurrency'
           type: string
-        kvk:
-          description: 'The number under which the supplier is registered at the chamber of commerce'
-          type: string
-        logo:
-          description: 'The logo for this component'
-          externalDocs:
-            url: 'https://schema.org/logo'
-          type: string
+        percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+            
+            @example 9
+          type: integer
+        offers:
+          description: 'The offers that use this tax'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-read'
       required:
-        - sourceOrganization
         - name
-        - kvk
-    'Supplier:jsonld-write':
+        - price
+        - percentage
+    'Tax:jsonld-write':
       type: object
-      description: 'An entity representing a supplier of products'
+      description: 'An entity representing an tax.'
       required:
-        - sourceOrganization
         - name
-        - kvk
+        - price
+        - percentage
       properties:
         '@context':
           readOnly: true
@@ -5045,59 +5652,466 @@ components:
         '@type':
           readOnly: true
           type: string
-        sourceOrganization:
-          description: 'The RSIN of the organization that owns this process'
-          type: string
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this tax'
+          type: string
+        description:
+          description: 'An short description of this tax'
+          type: string
+        price:
+          description: 'The price of this tax'
+          type: string
+        priceCurrency:
+          description: |
+            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+            
+            @example EUR
           externalDocs:
-            url: 'http://schema.org/name'
+            url: 'http://schema.org/priceCurrency'
           type: string
-        kvk:
-          description: 'The number under which the supplier is registered at the chamber of commerce'
-          type: string
-        logo:
-          description: 'The logo for this component'
-          externalDocs:
-            url: 'https://schema.org/logo'
-          type: string
+        percentage:
+          description: |
+            The tax percentage for this offer as an integer e.g. 9% makes 9
+            
+            @example 9
+          type: integer
+        offers:
+          description: 'The offers that use this tax'
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer:jsonld-write'
+definitions:
+  Catalogue-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        example: 'My Catalogue'
+        maxLength: 255
+      description:
+        example: 'This is the best catalogue ever'
+        maxLength: 2550
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      groups: []
+      products: []
+    required:
+      - name
+      - sourceOrganization
+  Catalogue-write:
+    properties:
+      name:
+        example: 'My Catalogue'
+        maxLength: 255
+      description:
+        example: 'This is the best catalogue ever'
+        maxLength: 2550
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+    required:
+      - name
+      - sourceOrganization
+  CustomerType-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        example: 'My CustomerType'
+        maxLength: 255
+      description:
+        example: 'this is the best customertype ever'
+        maxLength: 2550
+      offers: []
+    required:
+      - name
+      - description
+  CustomerType-write:
+    properties:
+      name:
+        example: 'My CustomerType'
+        maxLength: 255
+      description:
+        example: 'this is the best customertype ever'
+        maxLength: 2550
+      offers: []
+    required:
+      - name
+      - description
+  Group-read:
+    properties:
+      id:
+        format: uuid
+      name:
+        example: 'My Group'
+        maxLength: 255
+      description:
+        example: 'This is the best group ever'
+        maxLength: 2550
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      products: []
+      catalogue: []
+    required:
+      - name
+      - sourceOrganization
+  Group-write:
+    properties:
+      name:
+        example: 'My Group'
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      products: []
+      catalogue: []
+    required:
+      - name
+      - sourceOrganization
+  Offer-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        example: 'my offer'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      price: []
+      priceCurrency: []
+      offeredBy:
+        example: '(http://example.org/example/1)'
+        format: url
+        maxLength: 255
+      availabilityEnds:
+        example: '20191231'
+      availabilityStarts:
+        example: '20190101'
+      product: []
+      taxes: []
+      eligibleCustomerTypes: []
+    required:
+      - name
+      - price
+      - offeredBy
+      - availabilityEnds
+      - availabilityStarts
+      - product
+  Offer-write:
+    properties:
+      name:
+        example: 'my offer'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      price: []
+      priceCurrency: []
+      offeredBy:
+        example: '(http://example.org/example/1)'
+        format: url
+        maxLength: 255
+      availabilityEnds:
+        example: '20191231'
+      availabilityStarts:
+        example: '20190101'
+      product: []
+      taxes: []
+      eligibleCustomerTypes: []
+    required:
+      - name
+      - price
+      - offeredBy
+      - availabilityEnds
+      - availabilityStarts
+      - product
+  Product-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      sku:
+        example: 6666-2019
+      name:
+        example: 'My product'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+      movie:
+        example: 'https://www.youtube.com/embed/RkBZYoMnx5w'
+        format: url
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      price: []
+      priceCurrency:
+        example: |
+          EUR
+           @ApiProperty(
+              attributes={
+                  "swagger_context"={
+                      "iri"="https://schema.org/priceCurrency",
+                  	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                      "type"="string",
+                      "example"="EUR",
+                      "default"="EUR",
+                      "maxLength"="3",
+                      "minLength"="3"
+                  },
+                  "openapi_context"={
+                       "example"="EUR"
+                   }
+              }
+          )
+      taxPercentage: []
+      type:
+        example: simple
+      calendar:
+        example: 'http://example.org/calendar/calendar'
+        format: url
+        maxLength: 255
+      requiresAppointment:
+        example: 'false'
+      documents: []
+      images: []
+      externalDocs: []
+      groups: []
+      variations: []
+      groupedProducts: []
+      catalogue: []
+      offers: []
+    required:
+      - name
+      - sourceOrganization
+      - price
+      - requiresAppointment
+      - catalogue
+  Product-write:
+    properties:
+      sku:
+        example: 6666-2019
+      name:
+        example: 'My product'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+      movie:
+        example: 'https://www.youtube.com/embed/RkBZYoMnx5w'
+        format: url
+        maxLength: 255
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      price: []
+      priceCurrency:
+        example: |
+          EUR
+           @ApiProperty(
+              attributes={
+                  "swagger_context"={
+                      "iri"="https://schema.org/priceCurrency",
+                  	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
+                      "type"="string",
+                      "example"="EUR",
+                      "default"="EUR",
+                      "maxLength"="3",
+                      "minLength"="3"
+                  },
+                  "openapi_context"={
+                       "example"="EUR"
+                   }
+              }
+          )
+      taxPercentage: []
+      type:
+        example: simple
+      calendar:
+        example: 'http://example.org/calendar/calendar'
+        format: url
+        maxLength: 255
+      requiresAppointment:
+        example: 'false'
+      groups: []
+      parent: []
+      sets: []
+      catalogue: []
+      offers: []
+    required:
+      - name
+      - sourceOrganization
+      - price
+      - requiresAppointment
+      - catalogue
+  Supplier-read:
+    properties:
+      id:
+        format: uuid
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        example: 'My RequestType'
+        maxLength: 255
+      kvk:
+        example: '30280353'
+        maxLength: 255
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+    required:
+      - sourceOrganization
+      - name
+      - kvk
+  Supplier-write:
+    properties:
+      sourceOrganization:
+        example: '002851234'
+        maxLength: 11
+        minLength: 8
+      name:
+        example: 'My RequestType'
+        maxLength: 255
+      kvk:
+        example: '30280353'
+        maxLength: 255
+      logo:
+        example: 'https://www.my-organization.com/logo.png'
+        format: url
+        maxLength: 255
+    required:
+      - sourceOrganization
+      - name
+      - kvk
+  Tax-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        example: 'my offer'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      price:
+        example: '50.00'
+      priceCurrency: []
+      percentage: []
+      offers: []
+    required:
+      - name
+      - price
+  Tax-write:
+    properties:
+      name:
+        example: 'my offer'
+        maxLength: 255
+      description:
+        example: 'This is the best product ever'
+        maxLength: 2550
+      price:
+        example: '50.00'
+      priceCurrency: []
+      percentage: []
+      offers: []
+    required:
+      - name
+      - price
 tags:
   -
     name: Catalogue
     description: |
-      An entity representing a product catalogue
+      An entity representing a product catalogue.
       
       This entity represents a product catalogue that contains all products that can be ordered in a single point.
   -
     name: CustomerType
     description: |
-      An entity representing a type of customer
+      An entity representing a type of customer.
       
       This entity represents a type of customer that can order offers in the OrderRegistratieComponent. This entity is linked from offer with the variable eligibleCustomerType.
   -
     name: Group
     description: |
-      An entity representing a product group
+      An entity representing a product group.
       
       This entity represents a product group to differ between various product types.
   -
     name: Offer
     description: |
-      An entity representing an offer
+      An entity representing an offer.
       
       This entity represents an offer that bridges products to the OrderRegistratieComponent to be able to change prices without invalidating past orders.
   -
     name: Product
     description: |
-      An entity representing a product
+      An entity representing a product.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
     name: Supplier
     description: |
-      An entity representing a supplier of products
+      An entity representing a supplier of products.
       
       This entity represents a supplier that delivers products to the seller. For example: if we are a municipality we sell passports to our inhabitants, but these passports are made by the ministry of internal affairs.
+  -
+    name: Tax
+    description: |
+      An entity representing an tax.
+      
+      This entity represents an offer that bridges products to the OrderRegistratieComponent to be able to change prices without invalidating past orders.
+securityDefinitions:
+  JWT-Oauth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
+    flow: implicit
+    scopes:
+      read: 'read right to the Tax resource'
+      write: 'write right to the Tax resource'
+  JWT-Token:
+    type: apiKey
+    in: header
+    name: Authorization
+    scopes:
+      read: 'read right to the Tax resource'
+      write: 'write right to the Tax resource'
 host: irc.zaakonline.nl
 servers:
   -
