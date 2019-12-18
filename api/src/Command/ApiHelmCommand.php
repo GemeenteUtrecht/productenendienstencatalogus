@@ -57,8 +57,19 @@ class ApiHelmCommand extends Command
 
         $values = $this->twig->render('helm/Values.yaml.twig');
         $chart = $this->twig->render('helm/Chart.yaml.twig');
+        
 
-        if (!empty($location = $input->getOption('location')) && \is_string($location)) {
+        if (!empty($location = $input->getOption('location')) && \is_string($location)) {        	
+        	
+        	// Check if the directory exists
+        	if (!file_exists($location)) {
+        		mkdir($location, 0777);
+        		echo "The directory $location was successfully created.";
+        		exit;
+        	} else {
+        		echo "The directory $location exists.";
+        	}
+        	
             file_put_contents($location.'/values.yaml', $values);
             file_put_contents($location.'/Chart.yaml', $chart);
             $io->success(sprintf('Data written to %s (specification version %s).', $location, $version));

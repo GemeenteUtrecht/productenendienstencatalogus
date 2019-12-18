@@ -10,7 +10,17 @@ settings:
   version: {{ app_version }}
   description: '{{ app_description }}'
   repro: '{{ app_repro }}'
-  domain: {{ app_domain }}
+  domain: {{ app_domain }}  
+  domains:
+{% for domain in app_domains %}
+    - {{ domain }}
+{% endfor %}
+  organisationName: {{ organization_name }}
+  email: {{ organization_email }}
+  country: {{ organization_country }}
+  state: {{ organization_state }}
+  locality: {{ organization_locality }}
+  unit: {{ organization_unit }}  
   demo: {{ app_demo }}
   env: {{ app_env }}
   debug: {{ app_debug }}
