@@ -34,7 +34,6 @@ class CustomerType
 {
     /**
      * @var UuidInterface The UUID identifier of this object
-     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
@@ -48,7 +47,6 @@ class CustomerType
 
     /**
      * @var string The name of this CustomerType
-     *
      * @example My CustomerType
      *
      * @Groups({"read","write"})
@@ -62,7 +60,6 @@ class CustomerType
 
     /**
      * @var string The description for this CustomerType
-     *
      * @example this is the best customertype ever
      *
      * @Groups({"read","write"})

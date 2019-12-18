@@ -32,7 +32,6 @@ class Tax
 {
     /**
      * @var UuidInterface The UUID identifier of this object
-     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -46,7 +45,6 @@ class Tax
 
     /**
      * @var string The name of this tax
-     *
      * @example my offer
      *
      * @ORM\Column(type="string", length=255)
@@ -60,7 +58,6 @@ class Tax
 
     /**
      * @var string An short description of this tax
-     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -73,7 +70,6 @@ class Tax
 
     /**
      * @var string The price of this tax
-     *
      * @example 50.00
      *
      * @Groups({"read","write"})
@@ -84,9 +80,8 @@ class Tax
     private $price;
 
     /**
-     *  @var string The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-     *
-     *  @example EUR
+     * @var string The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     * @example EUR
      *
      * @Assert\Currency
      * @Groups({"read","write"})
@@ -95,9 +90,8 @@ class Tax
     private $priceCurrency = 'EUR';
 
     /**
-     *  @var int The tax percentage for this offer as an integer e.g. 9% makes 9
-     *
-     *  @example 9
+     * @var int The tax percentage for this offer as an integer e.g. 9% makes 9
+     * @example 9
      *
      * @Assert\NotBlank
      * @Assert\PositiveOrZero
