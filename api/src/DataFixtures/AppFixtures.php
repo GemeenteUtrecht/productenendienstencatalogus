@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use Ramsey\Uuid\Uuid;
+
 use App\Entity\Catalogue;
 use App\Entity\Group;
 use App\Entity\Product;
