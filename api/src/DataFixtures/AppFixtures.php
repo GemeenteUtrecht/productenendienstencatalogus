@@ -198,9 +198,9 @@ class AppFixtures extends Fixture
         $trouwen->setSourceOrganization('002220647');
         $trouwen->setDescription('Trouwen');
         $trouwen->setType('set');
-        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        	$trouwen->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        //	$trouwen->addGroup($group);
+        //}
         $trouwen->setCatalogue($utrecht);
         $trouwen->setPrice('627.00');
         $trouwen->setPriceCurrency('EUR');
@@ -215,9 +215,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Eenvoudig Trouwen');
         $product->setType('set');
-        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('163.00');
         $product->setPriceCurrency('EUR');
@@ -233,9 +233,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Gratis Trouwen');
         $product->setType('set');
-        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -251,9 +251,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Als Buitengewoon Ambtenaar van de Burgerlijke Stand geef ik, in overleg met het bruidspaar, invulling aan de huwelijksceremonie.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -270,9 +270,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Elkaar het Ja-woord geven, de officiële ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -289,9 +289,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Ik ben Rene Gulje, in 1949 in Amsterdam geboren. Ik studeerde Nederlands aan de UVA en journalistiek aan de HU.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -308,9 +308,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Uw trouwambtenaar wordt toegewezen, over enkele dagen krijgt u bericht van uw toegewezen trouwambtenaar!');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -327,9 +327,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beëdigen');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('150.00');
         $product->setPriceCurrency('EUR');
@@ -349,9 +349,9 @@ class AppFixtures extends Fixture
  De ruimte is eenvoudig en toch heel intiem.
  Het licht is in te stellen op een kleur die jullie graag willen.');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -368,9 +368,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -387,9 +387,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -406,9 +406,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Vrije locatie');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -424,9 +424,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Een mooi in leer gebonden herindering aan uw huwelijk');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('30.20');
         $product->setPriceCurrency('EUR');
