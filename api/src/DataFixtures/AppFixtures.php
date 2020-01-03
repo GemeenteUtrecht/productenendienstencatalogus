@@ -57,33 +57,33 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
     	// Catalogi
-        $catalogue = new Catalogue();
-        $catalogue->setName('Vereniging Nederlandse Gemeenten');
-        $catalogue->setSourceOrganization('0000');
-        $manager->persist($catalogue);
+        $vng = new Catalogue();
+        $vng->setName('Vereniging Nederlandse Gemeenten');
+        $vng->setSourceOrganization('0000');
+        $manager->persist($vng);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($vng);
         
-        $catalogue = new Catalogue();
-        $catalogue->setName('Gemeente \'s-Hertogenbosch');
-        $catalogue->setSourceOrganization('001709124');
-        $manager->persist($catalogue);
+        $denbosch= new Catalogue();
+        $denbosch->setName('Gemeente \'s-Hertogenbosch');
+        $denbosch->setSourceOrganization('001709124');
+        $manager->persist($denbosch);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($denbosch);
         
-        $catalogue = new Catalogue();
-        $catalogue->setName('Gemeente Eindhoven');
-        $catalogue->setSourceOrganization('001902763');
-        $manager->persist($catalogue);
+        $eindhoven = new Catalogue();
+        $eindhoven->setName('Gemeente Eindhoven');
+        $eindhoven->setSourceOrganization('001902763');
+        $manager->persist($eindhoven);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($eindhoven);
         
-        $catalogue = new Catalogue();
-        $catalogue->setName('Gemeente Utrecht');
-        $catalogue->setSourceOrganization('002220647');        
-        $manager->persist($catalogue);
+        $utrecht = new Catalogue();
+        $utrecht->setName('Gemeente Utrecht');
+        $utrecht->setSourceOrganization('002220647');        
+        $manager->persist($utrecht);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($utrecht);
 
         // Dan wat productgroepen        
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
