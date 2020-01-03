@@ -185,26 +185,26 @@ class AppFixtures extends Fixture
         //$manager->persist($trouwenUtrecht);
         
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc');
         $trouwenAmbtenarenUtrecht= new Group();
         $trouwenAmbtenarenUtrecht->setName('Trouwambtenaren');
         $trouwenAmbtenarenUtrecht->setDescription('Door wie wilt u worden getrouwd?');
         $trouwenAmbtenarenUtrecht->setSourceOrganization('002220647');
         $trouwenAmbtenarenUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenAmbtenarenUtrecht);
-        //$trouwenAmbtenarenUtrecht->setId($id);
-        //$manager->persist($trouwenAmbtenarenUtrecht);
+        $trouwenAmbtenarenUtrecht->setId($id);
+        $manager->persist($trouwenAmbtenarenUtrecht);
         
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('170788e7-b238-4c28-8efc-97bdada02c2e');
         $trouwenLocatiesUtrecht= new Group();
         $trouwenLocatiesUtrecht->setName('Trouwlocaties');
         $trouwenLocatiesUtrecht->setDescription('Waar wilt u trouwen?');
         $trouwenLocatiesUtrecht->setSourceOrganization('002220647');
         $trouwenLocatiesUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenLocatiesUtrecht);
-        //$trouwenLocatiesUtrecht->setId($id);
-        //$manager->persist($trouwenLocatiesUtrecht);
+        $trouwenLocatiesUtrecht->setId($id);
+        $manager->persist($trouwenLocatiesUtrecht);
         
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
         $trouwenCeremoniersUtrecht= new Group();
