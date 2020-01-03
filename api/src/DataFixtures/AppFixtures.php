@@ -6,6 +6,7 @@ use App\Entity\Catalogue;
 use App\Entity\Group;
 use App\Entity\Product;
 use App\Entity\Supplier;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -141,13 +142,80 @@ class AppFixtures extends Fixture
         $eindhoven = $this->loadCatalogue('Gemeente Eindhoven', '001902763', null, null, $manager);
         $utrecht = $this->loadCatalogue('Gemeente Utrecht', '002220647', null, null, $manager);
 
-        // Dan wat productgroepen
-        $this->loadGroup('Burgerzaken', '001709124', $denbosch, 'Producten en diensten binnen burgerzaken', null, $manager);
-        $this->loadGroup('Burgerzaken', '001902763', $eindhoven, 'Producten en diensten binnen burgerzaken', null, $manager);
-        $trouwproducten = $this->loadGroup('Trouwproducten', '002220647', $utrecht, 'Producten en diensten binnen het trouwproces', null, $manager);
-        $trouwAmbtenaren = $this->loadGroup('Trouwambtenaren', '002220647', $utrecht, 'Door wie wilt u worden getrouwd?', null, $manager);
-        $trouwLocaties = $this->loadGroup('Trouwlocaties', '002220647', $utrecht, 'Waar wilt u trouwen?', null, $manager);
-        $ceremonies = $this->loadGroup('Ceremonies', '0002220647', $utrecht, 'Verschillende ceremonies voor uw huwelijk / partnerschap', null, $manager);
+        // Dan wat productgroepen        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $burgerzakenDenBosh = new Group();
+        $burgerzakenDenBosh->setName('Burgerzaken');
+        $burgerzakenDenBosh->setDescription('Alle producten met betrekking tot burgerzaken');
+        $burgerzakenDenBosh->setSourceOrganization('001709124');
+        $burgerzakenDenBosh->setCatalogue($denbosch);
+        $manager->persist($burgerzakenDenBosh);
+        //$burgerzakenDenBosh->setId($id);
+        //$manager->persist($burgerzakenDenBosh);
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $burgerzakeEindhoven = new Group();
+        $burgerzakeEindhoven->setName('Burgerzaken');
+        $burgerzakeEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
+        $burgerzakeEindhoven->setSourceOrganization('002220647');
+        $burgerzakeEindhoven->setCatalogue($eindhoven);
+        $manager->persist($burgerzakeEindhoven);
+        //$burgerzakeEindhoven->setId($id);
+        //$manager->persist($burgerzakeEindhoven);        
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $burgerzakenUtrecht = new Group();
+        $burgerzakenUtrecht->setName('Burgerzaken');
+        $burgerzakenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
+        $burgerzakenUtrecht->setSourceOrganization('002220647');
+        $burgerzakenUtrecht->setCatalogue($utrecht);
+        $manager->persist($burgerzakenUtrecht);
+        //$burgerzakenUtrecht->setId($id);
+        //$manager->persist($burgerzakenUtrecht);
+        
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $trouwenUtrecht = new Group();
+        $trouwenUtrecht->setName('Trouwproducten');
+        $trouwenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
+        $trouwenUtrecht->setSourceOrganization('002220647');
+        $trouwenUtrecht->setCatalogue($utrecht);
+        $manager->persist($trouwenUtrecht);
+        //$trouwenUtrecht->setId($id);
+        //$manager->persist($trouwenUtrecht);
+        
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $trouwenAmbtenarenUtrecht= new Group();
+        $trouwenAmbtenarenUtrecht->setName('Trouwambtenaren');
+        $trouwenAmbtenarenUtrecht->setDescription('Door wie wilt u worden getrouwd?');
+        $trouwenAmbtenarenUtrecht->setSourceOrganization('002220647');
+        $trouwenAmbtenarenUtrecht->setCatalogue($utrecht);
+        $manager->persist($trouwenAmbtenarenUtrecht);
+        //$trouwenAmbtenarenUtrecht->setId($id);
+        //$manager->persist($trouwenAmbtenarenUtrecht);
+        
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $trouwenLocatiesUtrecht= new Group();
+        $trouwenLocatiesUtrecht->setName('Trouwlocaties');
+        $trouwenLocatiesUtrecht->setDescription('Waar wilt u trouwen?');
+        $trouwenLocatiesUtrecht->setSourceOrganization('002220647');
+        $trouwenLocatiesUtrecht->setCatalogue($utrecht);
+        $manager->persist($trouwenLocatiesUtrecht);
+        //$trouwenLocatiesUtrecht->setId($id);
+        //$manager->persist($trouwenLocatiesUtrecht);
+        
+        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $trouwenCeremoniersUtrecht= new Group();
+        $trouwenCeremoniersUtrecht->setName('Ceremonies');
+        $trouwenCeremoniersUtrecht->setDescription('Verschillende ceremonies voor uw huwelijk / partnerschap');
+        $trouwenCeremoniersUtrecht->setSourceOrganization('002220647');
+        $trouwenCeremoniersUtrecht->setCatalogue($utrecht);
+        $manager->persist($trouwenCeremoniersUtrecht);
+        //$trouwenCeremoniersUtrecht->setId($id);
+        //$manager->persist($trouwenCeremoniersUtrecht);
+        
 
         // Producten
         $trouwen = $this->loadProduct(
@@ -167,6 +235,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+        
         $eenvoudigtrouwen = $this->loadProduct(
             'Eenvoudig Trouwen',
             '002220647',
@@ -184,6 +253,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+        
         $gratistrouwen = $this->loadProduct(
             'Gratis Trouwen',
             '002220647',
@@ -201,6 +271,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+        
         $trouwambtenaar = $this->loadProduct(
             'Trouwambtenaar',
             '002220647',
@@ -222,6 +293,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+        
         $this->loadProduct(
             'Dhr Erik Hendrik',
             '123456789',
@@ -239,6 +311,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
+        
         $this->loadProduct(
             'Dhr Erik Hendrik',
             '123456789',
@@ -256,6 +329,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
+        
         $this->loadProduct(
             'Mvr Ike van den Pol',
             '123456789',
@@ -273,6 +347,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
+        
         $this->loadProduct(
             'Dhr. Rene Gulje',
             '123456789',
@@ -290,6 +365,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
+        
         $ambtenaar = $this->loadProduct(
             'Toegewezen Trouwamberbaar',
             '123456789',
@@ -324,6 +400,7 @@ class AppFixtures extends Fixture
             $trouwambtenaar,
             $manager
         );
+        
         $locatie = $this->loadProduct(
             'Locatie',
             '002220647',
@@ -345,6 +422,7 @@ class AppFixtures extends Fixture
             null,
             $manager
         );
+        
         $this->loadProduct(
             'Stadskantoor',
             '123456789',
@@ -365,6 +443,7 @@ class AppFixtures extends Fixture
             $locatie,
             $manager
         );
+        
         $this->loadProduct(
             'Stadhuis kleine zaal',
             '123456789',
@@ -382,6 +461,7 @@ class AppFixtures extends Fixture
             $locatie,
             $manager
         );
+        
         $this->loadProduct(
             'Stadhuis grote zaal',
             '123456789',
@@ -399,6 +479,7 @@ class AppFixtures extends Fixture
             $locatie,
             $manager
         );
+        
         $this->loadProduct(
             'Vrije locatie',
             '123456789',
@@ -416,6 +497,7 @@ class AppFixtures extends Fixture
             $locatie,
             $manager
         );
+        
         $this->loadProduct(
             'Trouwboekje',
             '002220647',
