@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
         $manager->flush();
         $manager->refresh($burgerzakenDenBosh);        
         
-        //$id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
+        $id = Uuid::fromString('d1cc2c8c-c87d-4bb1-b468-9546b4ce29a5');
         $burgerzakerEindhoven = new Group();
         $burgerzakerEindhoven->setName('Burgerzaken');
         $burgerzakerEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
         $burgerzakerEindhoven->setCatalogue($eindhoven);
         $manager->persist($burgerzakerEindhoven);
         // 
-        //$burgerzakerEindhoven->setId($id);
+        $burgerzakerEindhoven->setId($id);
         $manager->persist($burgerzakerEindhoven);
         $manager->flush();
         $manager->refresh($burgerzakerEindhoven);
@@ -134,7 +134,8 @@ class AppFixtures extends Fixture
         $trouwenUtrecht->setSourceOrganization('002220647');
         $trouwenUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenUtrecht);
-        //$trouwenUtrecht->setId($id);
+        //
+        $trouwenUtrecht->setId($id);
         $manager->persist($trouwenUtrecht);
         $manager->flush();
         $manager->refresh($trouwenUtrecht);
@@ -196,10 +197,12 @@ class AppFixtures extends Fixture
         $trouwenExtraUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenExtraUtrecht);
         //
-        $trouwenCeremoniersUtrecht->setId($id);
+        $trouwenExtraUtrecht->setId($id);
         $manager->persist($trouwenExtraUtrecht);
         $manager->flush();
         $manager->refresh($trouwenExtraUtrecht);
+        
+        $manager->clear();
         
         $trouwen = new Product();
         $trouwen->setName('Trouwen / Partnerschap');
@@ -223,8 +226,8 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Eenvoudig Trouwen');
         $product->setType('set');
+        $product->addGroup($trouwenCeremoniersUtrecht);
         //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        //	$product->addGroup($group);
         //}
         $product->setCatalogue($utrecht);
         $product->setPrice('163.00');
