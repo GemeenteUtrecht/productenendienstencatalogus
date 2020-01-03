@@ -32,21 +32,7 @@ class Supplier
 {
     /**
      * @var UuidInterface The Uuid identifier of this supplier
-     *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         },
-     *         "openapi_context"={
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -60,7 +46,6 @@ class Supplier
 
     /**
      * @var string The name of this RequestType
-     *
      * @example My RequestType
      *
      * @Assert\NotNull
@@ -74,7 +59,6 @@ class Supplier
 
     /**
      * @var string The number under which the supplier is registered at the chamber of commerce
-     *
      * @example 30280353
      *
      * @Assert\NotNull
@@ -88,7 +72,6 @@ class Supplier
 
     /**
      * @var string The logo for this component
-     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
