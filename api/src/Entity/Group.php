@@ -13,6 +13,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a product group.
@@ -36,18 +37,7 @@ class Group
 {
     /**
      * @var UuidInterface The Uuid identifier of this group
-     *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -60,21 +50,7 @@ class Group
 
     /**
      * @var string The name of this product group
-     *
      * @example My Group
-     *
-     * @ApiProperty(
-     * 	   iri="http://schema.org/name",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The name of this product group",
-     *             "type"="string",
-     *             "example"="My Group",
-     *             "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
      *
      * @Assert\NotNull
      * @Assert\Length(
@@ -87,20 +63,7 @@ class Group
 
     /**
      * @var string An short description of this product group
-     *
      * @example This is the best group ever
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/description",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "An short description of this product group",
-     *             "type"="string",
-     *             "example"="This is the best group ever",
-     *             "maxLength"="2550"
-     *         }
-     *     }
-     * )
      *
      * @Assert\Length(
      *      max = 2550
@@ -112,21 +75,7 @@ class Group
 
     /**
      * @var string The logo for this component
-     *
      * @example https://www.my-organization.com/logo.png
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/logo",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The logo for this component",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="https://www.my-organization.com/logo.png",
-     *             "maxLength"=255
-     *         }
-     *     }
-     * )
      *
      * @Assert\Url
      * @Assert\Length(
@@ -148,20 +97,7 @@ class Group
 
     /**
      * @var string The RSIN of the organization that owns this group
-     *
      * @example 002851234
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organization that owns this group",
-     *             "type"="string",
-     *             "example"="002851234",
-     *              "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
      *
      * @Assert\NotNull
      * @Assert\Length(
@@ -189,10 +125,17 @@ class Group
         $this->products = new ArrayCollection();
         $this->services = new ArrayCollection();
     }
-
-    public function getId()
+    
+    public function getId(): Uuid
     {
-        return $this->id;
+    	return $this->id;
+    }
+    
+    public function setId(Uuid $id): self
+    {
+    	$this->id = $id;
+    	
+    	return $this;
     }
 
     public function getName(): ?string

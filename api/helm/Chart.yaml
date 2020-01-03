@@ -3,5 +3,5 @@ appVersion: V.0.1
 description: '&#039;This component provides a products and services catalogue that can be used by a order component in order to provide the products in the orders with better details. The design considerations are given in [DESIGN.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN.md) and [DESIGN-PDC.md](https://github.com/ConductionNL/productenendienstencatalogus/blob/master/DESIGN-PDC.md)&#039;'
 name: pdc
 version: 0.1.0
-home: https://common-ground.dev
-icon: https://common-ground.dev/logo-250x250.png
+home: pc.zaakonline.nl
+icon: pc.zaakonline.nl

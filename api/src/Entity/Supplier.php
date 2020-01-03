@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a supplier of products.
@@ -32,21 +33,7 @@ class Supplier
 {
     /**
      * @var UuidInterface The Uuid identifier of this supplier
-     *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         },
-     *         "openapi_context"={
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -60,7 +47,6 @@ class Supplier
 
     /**
      * @var string The name of this RequestType
-     *
      * @example My RequestType
      *
      * @Assert\NotNull
@@ -74,7 +60,6 @@ class Supplier
 
     /**
      * @var string The number under which the supplier is registered at the chamber of commerce
-     *
      * @example 30280353
      *
      * @Assert\NotNull
@@ -88,7 +73,6 @@ class Supplier
 
     /**
      * @var string The logo for this component
-     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -98,11 +82,18 @@ class Supplier
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logo;
-
-    public function getId()
+    private $logo;    
+    
+    public function getId(): Uuid
     {
-        return $this->id;
+    	return $this->id;
+    }
+    
+    public function setId(Uuid $id): self
+    {
+    	$this->id = $id;
+    	
+    	return $this;
     }
 
     public function getSourceOrganization(): ?string

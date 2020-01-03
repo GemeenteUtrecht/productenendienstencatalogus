@@ -13,6 +13,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a product catalogue.
@@ -35,7 +36,6 @@ class Catalogue
 {
     /**
      * @var UuidInterface The UUID identifier of this object
-     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
@@ -49,21 +49,7 @@ class Catalogue
 
     /**
      * @var string The name of this Catalogue
-     *
      * @example My Catalogue
-     *
-     * @ApiProperty(
-     * 	   iri="http://schema.org/name",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The name of this Catalogue",
-     *             "type"="string",
-     *             "example"="My Catalogue",
-     *             "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
      *
      * @Assert\NotNull
      * @Assert\Length(
@@ -76,20 +62,7 @@ class Catalogue
 
     /**
      * @var string An short description of this Catalogue
-     *
      * @example This is the best catalogue ever
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/description",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "An short description of this Catalogue",
-     *             "type"="string",
-     *             "example"="This is the best catalogue ever",
-     *             "maxLength"="2550"
-     *         }
-     *     }
-     * )
      *
      * @Assert\Length(
      *      max = 2550
@@ -101,21 +74,7 @@ class Catalogue
 
     /**
      * @var string The logo for this component
-     *
      * @example https://www.my-organization.com/logo.png
-     *
-     * @ApiProperty(
-     * 	   iri="https://schema.org/logo",
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The logo for this component",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="https://www.my-organization.com/logo.png",
-     *             "maxLength"=255
-     *         }
-     *     }
-     * )
      *
      * @Assert\Url
      * @Assert\Length(
@@ -128,20 +87,7 @@ class Catalogue
 
     /**
      * @var string The RSIN of the organization that provides this catalogue
-     *
      * @example 002851234
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organization that provides this catalogue",
-     *             "type"="string",
-     *             "example"="002851234",
-     *              "maxLength"="255",
-     *             "required" = true
-     *         }
-     *     }
-     * )
      *
      * @Assert\NotNull
      * @Assert\Length(
@@ -177,10 +123,17 @@ class Catalogue
         $this->groups = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
-
-    public function getId()
+    
+    public function getId(): Uuid
     {
-        return $this->id;
+    	return $this->id;
+    }
+    
+    public function setId(Uuid $id): self
+    {
+    	$this->id = $id;
+    	
+    	return $this;
     }
 
     public function getName(): ?string
