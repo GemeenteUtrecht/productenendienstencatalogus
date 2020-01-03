@@ -86,44 +86,48 @@ class AppFixtures extends Fixture
         $manager->refresh($utrecht);
 
         // Dan wat productgroepen        
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('5a6a1219-1e2d-4dc5-aa03-82ffe1ff6249');
         $burgerzakenDenBosh = new Group();
         $burgerzakenDenBosh->setName('Burgerzaken');
         $burgerzakenDenBosh->setDescription('Alle producten met betrekking tot burgerzaken');
         $burgerzakenDenBosh->setSourceOrganization('001709124');
         $burgerzakenDenBosh->setCatalogue($denbosch);
         $manager->persist($burgerzakenDenBosh);
-        //$burgerzakenDenBosh->setId($id);
+        //
+        $burgerzakenDenBosh->setId($id);
         $manager->persist($burgerzakenDenBosh);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($burgerzakenDenBosh);        
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
-        $burgerzakeEindhoven = new Group();
-        $burgerzakeEindhoven->setName('Burgerzaken');
-        $burgerzakeEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
-        $burgerzakeEindhoven->setSourceOrganization('002220647');
-        $burgerzakeEindhoven->setCatalogue($eindhoven);
-        $manager->persist($burgerzakeEindhoven);
-        //$burgerzakeEindhoven->setId($id);
-        $manager->persist($burgerzakeEindhoven);
+        //$id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
+        $burgerzakerEindhoven = new Group();
+        $burgerzakerEindhoven->setName('Burgerzaken');
+        $burgerzakerEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
+        $burgerzakerEindhoven->setSourceOrganization('1234567');
+        $burgerzakerEindhoven->setCatalogue($eindhoven);
+        $manager->persist($burgerzakerEindhoven);
+        // 
+        //$burgerzakerEindhoven->setId($id);
+        $manager->persist($burgerzakerEindhoven);
         $manager->flush();
-        $manager->refresh($burgerzakeEindhoven);
+        $manager->refresh($burgerzakerEindhoven);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        
+        $id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
         $burgerzakenUtrecht = new Group();
         $burgerzakenUtrecht->setName('Burgerzaken');
         $burgerzakenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
         $burgerzakenUtrecht->setSourceOrganization('002220647');
         $burgerzakenUtrecht->setCatalogue($utrecht);
         $manager->persist($burgerzakenUtrecht);
-        //$burgerzakenUtrecht->setId($id);
+        //
+        $burgerzakenUtrecht->setId($id);
         $manager->persist($burgerzakenUtrecht);
         $manager->flush();
         $manager->refresh($burgerzakenUtrecht);
         
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('0c1f993d-f9e2-46c5-8d83-0b6dfb702069');
         $trouwenUtrecht = new Group();
         $trouwenUtrecht->setName('Trouwproducten');
         $trouwenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
@@ -147,6 +151,7 @@ class AppFixtures extends Fixture
         $trouwenAmbtenarenUtrecht->setSourceOrganization('002220647');
         $trouwenAmbtenarenUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenAmbtenarenUtrecht);
+        
         $trouwenAmbtenarenUtrecht->setId($id);
         $manager->persist($trouwenAmbtenarenUtrecht);
         $manager->flush();
@@ -164,31 +169,34 @@ class AppFixtures extends Fixture
         $trouwenLocatiesUtrecht->setSourceOrganization('002220647');
         $trouwenLocatiesUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenLocatiesUtrecht);
+        
         $trouwenLocatiesUtrecht->setId($id);
         $manager->persist($trouwenLocatiesUtrecht);
         $manager->flush();
         $manager->refresh($trouwenLocatiesUtrecht);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('1cad775c-c2d0-48af-858f-a12029af24b3');
         $trouwenCeremoniersUtrecht= new Group();
         $trouwenCeremoniersUtrecht->setName('Ceremonies');
         $trouwenCeremoniersUtrecht->setDescription('Verschillende ceremonies voor uw huwelijk / partnerschap');
         $trouwenCeremoniersUtrecht->setSourceOrganization('002220647');
         $trouwenCeremoniersUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenCeremoniersUtrecht);
-        //$trouwenCeremoniersUtrecht->setId($id);
+        //
+        $trouwenCeremoniersUtrecht->setId($id);
         $manager->persist($trouwenCeremoniersUtrecht);
         $manager->flush();
         $manager->refresh($trouwenLocatiesUtrecht);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('f8298a12-91eb-46d0-b8a9-e7095f81be6f');
         $trouwenExtraUtrecht= new Group();
         $trouwenExtraUtrecht->setName('Extra producten');
         $trouwenExtraUtrecht->setDescription('Extra producten voor bij uw huwelijk');
         $trouwenExtraUtrecht->setSourceOrganization('002220647');
         $trouwenExtraUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenExtraUtrecht);
-        //$trouwenCeremoniersUtrecht->setId($id);
+        //
+        $trouwenCeremoniersUtrecht->setId($id);
         $manager->persist($trouwenExtraUtrecht);
         $manager->flush();
         $manager->refresh($trouwenExtraUtrecht);
