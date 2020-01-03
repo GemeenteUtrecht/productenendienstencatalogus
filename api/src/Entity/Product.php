@@ -38,7 +38,6 @@ class Product
 {
     /**
      * @var UuidInterface The UUID identifier of this object
-     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -52,7 +51,6 @@ class Product
 
     /**
      * @var string The human readable reference for this product, also known as Stock Keeping Unit (SKU)
-     *
      * @example 6666-2019
      *
      * @Groups({"read","write"})
@@ -71,7 +69,6 @@ class Product
 
     /**
      * @var string The name of this Product
-     *
      * @example My product
      *
      * @Assert\NotNull
@@ -85,7 +82,6 @@ class Product
 
     /**
      * @var string An short description of this Product
-     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -98,7 +94,6 @@ class Product
 
     /**
      * @var string The logo of this product
-     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -112,7 +107,6 @@ class Product
 
     /**
      * @var string The movie for this product
-     *
      * @example https://www.youtube.com/embed/RkBZYoMnx5w
      *
      * @Assert\Url
@@ -126,23 +120,7 @@ class Product
 
     /**
      * @var string The RSIN of the organization that owns this product
-     *
      * @example 002851234
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The RSIN of the organization that owns this product",
-     *             "type"="string",
-     *             "example"="002851234",
-     *              "maxLength"="255",
-     *             "required" = true
-     *         },
-     *         "openapi_context"={
-     *              "example"="002851234"
-     *          }
-     *     }
-     * )
      *
      * @Assert\NotNull
      * @Assert\Length(
@@ -167,26 +145,9 @@ class Product
 
     /**
      *  @var string The price of this product
+     *  @example 50.00
      *
      *  @ORM\Column(type="decimal", precision=8, scale=2)
-     *
-     *  @example 50.00
-     *  @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *             "iri"="https://schema.org/price",
-     *         	   "description" = "The price of this product",
-     *             "type"="string",
-     *             "example"="50.00",
-     *             "maxLength"="9",
-     *             "required" = true
-     *         },
-     *         "openapi_context"={
-     *              "example"="50.00"
-     *          }
-     *     }
-     * )
-     *
      * @Assert\NotNull
      * @Groups({"read","write"})
      */
@@ -194,50 +155,17 @@ class Product
 
     /**
      *  @var string The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     * @example EUR
      *
      * @ORM\Column(type="string")
-     *
-     * @example EUR
-     *  @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *             "iri"="https://schema.org/priceCurrency",
-     *         	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-     *             "type"="string",
-     *             "example"="EUR",
-     *             "default"="EUR",
-     *             "maxLength"="3",
-     *             "minLength"="3"
-     *         },
-     *         "openapi_context"={
-     *              "example"="EUR"
-     *          }
-     *     }
-     * )
-     *
      * @Assert\Currency
      * @Groups({"read","write"})
      */
     private $priceCurrency = 'EUR';
 
     /**
-     *  @var int The tax percentage for this product as an integer e.g. 9% makes 9
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The tax percentage for this product as an integer e.g. 9% makes 9",
-     *             "type"="integer",
-     *             "example"="9",
-     *             "maxLength"="3",
-     *             "minLength"="1",
-     *             "required" = true
-     *         },
-     *         "openapi_context"={
-     *              "example"=9
-     *          }
-     *     }
-     * )
+     * @var int The tax percentage for this product as an integer e.g. 9% makes 9
+     * @example 9
      *
      * @Assert\NotBlank
      * @Assert\PositiveOrZero
@@ -266,21 +194,9 @@ class Product
 
     /**
      * @var string The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**
-     *
      * @example simple
      *
      * @ORM\Column
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "type"="string",
-     *         	  "description" = "The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**",
-     *             "enum"={"simple", "set", "virtual","external","ticket","variable","subscription","person","location","service"},
-     *             "example"="simple",
-     *             "required"="true"
-     *         }
-     *     }
-     * )
      * @Assert\NotBlank
      * @Assert\Choice(
      *     choices = { "simple", "set", "virtual","external","ticket","variable","subscription","person","location","service" },
@@ -334,15 +250,8 @@ class Product
 
     /**
      * @var string The uri referring to the calendar of this product.
-     *
      * @example http://example.org/calendar/calendar
-     * @ApiProperty(
-     *     attributes={
-     *          "openapi_context"={
-     *              "example"="http://example.org/calendar/calendar"
-     *          }
-     *     }
-     * )
+     *
      * @Assert\Url
      * @Assert\Length(
      *     max = 255
@@ -354,15 +263,8 @@ class Product
 
     /**
      * @var bool If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
-     *
      * @example false
-     * @ApiProperty(
-     *     attributes={
-     *          "openapi_context"={
-     *              "example"= false
-     *          }
-     *     }
-     * )
+     *
      * @ORM\Column(type="boolean")
      * @Assert\NotNull
      * @Groups({"read", "write"})
