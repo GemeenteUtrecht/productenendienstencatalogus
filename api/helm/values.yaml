@@ -13,7 +13,9 @@ settings:
   domain: conduction.nl  
   domains:
     - conduction.nl
+    - zaakonline.nl
     - huwelijksplanner.online
+    - common-ground.dev
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
