@@ -154,6 +154,7 @@ class AppFixtures extends Fixture
         $manager->persist($burgerzakenDenBosh);
         //$burgerzakenDenBosh->setId($id);
         //$manager->persist($burgerzakenDenBosh);
+        $manager->flush();
         
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
         $burgerzakeEindhoven = new Group();
@@ -163,7 +164,8 @@ class AppFixtures extends Fixture
         $burgerzakeEindhoven->setCatalogue($eindhoven);
         $manager->persist($burgerzakeEindhoven);
         //$burgerzakeEindhoven->setId($id);
-        //$manager->persist($burgerzakeEindhoven);        
+        //$manager->persist($burgerzakeEindhoven);
+        $manager->flush();
         
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
         $burgerzakenUtrecht = new Group();
@@ -174,6 +176,7 @@ class AppFixtures extends Fixture
         $manager->persist($burgerzakenUtrecht);
         //$burgerzakenUtrecht->setId($id);
         //$manager->persist($burgerzakenUtrecht);
+        $manager->flush();
         
         
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
@@ -185,6 +188,7 @@ class AppFixtures extends Fixture
         $manager->persist($trouwenUtrecht);
         //$trouwenUtrecht->setId($id);
         //$manager->persist($trouwenUtrecht);
+        $manager->flush();
         
         
         $id = Uuid::fromString('7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc');
@@ -196,6 +200,7 @@ class AppFixtures extends Fixture
         $manager->persist($trouwenAmbtenarenUtrecht);
         $trouwenAmbtenarenUtrecht->setId($id);
         $manager->persist($trouwenAmbtenarenUtrecht);
+        $manager->flush();
         
         
         $id = Uuid::fromString('170788e7-b238-4c28-8efc-97bdada02c2e');
@@ -207,6 +212,7 @@ class AppFixtures extends Fixture
         $manager->persist($trouwenLocatiesUtrecht);
         $trouwenLocatiesUtrecht->setId($id);
         $manager->persist($trouwenLocatiesUtrecht);
+        $manager->flush();
         
         // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
         $trouwenCeremoniersUtrecht= new Group();
