@@ -497,7 +497,7 @@ class AppFixtures extends Fixture
         $product->setId($id);
         $manager->persist($product);
         $manager->flush();
-        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));v
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
         foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
         	$product->addGroup($group);
         }
