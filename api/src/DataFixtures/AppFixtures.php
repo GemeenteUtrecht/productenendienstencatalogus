@@ -86,51 +86,56 @@ class AppFixtures extends Fixture
         $manager->refresh($utrecht);
 
         // Dan wat productgroepen        
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('5a6a1219-1e2d-4dc5-aa03-82ffe1ff6249');
         $burgerzakenDenBosh = new Group();
         $burgerzakenDenBosh->setName('Burgerzaken');
         $burgerzakenDenBosh->setDescription('Alle producten met betrekking tot burgerzaken');
         $burgerzakenDenBosh->setSourceOrganization('001709124');
         $burgerzakenDenBosh->setCatalogue($denbosch);
         $manager->persist($burgerzakenDenBosh);
-        //$burgerzakenDenBosh->setId($id);
+        //
+        $burgerzakenDenBosh->setId($id);
         $manager->persist($burgerzakenDenBosh);
         $manager->flush();
-        $manager->refresh($burgerzakenDenBosh);
+        $manager->refresh($burgerzakenDenBosh);        
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
-        $burgerzakeEindhoven = new Group();
-        $burgerzakeEindhoven->setName('Burgerzaken');
-        $burgerzakeEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
-        $burgerzakeEindhoven->setSourceOrganization('002220647');
-        $burgerzakeEindhoven->setCatalogue($eindhoven);
-        $manager->persist($burgerzakeEindhoven);
-        //$burgerzakeEindhoven->setId($id);
-        $manager->persist($burgerzakeEindhoven);
+        $id = Uuid::fromString('d1cc2c8c-c87d-4bb1-b468-9546b4ce29a5');
+        $burgerzakerEindhoven = new Group();
+        $burgerzakerEindhoven->setName('Burgerzaken');
+        $burgerzakerEindhoven->setDescription('Alle producten met betrekking tot burgerzaken');
+        $burgerzakerEindhoven->setSourceOrganization('1234567');
+        $burgerzakerEindhoven->setCatalogue($eindhoven);
+        $manager->persist($burgerzakerEindhoven);
+        // 
+        $burgerzakerEindhoven->setId($id);
+        $manager->persist($burgerzakerEindhoven);
         $manager->flush();
-        $manager->refresh($burgerzakeEindhoven);
+        $manager->refresh($burgerzakerEindhoven);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        
+        $id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
         $burgerzakenUtrecht = new Group();
         $burgerzakenUtrecht->setName('Burgerzaken');
         $burgerzakenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
         $burgerzakenUtrecht->setSourceOrganization('002220647');
         $burgerzakenUtrecht->setCatalogue($utrecht);
         $manager->persist($burgerzakenUtrecht);
-        //$burgerzakenUtrecht->setId($id);
+        //
+        $burgerzakenUtrecht->setId($id);
         $manager->persist($burgerzakenUtrecht);
         $manager->flush();
         $manager->refresh($burgerzakenUtrecht);
         
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('0c1f993d-f9e2-46c5-8d83-0b6dfb702069');
         $trouwenUtrecht = new Group();
         $trouwenUtrecht->setName('Trouwproducten');
         $trouwenUtrecht->setDescription('Alle producten met betrekking tot burgerzaken');
         $trouwenUtrecht->setSourceOrganization('002220647');
         $trouwenUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenUtrecht);
-        //$trouwenUtrecht->setId($id);
+        //
+        $trouwenUtrecht->setId($id);
         $manager->persist($trouwenUtrecht);
         $manager->flush();
         $manager->refresh($trouwenUtrecht);
@@ -147,6 +152,7 @@ class AppFixtures extends Fixture
         $trouwenAmbtenarenUtrecht->setSourceOrganization('002220647');
         $trouwenAmbtenarenUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenAmbtenarenUtrecht);
+        
         $trouwenAmbtenarenUtrecht->setId($id);
         $manager->persist($trouwenAmbtenarenUtrecht);
         $manager->flush();
@@ -164,34 +170,46 @@ class AppFixtures extends Fixture
         $trouwenLocatiesUtrecht->setSourceOrganization('002220647');
         $trouwenLocatiesUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenLocatiesUtrecht);
+        
         $trouwenLocatiesUtrecht->setId($id);
         $manager->persist($trouwenLocatiesUtrecht);
         $manager->flush();
         $manager->refresh($trouwenLocatiesUtrecht);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('1cad775c-c2d0-48af-858f-a12029af24b3');
         $trouwenCeremoniersUtrecht= new Group();
         $trouwenCeremoniersUtrecht->setName('Ceremonies');
         $trouwenCeremoniersUtrecht->setDescription('Verschillende ceremonies voor uw huwelijk / partnerschap');
         $trouwenCeremoniersUtrecht->setSourceOrganization('002220647');
         $trouwenCeremoniersUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenCeremoniersUtrecht);
-        //$trouwenCeremoniersUtrecht->setId($id);
+        //
+        $trouwenCeremoniersUtrecht->setId($id);
         $manager->persist($trouwenCeremoniersUtrecht);
         $manager->flush();
         $manager->refresh($trouwenLocatiesUtrecht);
         
-        // $id = Uuid::fromString('9d76fb58-0711-4437-acc4-9f4d9d403cdf');
+        $id = Uuid::fromString('f8298a12-91eb-46d0-b8a9-e7095f81be6f');
         $trouwenExtraUtrecht= new Group();
         $trouwenExtraUtrecht->setName('Extra producten');
         $trouwenExtraUtrecht->setDescription('Extra producten voor bij uw huwelijk');
         $trouwenExtraUtrecht->setSourceOrganization('002220647');
         $trouwenExtraUtrecht->setCatalogue($utrecht);
         $manager->persist($trouwenExtraUtrecht);
-        //$trouwenCeremoniersUtrecht->setId($id);
+        //
+        $trouwenExtraUtrecht->setId($id);
         $manager->persist($trouwenExtraUtrecht);
         $manager->flush();
         $manager->refresh($trouwenExtraUtrecht);
+        
+        $manager->clear();
+        
+        $trouwenExtraUtrecht = $manager->getRepository('App:Group')->findBy(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
+        $trouwenCeremoniersUtrecht= $manager->getRepository('App:Group')->findBy(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
+        $trouwenLocatiesUtrecht= $manager->getRepository('App:Group')->findBy(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
+        $trouwenAmbtenarenUtrecht= $manager->getRepository('App:Group')->findBy(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
+        $trouwenUtrecht = $manager->getRepository('App:Group')->findBy(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
+        $burgerzakenUtrecht = $manager->getRepository('App:Group')->findBy(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
         
         $trouwen = new Product();
         $trouwen->setName('Trouwen / Partnerschap');
@@ -215,9 +233,7 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Eenvoudig Trouwen');
         $product->setType('set');
-        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        $product->addGroup($trouwenCeremoniersUtrecht);
         $product->setCatalogue($utrecht);
         $product->setPrice('163.00');
         $product->setPriceCurrency('EUR');
@@ -233,9 +249,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Gratis Trouwen');
         $product->setType('set');
-        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -251,9 +267,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Als Buitengewoon Ambtenaar van de Burgerlijke Stand geef ik, in overleg met het bruidspaar, invulling aan de huwelijksceremonie.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -270,9 +286,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Elkaar het Ja-woord geven, de officiële ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -289,9 +305,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Ik ben Rene Gulje, in 1949 in Amsterdam geboren. Ik studeerde Nederlands aan de UVA en journalistiek aan de HU.</p>');
         $product->setType('person');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -308,9 +324,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Uw trouwambtenaar wordt toegewezen, over enkele dagen krijgt u bericht van uw toegewezen trouwambtenaar!');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -327,9 +343,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beëdigen');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('150.00');
         $product->setPriceCurrency('EUR');
@@ -349,9 +365,9 @@ class AppFixtures extends Fixture
  De ruimte is eenvoudig en toch heel intiem.
  Het licht is in te stellen op een kleur die jullie graag willen.');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -368,9 +384,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -387,9 +403,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -406,9 +422,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Vrije locatie');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -424,9 +440,9 @@ class AppFixtures extends Fixture
         $product->setSourceOrganization('002220647');
         $product->setDescription('Een mooi in leer gebonden herindering aan uw huwelijk');
         $product->setType('simple');
-        foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
-        	$product->addGroup($group);
-        }
+        //foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
+        //	$product->addGroup($group);
+        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('30.20');
         $product->setPriceCurrency('EUR');
