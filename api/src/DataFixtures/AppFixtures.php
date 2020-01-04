@@ -204,6 +204,13 @@ class AppFixtures extends Fixture
         
         $manager->clear();
         
+        $trouwenExtraUtrecht = $em->getRepository('App:Group')->findBy(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
+        $trouwenCeremoniersUtrecht= $em->getRepository('App:Group')->findBy(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
+        $trouwenLocatiesUtrecht= $em->getRepository('App:Group')->findBy(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
+        $trouwenAmbtenarenUtrecht= $em->getRepository('App:Group')->findBy(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
+        $trouwenUtrecht = $em->getRepository('App:Group')->findBy(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
+        $burgerzakenUtrecht = $em->getRepository('App:Group')->findBy(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
+        
         $trouwen = new Product();
         $trouwen->setName('Trouwen / Partnerschap');
         $trouwen->setSourceOrganization('002220647');
@@ -227,8 +234,6 @@ class AppFixtures extends Fixture
         $product->setDescription('Eenvoudig Trouwen');
         $product->setType('set');
         $product->addGroup($trouwenCeremoniersUtrecht);
-        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('163.00');
         $product->setPriceCurrency('EUR');
