@@ -218,12 +218,12 @@ class AppFixtures extends Fixture
         $trouwen->setTaxPercentage(0);
         $trouwen->setRequiresAppointment(false);
         $manager->persist($trouwen);
-        $product->setId($id);
-        $manager->persist($product);
+        $trouwen->setId($id);
+        $manager->persist($trouwen);
         foreach ([$trouwenUtrecht, $trouwenCeremoniersUtrecht] as $group) {
         	$trouwen->addGroup($group);
         }
-        $manager->persist($product);
+        $manager->persist($trouwen);
         $manager->flush();
         $manager->refresh($trouwen);        
         
