@@ -211,11 +211,11 @@ class AppFixtures extends Fixture
         $product->setName('Trouwen / Partnerschap');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Trouwen');
-        $product->setType('set');
+        $product->setType('set'); 
         $product->setCatalogue($utrecht);
         $product->setPrice('627.00');
         $product->setPriceCurrency('EUR');
-        $trouwen->setTaxPercentage(0);
+        $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
         $manager->persist($product);
         $product->setId($id);
