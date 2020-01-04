@@ -231,7 +231,7 @@ class Product
      * @var Catalogue The Catalogue that this product belongs to
      *
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Catalogue", inversedBy="products",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull
      * @Groups({"read","write"})

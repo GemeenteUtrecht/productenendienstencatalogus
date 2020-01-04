@@ -61,29 +61,24 @@ class AppFixtures extends Fixture
         $vng->setName('Vereniging Nederlandse Gemeenten');
         $vng->setSourceOrganization('0000');
         $manager->persist($vng);
-        $manager->flush();
-        $manager->refresh($vng);
         
         $denbosch= new Catalogue();
         $denbosch->setName('Gemeente \'s-Hertogenbosch');
         $denbosch->setSourceOrganization('001709124');
         $manager->persist($denbosch);
-        $manager->flush();
-        $manager->refresh($denbosch);
         
         $eindhoven = new Catalogue();
         $eindhoven->setName('Gemeente Eindhoven');
         $eindhoven->setSourceOrganization('001902763');
         $manager->persist($eindhoven);
-        $manager->flush();
-        $manager->refresh($eindhoven);
         
         $utrecht = new Catalogue();
         $utrecht->setName('Gemeente Utrecht');
         $utrecht->setSourceOrganization('002220647');        
         $manager->persist($utrecht);
+        
+        
         $manager->flush();
-        $manager->refresh($utrecht);
 
         // Dan wat productgroepen        
         $id = Uuid::fromString('5a6a1219-1e2d-4dc5-aa03-82ffe1ff6249');
