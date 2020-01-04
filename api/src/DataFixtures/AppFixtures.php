@@ -207,25 +207,25 @@ class AppFixtures extends Fixture
         $burgerzakenUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
         
         $id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
-        $trouwen = new Product();
-        $trouwen->setName('Trouwen / Partnerschap');
-        $trouwen->setSourceOrganization('002220647');
-        $trouwen->setDescription('Trouwen');
-        $trouwen->setType('set');
-        $trouwen->setCatalogue($utrecht);
-        $trouwen->setPrice('627.00');
-        $trouwen->setPriceCurrency('EUR');
+        $product= new Product();
+        $product->setName('Trouwen / Partnerschap');
+        $product->setSourceOrganization('002220647');
+        $product->setDescription('Trouwen');
+        $product->setType('set');
+        $product->setCatalogue($utrecht);
+        $product->setPrice('627.00');
+        $product->setPriceCurrency('EUR');
         $trouwen->setTaxPercentage(0);
-        $trouwen->setRequiresAppointment(false);
-        $manager->persist($trouwen);
-        $trouwen->setId($id);
-        $manager->persist($trouwen);
+        $product->setRequiresAppointment(false);
+        $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         foreach ([$trouwenUtrecht, $trouwenCeremoniersUtrecht] as $group) {
-        	$trouwen->addGroup($group);
+        	$product->addGroup($group);
         }
-        $manager->persist($trouwen);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($trouwen);        
+        $manager->refresh($product);        
         
         $id = Uuid::fromString('16353702-4614-42ff-92af-7dd11c8eef9f');
         $product = new Product();
