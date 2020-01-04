@@ -61,29 +61,24 @@ class AppFixtures extends Fixture
         $vng->setName('Vereniging Nederlandse Gemeenten');
         $vng->setSourceOrganization('0000');
         $manager->persist($vng);
-        $manager->flush();
-        $manager->refresh($vng);
         
         $denbosch= new Catalogue();
         $denbosch->setName('Gemeente \'s-Hertogenbosch');
         $denbosch->setSourceOrganization('001709124');
         $manager->persist($denbosch);
-        $manager->flush();
-        $manager->refresh($denbosch);
         
         $eindhoven = new Catalogue();
         $eindhoven->setName('Gemeente Eindhoven');
         $eindhoven->setSourceOrganization('001902763');
         $manager->persist($eindhoven);
-        $manager->flush();
-        $manager->refresh($eindhoven);
         
         $utrecht = new Catalogue();
         $utrecht->setName('Gemeente Utrecht');
         $utrecht->setSourceOrganization('002220647');        
         $manager->persist($utrecht);
+        
+        
         $manager->flush();
-        $manager->refresh($utrecht);
 
         // Dan wat productgroepen        
         $id = Uuid::fromString('5a6a1219-1e2d-4dc5-aa03-82ffe1ff6249');
@@ -204,36 +199,40 @@ class AppFixtures extends Fixture
         
         $manager->clear();
         
-        $trouwenExtraUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
-        $trouwenCeremoniersUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
-        $trouwenLocatiesUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
-        $trouwenAmbtenarenUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
-        $trouwenUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
-        $burgerzakenUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
+        $trouwenExtraUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
+        $trouwenCeremoniersUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
+        $trouwenLocatiesUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
+        $trouwenAmbtenarenUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
+        $trouwenUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
+        $burgerzakenUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
         
-        $trouwen = new Product();
-        $trouwen->setName('Trouwen / Partnerschap');
-        $trouwen->setSourceOrganization('002220647');
-        $trouwen->setDescription('Trouwen');
-        $trouwen->setType('set');
+        $id = Uuid::fromString('d1a8b316-5966-4a29-8cf7-be15b8302301');
+        $product= new Product();
+        $product->setName('Trouwen / Partnerschap');
+        $product->setSourceOrganization('002220647');
+        $product->setDescription('Trouwen');
+        $product->setType('set'); 
+        $product->setCatalogue($utrecht);
+        $product->setPrice('627.00');
+        $product->setPriceCurrency('EUR');
+        $product->setTaxPercentage(0);
+        $product->setRequiresAppointment(false);
+        $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
+        $manager->flush();        
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
         foreach ([$trouwenUtrecht, $trouwenCeremoniersUtrecht] as $group) {
-        	$trouwen->addGroup($group);
+        	$product->addGroup($group);
         }
-        $trouwen->setCatalogue($utrecht);
-        $trouwen->setPrice('627.00');
-        $trouwen->setPriceCurrency('EUR');
-        $trouwen->setTaxPercentage(0);
-        $trouwen->setRequiresAppointment(false);
-        $manager->persist($trouwen);
-        $manager->flush();
-        $manager->refresh($trouwen);        
+        $manager->persist($product);
         
+        $id = Uuid::fromString('16353702-4614-42ff-92af-7dd11c8eef9f');
         $product = new Product();
         $product->setName('Eenvoudig Trouwen');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Eenvoudig Trouwen');
         $product->setType('set');
-        $product->addGroup($trouwenCeremoniersUtrecht);
         $product->setCatalogue($utrecht);
         $product->setPrice('163.00');
         $product->setPriceCurrency('EUR');
@@ -241,17 +240,21 @@ class AppFixtures extends Fixture
         $product->setRequiresAppointment(false);
         //$product->setParent($trouwen);
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('190c3611-010d-4b0e-a31c-60dadf4d1c62');
         $product = new Product();
         $product->setName('Gratis Trouwen');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Gratis Trouwen');
         $product->setType('set');
-        //foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -259,17 +262,21 @@ class AppFixtures extends Fixture
         $product->setRequiresAppointment(false);
         //$product->setParent($trouwen);
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht,$trouwenCeremoniersUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
                 
+        $id = Uuid::fromString('1edd4d62-d778-452a-8b2a-ac22f3dcdf4d');
         $product = new Product();
         $product->setName('Dhr Erik Hendrik');
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Als Buitengewoon Ambtenaar van de Burgerlijke Stand geef ik, in overleg met het bruidspaar, invulling aan de huwelijksceremonie.</p>');
         $product->setType('person');
-        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -278,17 +285,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/erik.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('477ea744-47b1-4690-bd2e-c9c15d5cf2d4');
         $product = new Product();
         $product->setName('Mvr Ike van den Pol');
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Elkaar het Ja-woord geven, de officiële ceremonie. Vaak is dit het romantische hoogtepunt van de trouwdag. Een bijzonder moment, gedeeld met de mensen die je lief zijn. Een persoonlijke ceremonie, passend bij jullie relatie. Alles is bespreekbaar en maatwerk. Een originele trouwplechtigheid waar muziek, sprekers en kinderen een rol kunnen spelen. Een ceremonie met inhoud, ernst en humor, een traan en een lach, stijlvol, spontaan en ontspannen.</p>');
         $product->setType('person');
-        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -297,17 +308,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/ike.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('4f7c5d73-0fcb-4363-9ebb-fd47e2209148');
         $product = new Product();
         $product->setName('Dhr. Rene Gulje');
         $product->setSourceOrganization('002220647');
         $product->setDescription('<p>Ik ben Rene Gulje, in 1949 in Amsterdam geboren. Ik studeerde Nederlands aan de UVA en journalistiek aan de HU.</p>');
         $product->setType('person');
-        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -316,17 +331,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/rene.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('55af09c8-361b-418a-af87-df8f8827984b');
         $product = new Product();
         $product->setName('Toegewezen Trouwamberbaar');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Uw trouwambtenaar wordt toegewezen, over enkele dagen krijgt u bericht van uw toegewezen trouwambtenaar!');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -335,17 +354,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/Ttrouwambtenaar.jpg');
         $product->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('5a0ad366-9f10-4002-adcb-bac47143b93b');
         $product = new Product();
         $product->setName('Zelfgekozen BABS');
         $product->setSourceOrganization('002220647');
         $product->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beëdigen');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('150.00');
         $product->setPriceCurrency('EUR');
@@ -354,9 +377,16 @@ class AppFixtures extends Fixture
         $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/Ttrouwambtenaar.jpg');
         $product->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
         $product = new Product();
         $product->setName('Stadskantoor');
         $product->setSourceOrganization('002220647');
@@ -365,9 +395,6 @@ class AppFixtures extends Fixture
  De ruimte is eenvoudig en toch heel intiem.
  Het licht is in te stellen op een kleur die jullie graag willen.');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -376,17 +403,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/Trouwzaal-Stadskantoor-Utrecht.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('7ebcc7a9-ce12-401b-b3a1-18497c54d79d');
         $product = new Product();
         $product->setName('Stadhuis kleine zaal');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -395,17 +426,21 @@ class AppFixtures extends Fixture
         $product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/kleine-trouwzaal-stadhuis-utrecht.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
         $manager->flush();
-        $manager->refresh($product);
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        $manager->persist($product);
+        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('9d7c1c5b-3e65-4429-90ec-16e7371f2360');
         $product = new Product();
         $product->setName('Stadhuis grote zaal');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Deze uiterst sfeervolle trouwzaal maakt de dag compleet');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -414,17 +449,22 @@ class AppFixtures extends Fixture
         $product->setLogo('https://www.utrecht.nl/fileadmin/uploads/documenten/9.digitaalloket/Burgerzaken/grote-trouwzaal-stadhuis-utrecht.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('c7b556bb-a2f0-471c-9ff9-37543bc4d843');
         $product = new Product();
         $product->setName('Vrije locatie');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Vrije locatie');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('0.00');
         $product->setPriceCurrency('EUR');
@@ -432,17 +472,21 @@ class AppFixtures extends Fixture
         $product->setRequiresAppointment(false);
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        foreach ([$trouwenUtrecht, $trouwenLocatiesUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
+        $id = Uuid::fromString('d7bd202b-27ae-4c09-aeb9-3806c5fba504');
         $product = new Product();
         $product->setName('Trouwboekje');
         $product->setSourceOrganization('002220647');
         $product->setDescription('Een mooi in leer gebonden herindering aan uw huwelijk');
         $product->setType('simple');
-        //foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
-        //	$product->addGroup($group);
-        //}
         $product->setCatalogue($utrecht);
         $product->setPrice('30.20');
         $product->setPriceCurrency('EUR');
@@ -450,8 +494,14 @@ class AppFixtures extends Fixture
         $product->setRequiresAppointment(false);
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
+        $product->setId($id);
+        $manager->persist($product);
         $manager->flush();
-        $manager->refresh($product);
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));v
+        foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
+        	$product->addGroup($group);
+        }
+        $manager->persist($product);
         
         $manager->flush();
     }
