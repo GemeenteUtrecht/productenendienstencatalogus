@@ -204,12 +204,12 @@ class AppFixtures extends Fixture
         
         $manager->clear();
         
-        $trouwenExtraUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
-        $trouwenCeremoniersUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
-        $trouwenLocatiesUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
-        $trouwenAmbtenarenUtrecht= $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
-        $trouwenUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
-        $burgerzakenUtrecht = $manager->getRepository('App:Group')->getOneOrNullResult(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
+        $trouwenExtraUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> 'f8298a12-91eb-46d0-b8a9-e7095f81be6f'));
+        $trouwenCeremoniersUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '1cad775c-c2d0-48af-858f-a12029af24b3'));
+        $trouwenLocatiesUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '170788e7-b238-4c28-8efc-97bdada02c2e'));
+        $trouwenAmbtenarenUtrecht= $manager->getRepository('App:Group')->findOneBy(array('id'=> '7f4ff7ae-ed1b-45c9-9a73-3ed06a36b9cc'));
+        $trouwenUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> '0c1f993d-f9e2-46c5-8d83-0b6dfb702069'));
+        $burgerzakenUtrecht = $manager->getRepository('App:Group')->findOneBy(array('id'=> 'd1a8b316-5966-4a29-8cf7-be15b8302301'));
         
         $trouwen = new Product();
         $trouwen->setName('Trouwen / Partnerschap');
