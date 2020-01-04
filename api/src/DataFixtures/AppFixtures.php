@@ -227,6 +227,7 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
+        /*
         $id = Uuid::fromString('16353702-4614-42ff-92af-7dd11c8eef9f');
         $product = new Product();
         $product->setName('Eenvoudig Trouwen');
@@ -502,7 +503,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
-        
+        */
         $manager->flush();
     }
 }
