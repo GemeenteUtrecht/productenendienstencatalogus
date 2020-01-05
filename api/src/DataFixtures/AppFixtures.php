@@ -386,6 +386,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        */
         
         $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
         $product = new Product();
@@ -482,7 +483,6 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
-        */
         $id = Uuid::fromString('d7bd202b-27ae-4c09-aeb9-3806c5fba504');
         $product = new Product();
         $product->setName('Trouwboekje');
