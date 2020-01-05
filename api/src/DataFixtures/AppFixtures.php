@@ -340,7 +340,6 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
-        /*
         $id = Uuid::fromString('55af09c8-361b-418a-af87-df8f8827984b');
         $product = new Product();
         $product->setName('Toegewezen Trouwamberbaar');
@@ -386,7 +385,6 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
-        */
         
         $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
         $product = new Product();
