@@ -271,7 +271,6 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
-        /*
         $id = Uuid::fromString('1edd4d62-d778-452a-8b2a-ac22f3dcdf4d');
         $product = new Product();
         $product->setName('Dhr Erik Hendrik');
@@ -341,6 +340,7 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
+        /*
         $id = Uuid::fromString('55af09c8-361b-418a-af87-df8f8827984b');
         $product = new Product();
         $product->setName('Toegewezen Trouwamberbaar');
