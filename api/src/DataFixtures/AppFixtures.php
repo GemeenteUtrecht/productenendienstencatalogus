@@ -227,7 +227,6 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
-        /*
         $id = Uuid::fromString('16353702-4614-42ff-92af-7dd11c8eef9f');
         $product = new Product();
         $product->setName('Eenvoudig Trouwen');
@@ -271,7 +270,8 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
-                
+        
+        /*
         $id = Uuid::fromString('1edd4d62-d778-452a-8b2a-ac22f3dcdf4d');
         $product = new Product();
         $product->setName('Dhr Erik Hendrik');
@@ -482,6 +482,7 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
+        */
         $id = Uuid::fromString('d7bd202b-27ae-4c09-aeb9-3806c5fba504');
         $product = new Product();
         $product->setName('Trouwboekje');
@@ -503,7 +504,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
-        */
+        
         $manager->flush();
     }
 }
