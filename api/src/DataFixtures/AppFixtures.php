@@ -363,6 +363,7 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
+        /*
         $id = Uuid::fromString('5a0ad366-9f10-4002-adcb-bac47143b93b');
         $product = new Product();
         $product->setName('Zelfgekozen BABS');
@@ -385,6 +386,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        */
         
         $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
         $product = new Product();
