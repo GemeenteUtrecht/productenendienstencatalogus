@@ -270,7 +270,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
-                
+        
         $id = Uuid::fromString('1edd4d62-d778-452a-8b2a-ac22f3dcdf4d');
         $product = new Product();
         $product->setName('Dhr Erik Hendrik');
@@ -351,7 +351,7 @@ class AppFixtures extends Fixture
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/Ttrouwambtenaar.jpg');
+        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/trouwambtenaar.jpg');
         $product->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
         $manager->persist($product);
         $product->setId($id);
@@ -363,29 +363,31 @@ class AppFixtures extends Fixture
         }
         $manager->persist($product);
         
+        /*
         $id = Uuid::fromString('5a0ad366-9f10-4002-adcb-bac47143b93b');
         $product = new Product();
-        $product->setName('Zelfgekozen BABS');
+        $product->setName(v);
         $product->setSourceOrganization('002220647');
-        $product->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beÃ«digen');
+        $product->setDescription('U draagt zelf een trouwambtenaar voor en laat deze voor een dag beëdigd'));
         $product->setType('simple');
         $product->setCatalogue($utrecht);
         $product->setPrice('150.00');
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/Ttrouwambtenaar.jpg');
+        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/trouwambtenaar.jpg');
         $product->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
         $manager->persist($product);
         $product->setId($id);
         $manager->persist($product);
         $manager->flush();
-        product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
+        $product= $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
         foreach ([$trouwenUtrecht, $trouwenAmbtenarenUtrecht] as $group) {
         	$product->addGroup($group);
         }
         $manager->persist($product);
-        
+        */
+                
         $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
         $product = new Product();
         $product->setName('Stadskantoor');
@@ -497,7 +499,7 @@ class AppFixtures extends Fixture
         $product->setId($id);
         $manager->persist($product);
         $manager->flush();
-        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));v
+        $product = $manager->getRepository('App:Product')->findOneBy(array('id'=> $id));
         foreach ([$trouwenUtrecht, $trouwenExtraUtrecht] as $group) {
         	$product->addGroup($group);
         }
