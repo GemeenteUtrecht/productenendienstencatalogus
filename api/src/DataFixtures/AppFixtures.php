@@ -226,6 +226,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('16353702-4614-42ff-92af-7dd11c8eef9f');
         $product = new Product();
@@ -248,6 +249,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('190c3611-010d-4b0e-a31c-60dadf4d1c62');
         $product = new Product();
@@ -270,6 +272,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('1edd4d62-d778-452a-8b2a-ac22f3dcdf4d');
         $product = new Product();
@@ -293,6 +296,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('477ea744-47b1-4690-bd2e-c9c15d5cf2d4');
         $product = new Product();
@@ -316,6 +320,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('4f7c5d73-0fcb-4363-9ebb-fd47e2209148');
         $product = new Product();
@@ -339,6 +344,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('55af09c8-361b-418a-af87-df8f8827984b');
         $product = new Product();
@@ -362,6 +368,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         /*
         $id = Uuid::fromString('5a0ad366-9f10-4002-adcb-bac47143b93b');
@@ -386,6 +393,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         */
                 
         $id = Uuid::fromString('7a3489d5-2d2c-454b-91c9-caff4fed897f');
@@ -413,6 +421,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('7ebcc7a9-ce12-401b-b3a1-18497c54d79d');
         $product = new Product();
@@ -436,6 +445,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('9d7c1c5b-3e65-4429-90ec-16e7371f2360');
         $product = new Product();
@@ -460,6 +470,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('c7b556bb-a2f0-471c-9ff9-37543bc4d843');
         $product = new Product();
@@ -482,6 +493,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $id = Uuid::fromString('d7bd202b-27ae-4c09-aeb9-3806c5fba504');
         $product = new Product();
@@ -504,6 +516,7 @@ class AppFixtures extends Fixture
         	$product->addGroup($group);
         }
         $manager->persist($product);
+        $manager->flush();
         
         $manager->flush();
     }
