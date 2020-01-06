@@ -3051,22 +3051,6 @@ paths:
                   $ref: '#/components/schemas/Supplier-read'
       parameters:
         -
-          name: sourceOrganization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'sourceOrganization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: page
           in: query
           required: false
@@ -4180,18 +4164,14 @@ components:
           type: string
         name:
           description: 'The name of this Catalogue'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -4220,18 +4200,14 @@ components:
       properties:
         name:
           description: 'The name of this Catalogue'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -4257,18 +4233,14 @@ components:
           type: string
         name:
           description: 'The name of this Catalogue'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -4306,18 +4278,14 @@ components:
           type: string
         name:
           description: 'The name of this Catalogue'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           description: 'An short description of this Catalogue'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         sourceOrganization:
           description: 'The RSIN of the organization that provides this catalogue'
@@ -4436,20 +4404,16 @@ components:
           type: string
         name:
           description: 'The name of this product group'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           readOnly: true
           description: 'An short description of this product group'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           readOnly: true
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -4474,8 +4438,6 @@ components:
       properties:
         name:
           description: 'The name of this product group'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -4509,20 +4471,16 @@ components:
           type: string
         name:
           description: 'The name of this product group'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         description:
           readOnly: true
           description: 'An short description of this product group'
-          externalDocs:
-            url: 'https://schema.org/description'
           type: string
         logo:
           readOnly: true
           description: 'The logo for this component'
           externalDocs:
-            url: 'https://schema.org/logo'
+            url: 'http://schema.org/url'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -4556,8 +4514,6 @@ components:
           type: string
         name:
           description: 'The name of this product group'
-          externalDocs:
-            url: 'http://schema.org/name'
           type: string
         products:
           description: 'The groups that are a part of this product group'
@@ -4592,13 +4548,11 @@ components:
         price:
           description: |
             The price of this product
-            
             @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
             @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
@@ -4660,13 +4614,11 @@ components:
         price:
           description: |
             The price of this product
-            
             @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
             @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
@@ -4729,13 +4681,11 @@ components:
         price:
           description: |
             The price of this product
-            
             @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
             @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
@@ -4806,13 +4756,11 @@ components:
         price:
           description: |
             The price of this product
-            
             @example 50.00
           type: string
         priceCurrency:
           description: |
             The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
             @example EUR
           externalDocs:
             url: 'http://schema.org/priceCurrency'
@@ -4874,7 +4822,6 @@ components:
             url: 'http://schema.org/url'
           type: string
         sourceOrganization:
-          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -4883,18 +4830,18 @@ components:
           items:
             $ref: '#/components/schemas/Group-read'
         price:
-          example: '50.00'
           description: |
             The price of this product
+            @example 50.00
+            
+            @ORM\Column(type="decimal", precision=8, scale=2)
           type: string
         priceCurrency:
-          example: EUR
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          example: 9
           description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         variations:
@@ -4904,21 +4851,8 @@ components:
           items:
             $ref: '#/components/schemas/Product-read'
         type:
-          type: string
           description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
-          enum:
-            - simple
-            - set
-            - virtual
-            - external
-            - ticket
-            - variable
-            - subscription
-            - person
-            - location
-            - service
-          example: simple
-          required: 'true'
+          type: string
         groupedProducts:
           readOnly: true
           description: 'If the product type is a **set** this contains the products that are part of that set'
@@ -4934,13 +4868,11 @@ components:
           items:
             $ref: '#/components/schemas/Offer-read'
         calendar:
-          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
-          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
@@ -4993,7 +4925,6 @@ components:
             url: 'http://schema.org/url'
           type: string
         sourceOrganization:
-          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -5002,37 +4933,18 @@ components:
           items:
             $ref: '#/components/schemas/Group-write'
         price:
-          example: '50.00'
           description: |
             The price of this product
+            @example 50.00
             
-             @ORM\Column(type="decimal", precision=8, scale=2)
-            
-             @example 50.00
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    },
-                    "openapi_context"={
-                         "example"="50.00"
-                     }
-                }
-            )
+            @ORM\Column(type="decimal", precision=8, scale=2)
           type: string
         priceCurrency:
-          example: EUR
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          example: 9
           description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         parent:
@@ -5040,21 +4952,8 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product-write'
         type:
-          type: string
           description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
-          enum:
-            - simple
-            - set
-            - virtual
-            - external
-            - ticket
-            - variable
-            - subscription
-            - person
-            - location
-            - service
-          example: simple
-          required: 'true'
+          type: string
         sets:
           writeOnly: true
           description: 'The sets thats this product is a part of'
@@ -5070,13 +4969,11 @@ components:
           items:
             $ref: '#/components/schemas/Offer-write'
         calendar:
-          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
-          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
@@ -5126,7 +5023,6 @@ components:
             url: 'http://schema.org/url'
           type: string
         sourceOrganization:
-          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -5135,37 +5031,18 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
         price:
-          example: '50.00'
           description: |
             The price of this product
+            @example 50.00
             
-             @ORM\Column(type="decimal", precision=8, scale=2)
-            
-             @example 50.00
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    },
-                    "openapi_context"={
-                         "example"="50.00"
-                     }
-                }
-            )
+            @ORM\Column(type="decimal", precision=8, scale=2)
           type: string
         priceCurrency:
-          example: EUR
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          example: 9
           description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         variations:
@@ -5175,21 +5052,8 @@ components:
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
         type:
-          type: string
           description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
-          enum:
-            - simple
-            - set
-            - virtual
-            - external
-            - ticket
-            - variable
-            - subscription
-            - person
-            - location
-            - service
-          example: simple
-          required: 'true'
+          type: string
         groupedProducts:
           readOnly: true
           description: 'If the product type is a **set** this contains the products that are part of that set'
@@ -5205,13 +5069,11 @@ components:
           items:
             $ref: '#/components/schemas/Offer:jsonld-read'
         calendar:
-          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
-          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
         documents:
@@ -5273,7 +5135,6 @@ components:
             url: 'http://schema.org/url'
           type: string
         sourceOrganization:
-          example: '002851234'
           description: 'The RSIN of the organization that owns this product'
           type: string
         groups:
@@ -5282,37 +5143,18 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
         price:
-          example: '50.00'
           description: |
             The price of this product
+            @example 50.00
             
-             @ORM\Column(type="decimal", precision=8, scale=2)
-            
-             @example 50.00
-             @ApiProperty(
-                attributes={
-                    "swagger_context"={
-                        "iri"="https://schema.org/price",
-                    	   "description" = "The price of this product",
-                        "type"="string",
-                        "example"="50.00",
-                        "maxLength"="9",
-                        "required" = true
-                    },
-                    "openapi_context"={
-                         "example"="50.00"
-                     }
-                }
-            )
+            @ORM\Column(type="decimal", precision=8, scale=2)
           type: string
         priceCurrency:
-          example: EUR
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         taxPercentage:
-          example: 9
           description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
           type: integer
         parent:
@@ -5320,21 +5162,8 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product:jsonld-write'
         type:
-          type: string
           description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
-          enum:
-            - simple
-            - set
-            - virtual
-            - external
-            - ticket
-            - variable
-            - subscription
-            - person
-            - location
-            - service
-          example: simple
-          required: 'true'
+          type: string
         sets:
           writeOnly: true
           description: 'The sets thats this product is a part of'
@@ -5350,13 +5179,11 @@ components:
           items:
             $ref: '#/components/schemas/Offer:jsonld-write'
         calendar:
-          example: 'http://example.org/calendar/calendar'
           description: 'The uri referring to the calendar of this product.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
         requiresAppointment:
-          example: false
           description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
           type: boolean
       required:
@@ -5372,15 +5199,10 @@ components:
       description: 'An entity representing a supplier of products.'
       properties:
         id:
-          example: e2984465-190a-4562-829e-a8cca81aa35d
           readOnly: true
           description: 'The Uuid identifier of this supplier'
           externalDocs:
             url: 'http://schema.org/identifier'
-          type: string
-        sourceOrganization:
-          example: '002851234'
-          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5394,21 +5216,15 @@ components:
             url: 'http://schema.org/url'
           type: string
       required:
-        - sourceOrganization
         - name
         - kvk
     Supplier-write:
       type: object
       description: 'An entity representing a supplier of products.'
       required:
-        - sourceOrganization
         - name
         - kvk
       properties:
-        sourceOrganization:
-          example: '002851234'
-          description: 'The RSIN of the organization that owns this process'
-          type: string
         name:
           description: 'The name of this RequestType'
           type: string
@@ -5434,15 +5250,10 @@ components:
           readOnly: true
           type: string
         id:
-          example: e2984465-190a-4562-829e-a8cca81aa35d
           readOnly: true
           description: 'The Uuid identifier of this supplier'
           externalDocs:
             url: 'http://schema.org/identifier'
-          type: string
-        sourceOrganization:
-          example: '002851234'
-          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5456,14 +5267,12 @@ components:
             url: 'http://schema.org/url'
           type: string
       required:
-        - sourceOrganization
         - name
         - kvk
     'Supplier:jsonld-write':
       type: object
       description: 'An entity representing a supplier of products.'
       required:
-        - sourceOrganization
         - name
         - kvk
       properties:
@@ -5475,10 +5284,6 @@ components:
           type: string
         '@type':
           readOnly: true
-          type: string
-        sourceOrganization:
-          example: '002851234'
-          description: 'The RSIN of the organization that owns this process'
           type: string
         name:
           description: 'The name of this RequestType'
@@ -5511,18 +5316,12 @@ components:
           description: 'The price of this tax'
           type: string
         priceCurrency:
-          description: |
-            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
-            @example EUR
+          description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         percentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-            
-            @example 9
+          description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
           type: integer
         offers:
           description: 'The offers that use this tax'
@@ -5551,18 +5350,12 @@ components:
           description: 'The price of this tax'
           type: string
         priceCurrency:
-          description: |
-            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
-            @example EUR
+          description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         percentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-            
-            @example 9
+          description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
           type: integer
         offers:
           description: 'The offers that use this tax'
@@ -5598,18 +5391,12 @@ components:
           description: 'The price of this tax'
           type: string
         priceCurrency:
-          description: |
-            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
-            @example EUR
+          description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         percentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-            
-            @example 9
+          description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
           type: integer
         offers:
           description: 'The offers that use this tax'
@@ -5647,18 +5434,12 @@ components:
           description: 'The price of this tax'
           type: string
         priceCurrency:
-          description: |
-            The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
-            
-            @example EUR
+          description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
           externalDocs:
             url: 'http://schema.org/priceCurrency'
           type: string
         percentage:
-          description: |
-            The tax percentage for this offer as an integer e.g. 9% makes 9
-            
-            @example 9
+          description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
           type: integer
         offers:
           description: 'The offers that use this tax'
@@ -5739,6 +5520,7 @@ definitions:
   Group-read:
     properties:
       id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
         example: 'My Group'
@@ -5859,25 +5641,9 @@ definitions:
         minLength: 8
       price: []
       priceCurrency:
-        example: |
-          EUR
-           @ApiProperty(
-              attributes={
-                  "swagger_context"={
-                      "iri"="https://schema.org/priceCurrency",
-                  	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                      "type"="string",
-                      "example"="EUR",
-                      "default"="EUR",
-                      "maxLength"="3",
-                      "minLength"="3"
-                  },
-                  "openapi_context"={
-                       "example"="EUR"
-                   }
-              }
-          )
-      taxPercentage: []
+        example: EUR
+      taxPercentage:
+        example: '9'
       type:
         example: simple
       calendar:
@@ -5924,25 +5690,9 @@ definitions:
         minLength: 8
       price: []
       priceCurrency:
-        example: |
-          EUR
-           @ApiProperty(
-              attributes={
-                  "swagger_context"={
-                      "iri"="https://schema.org/priceCurrency",
-                  	   "description" = "The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format",
-                      "type"="string",
-                      "example"="EUR",
-                      "default"="EUR",
-                      "maxLength"="3",
-                      "minLength"="3"
-                  },
-                  "openapi_context"={
-                       "example"="EUR"
-                   }
-              }
-          )
-      taxPercentage: []
+        example: EUR
+      taxPercentage:
+        example: '9'
       type:
         example: simple
       calendar:
@@ -5965,11 +5715,8 @@ definitions:
   Supplier-read:
     properties:
       id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      sourceOrganization:
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
       name:
         example: 'My RequestType'
         maxLength: 255
@@ -5981,15 +5728,10 @@ definitions:
         format: url
         maxLength: 255
     required:
-      - sourceOrganization
       - name
       - kvk
   Supplier-write:
     properties:
-      sourceOrganization:
-        example: '002851234'
-        maxLength: 11
-        minLength: 8
       name:
         example: 'My RequestType'
         maxLength: 255
@@ -6001,7 +5743,6 @@ definitions:
         format: url
         maxLength: 255
     required:
-      - sourceOrganization
       - name
       - kvk
   Tax-read:
@@ -6017,8 +5758,10 @@ definitions:
         maxLength: 2550
       price:
         example: '50.00'
-      priceCurrency: []
-      percentage: []
+      priceCurrency:
+        example: EUR
+      percentage:
+        example: '9'
       offers: []
     required:
       - name
@@ -6033,8 +5776,10 @@ definitions:
         maxLength: 2550
       price:
         example: '50.00'
-      priceCurrency: []
-      percentage: []
+      priceCurrency:
+        example: EUR
+      percentage:
+        example: '9'
       offers: []
     required:
       - name
