@@ -499,7 +499,7 @@ class AppFixtures extends Fixture
         $product = new Product();
         $product->setName('Trouwboekje');
         $product->setSourceOrganization('002220647');
-        $product->setDescription('Een mooi in leer gebonden herindering aan uw huwelijk');
+        $product->setDescription('Een mooi in leer gebonden herinnering aan uw huwelijk');
         $product->setType('simple');
         $product->setCatalogue($utrecht);
         $product->setPrice('30.20');

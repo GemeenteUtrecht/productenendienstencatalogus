@@ -113,7 +113,6 @@ class Catalogue
      * @var ArrayCollection The groups that are a part of this catalogue
      *
      * @MaxDepth(1)
-     * @Groups({"read"})
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="catalogue", orphanRemoval=true)
      */
     private $products;
