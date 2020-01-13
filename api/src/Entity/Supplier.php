@@ -46,7 +46,7 @@ class Supplier
 
 
     /**
-     * @var string The name of this RequestType
+     * @var string The name of this Supplier
      * @example My RequestType
      *
      * @Assert\NotNull
@@ -72,7 +72,7 @@ class Supplier
     private $kvk;
 
     /**
-     * @var string The logo for this component
+     * @var string The logo for this supplier
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -82,17 +82,17 @@ class Supplier
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logo;    
-    
+    private $logo;
+
     public function getId(): Uuid
     {
     	return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
     	$this->id = $id;
-    	
+
     	return $this;
     }
 

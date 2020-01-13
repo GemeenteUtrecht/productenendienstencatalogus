@@ -307,16 +307,16 @@ class Product
         $this->sets = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
     	return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
     	$this->id = $id;
-    	
+
     	return $this;
     }
 
