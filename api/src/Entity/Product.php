@@ -145,10 +145,10 @@ class Product
     private $groups;
 
     /**
-     *  @var string The price of this product
-     *  @example 50.00
+     * @var string The price of this product
+     * @example 50.00
      *
-     *  @ORM\Column(type="decimal", precision=8, scale=2)
+     * @ORM\Column(type="decimal", precision=8, scale=2)
      * @Assert\NotNull
      * @Groups({"read","write"})
      */
@@ -304,16 +304,16 @@ class Product
         $this->sets = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
     	return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
     	$this->id = $id;
-    	
+
     	return $this;
     }
 
