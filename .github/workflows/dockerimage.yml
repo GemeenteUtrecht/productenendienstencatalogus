@@ -131,3 +131,7 @@ jobs:
             release_name: ${{ steps.releasecode.outputs.releasename }}
             draft: false
             prerelease: false
+      - name: Create pull request
+        if: (success() && contains( github.ref, 'master' ))
+        run: |
+            git request-pull master https://github.com/gemeenteutrecht/pdc
