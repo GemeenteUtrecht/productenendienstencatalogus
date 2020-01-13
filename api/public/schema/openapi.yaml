@@ -4182,12 +4182,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group-read'
-        products:
-          readOnly: true
-          description: 'The groups that are a part of this catalogue'
-          type: array
-          items:
-            $ref: '#/components/schemas/Product-read'
       required:
         - name
         - sourceOrganization
@@ -4251,12 +4245,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
-        products:
-          readOnly: true
-          description: 'The groups that are a part of this catalogue'
-          type: array
-          items:
-            $ref: '#/components/schemas/Product:jsonld-read'
       required:
         - name
         - sourceOrganization
@@ -4830,11 +4818,7 @@ components:
           items:
             $ref: '#/components/schemas/Group-read'
         price:
-          description: |
-            The price of this product
-            @example 50.00
-            
-            @ORM\Column(type="decimal", precision=8, scale=2)
+          description: 'The price of this product'
           type: string
         priceCurrency:
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
@@ -4851,7 +4835,7 @@ components:
           items:
             $ref: '#/components/schemas/Product-read'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         groupedProducts:
           readOnly: true
@@ -4933,11 +4917,7 @@ components:
           items:
             $ref: '#/components/schemas/Group-write'
         price:
-          description: |
-            The price of this product
-            @example 50.00
-            
-            @ORM\Column(type="decimal", precision=8, scale=2)
+          description: 'The price of this product'
           type: string
         priceCurrency:
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
@@ -4952,7 +4932,7 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product-write'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         sets:
           writeOnly: true
@@ -5031,11 +5011,7 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-read'
         price:
-          description: |
-            The price of this product
-            @example 50.00
-            
-            @ORM\Column(type="decimal", precision=8, scale=2)
+          description: 'The price of this product'
           type: string
         priceCurrency:
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
@@ -5052,7 +5028,7 @@ components:
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         groupedProducts:
           readOnly: true
@@ -5143,11 +5119,7 @@ components:
           items:
             $ref: '#/components/schemas/Group:jsonld-write'
         price:
-          description: |
-            The price of this product
-            @example 50.00
-            
-            @ORM\Column(type="decimal", precision=8, scale=2)
+          description: 'The price of this product'
           type: string
         priceCurrency:
           description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
@@ -5162,7 +5134,7 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product:jsonld-write'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         sets:
           writeOnly: true
@@ -5450,40 +5422,59 @@ definitions:
   Catalogue-read:
     properties:
       id:
+        description: 'The UUID identifier of this object'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this Catalogue'
+        type: string
         example: 'My Catalogue'
         maxLength: 255
       description:
+        description: 'An short description of this Catalogue'
+        type: string
         example: 'This is the best catalogue ever'
         maxLength: 2550
       logo:
+        description: 'The logo for this component'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that provides this catalogue'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
-      groups: []
-      products: []
+      groups:
+        description: 'The groups that are a part of this catalogue'
+        type: \ArrayCollection
     required:
       - name
       - sourceOrganization
   Catalogue-write:
     properties:
       name:
+        description: 'The name of this Catalogue'
+        type: string
         example: 'My Catalogue'
         maxLength: 255
       description:
+        description: 'An short description of this Catalogue'
+        type: string
         example: 'This is the best catalogue ever'
         maxLength: 2550
       logo:
+        description: 'The logo for this component'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that provides this catalogue'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
@@ -5493,92 +5484,156 @@ definitions:
   CustomerType-read:
     properties:
       id:
+        description: 'The UUID identifier of this object'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this CustomerType'
+        type: string
         example: 'My CustomerType'
         maxLength: 255
       description:
+        description: 'The description for this CustomerType'
+        type: string
         example: 'this is the best customertype ever'
         maxLength: 2550
-      offers: []
+      offers:
+        description: 'The offers that this CustomerType is eligible for'
+        type: \ArrayCollection
     required:
       - name
       - description
   CustomerType-write:
     properties:
       name:
+        description: 'The name of this CustomerType'
+        type: string
         example: 'My CustomerType'
         maxLength: 255
       description:
+        description: 'The description for this CustomerType'
+        type: string
         example: 'this is the best customertype ever'
         maxLength: 2550
-      offers: []
+      offers:
+        description: 'The offers that this CustomerType is eligible for'
+        type: \ArrayCollection
     required:
       - name
       - description
   Group-read:
     properties:
       id:
+        description: 'The Uuid identifier of this group'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this product group'
+        type: string
         example: 'My Group'
         maxLength: 255
       description:
+        description: 'An short description of this product group'
+        type: string
         example: 'This is the best group ever'
         maxLength: 2550
       logo:
+        description: 'The logo for this component'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that owns this group'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
-      products: []
-      catalogue: []
+      products:
+        description: 'The groups that are a part of this product group'
+        type: \ArrayCollection
+      catalogue:
+        description: 'The Catalogue that this product group belongs to'
+        type: \Catalogue
     required:
       - name
       - sourceOrganization
   Group-write:
     properties:
       name:
+        description: 'The name of this product group'
+        type: string
         example: 'My Group'
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that owns this group'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
-      products: []
-      catalogue: []
+      products:
+        description: 'The groups that are a part of this product group'
+        type: \ArrayCollection
+      catalogue:
+        description: 'The Catalogue that this product group belongs to'
+        type: \Catalogue
     required:
       - name
       - sourceOrganization
   Offer-read:
     properties:
       id:
+        description: 'The UUID identifier of this object'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this offer'
+        type: string
         example: 'my offer'
         maxLength: 255
       description:
+        description: 'An short description of this offer'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
-      price: []
-      priceCurrency: []
+      price:
+        description: |
+          The price of this product
+          @example 50.00
+        type: string
+      priceCurrency:
+        description: |
+          The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+          @example EUR
+        type: string
       offeredBy:
+        description: 'The uri for the organisation that offers this offer'
+        type: string
         example: '(http://example.org/example/1)'
         format: url
         maxLength: 255
       availabilityEnds:
-        example: '20191231'
+        description: 'the date this offer ends'
+        type: string
+        example: '2020-01-13'
+        format: date
       availabilityStarts:
-        example: '20190101'
-      product: []
-      taxes: []
-      eligibleCustomerTypes: []
+        description: 'the date this offer has started'
+        type: string
+        example: '2020-01-13'
+        format: date
+      product:
+        description: 'The product that is sold via this offer'
+        type: \Product
+      taxes:
+        description: 'The taxdes that affect this offer'
+        type: \ArrayCollection
+      eligibleCustomerTypes:
+        description: 'The customer types that are eligible for this offer'
+        type: \ArrayCollection
     required:
       - name
       - price
@@ -5589,24 +5644,50 @@ definitions:
   Offer-write:
     properties:
       name:
+        description: 'The name of this offer'
+        type: string
         example: 'my offer'
         maxLength: 255
       description:
+        description: 'An short description of this offer'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
-      price: []
-      priceCurrency: []
+      price:
+        description: |
+          The price of this product
+          @example 50.00
+        type: string
+      priceCurrency:
+        description: |
+          The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+          @example EUR
+        type: string
       offeredBy:
+        description: 'The uri for the organisation that offers this offer'
+        type: string
         example: '(http://example.org/example/1)'
         format: url
         maxLength: 255
       availabilityEnds:
-        example: '20191231'
+        description: 'the date this offer ends'
+        type: string
+        example: '2020-01-13'
+        format: date
       availabilityStarts:
-        example: '20190101'
-      product: []
-      taxes: []
-      eligibleCustomerTypes: []
+        description: 'the date this offer has started'
+        type: string
+        example: '2020-01-13'
+        format: date
+      product:
+        description: 'The product that is sold via this offer'
+        type: \Product
+      taxes:
+        description: 'The taxdes that affect this offer'
+        type: \ArrayCollection
+      eligibleCustomerTypes:
+        description: 'The customer types that are eligible for this offer'
+        type: \ArrayCollection
     required:
       - name
       - price
@@ -5617,49 +5698,93 @@ definitions:
   Product-read:
     properties:
       id:
+        description: 'The UUID identifier of this object'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       sku:
+        description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
+        type: string
         example: 6666-2019
       name:
+        description: 'The name of this Product'
+        type: string
         example: 'My product'
         maxLength: 255
       description:
+        description: 'An short description of this Product'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
       logo:
+        description: 'The logo of this product'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
       movie:
+        description: 'The movie for this product'
+        type: string
         example: 'https://www.youtube.com/embed/RkBZYoMnx5w'
         format: url
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
-      price: []
+      price:
+        description: 'The price of this product'
+        type: string
+        example: '50.00'
       priceCurrency:
+        description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
+        type: string
         example: EUR
       taxPercentage:
+        description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
+        type: int
         example: '9'
       type:
+        description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
+        type: string
         example: simple
+        maxLength: 15
       calendar:
+        description: 'The uri referring to the calendar of this product.'
+        type: string
         example: 'http://example.org/calendar/calendar'
         format: url
         maxLength: 255
       requiresAppointment:
+        description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
+        type: bool
         example: 'false'
-      documents: []
-      images: []
-      externalDocs: []
-      groups: []
-      variations: []
-      groupedProducts: []
-      catalogue: []
-      offers: []
+      documents:
+        description: 'An array of URLs pointing to documents related to this product'
+        type: array
+      images:
+        description: 'An array of URLs pointing to images related to this product'
+        type: array
+      externalDocs:
+        description: 'An array of URLs pointing to external documents referred to from this product'
+        type: array
+      groups:
+        description: 'The product groups that this product is a part of'
+        type: \ArrayCollection
+      variations:
+        description: 'The different variations that are available of this product'
+        type: \ArrayCollection
+      groupedProducts:
+        description: 'If the product type is a **set** this contains the products that are part of that set'
+        type: \ArrayCollection
+      catalogue:
+        description: 'The Catalogue that this product belongs to'
+        type: \Catalogue
+      offers:
+        description: 'The offers that refer to this product'
+        type: \ArrayCollection
     required:
       - name
       - sourceOrganization
@@ -5669,43 +5794,79 @@ definitions:
   Product-write:
     properties:
       sku:
+        description: 'The human readable reference for this product, also known as Stock Keeping Unit (SKU)'
+        type: string
         example: 6666-2019
       name:
+        description: 'The name of this Product'
+        type: string
         example: 'My product'
         maxLength: 255
       description:
+        description: 'An short description of this Product'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
       logo:
+        description: 'The logo of this product'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
       movie:
+        description: 'The movie for this product'
+        type: string
         example: 'https://www.youtube.com/embed/RkBZYoMnx5w'
         format: url
         maxLength: 255
       sourceOrganization:
+        description: 'The RSIN of the organization that owns this product'
+        type: string
         example: '002851234'
         maxLength: 11
         minLength: 8
-      price: []
+      price:
+        description: 'The price of this product'
+        type: string
+        example: '50.00'
       priceCurrency:
+        description: 'The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
+        type: string
         example: EUR
       taxPercentage:
+        description: 'The tax percentage for this product as an integer e.g. 9% makes 9'
+        type: int
         example: '9'
       type:
+        description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
+        type: string
         example: simple
+        maxLength: 15
       calendar:
+        description: 'The uri referring to the calendar of this product.'
+        type: string
         example: 'http://example.org/calendar/calendar'
         format: url
         maxLength: 255
       requiresAppointment:
+        description: 'If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms'
+        type: bool
         example: 'false'
-      groups: []
-      parent: []
-      sets: []
-      catalogue: []
-      offers: []
+      groups:
+        description: 'The product groups that this product is a part of'
+        type: \ArrayCollection
+      parent:
+        description: 'The product that this product is a variation of'
+        type: \Product
+      sets:
+        description: 'The sets thats this product is a part of'
+        type: \ArrayCollection
+      catalogue:
+        description: 'The Catalogue that this product belongs to'
+        type: \Catalogue
+      offers:
+        description: 'The offers that refer to this product'
+        type: \ArrayCollection
     required:
       - name
       - sourceOrganization
@@ -5715,15 +5876,23 @@ definitions:
   Supplier-read:
     properties:
       id:
+        description: 'The Uuid identifier of this supplier'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this RequestType'
+        type: string
         example: 'My RequestType'
         maxLength: 255
       kvk:
+        description: 'The number under which the supplier is registered at the chamber of commerce'
+        type: string
         example: '30280353'
         maxLength: 255
       logo:
+        description: 'The logo for this component'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
@@ -5733,12 +5902,18 @@ definitions:
   Supplier-write:
     properties:
       name:
+        description: 'The name of this RequestType'
+        type: string
         example: 'My RequestType'
         maxLength: 255
       kvk:
+        description: 'The number under which the supplier is registered at the chamber of commerce'
+        type: string
         example: '30280353'
         maxLength: 255
       logo:
+        description: 'The logo for this component'
+        type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
         maxLength: 255
@@ -5748,39 +5923,65 @@ definitions:
   Tax-read:
     properties:
       id:
+        description: 'The UUID identifier of this object'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
+        description: 'The name of this tax'
+        type: string
         example: 'my offer'
         maxLength: 255
       description:
+        description: 'An short description of this tax'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
       price:
+        description: 'The price of this tax'
+        type: string
         example: '50.00'
       priceCurrency:
+        description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
+        type: string
         example: EUR
       percentage:
+        description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
+        type: int
         example: '9'
-      offers: []
+      offers:
+        description: 'The offers that use this tax'
+        type: \ArrayCollection
     required:
       - name
       - price
   Tax-write:
     properties:
       name:
+        description: 'The name of this tax'
+        type: string
         example: 'my offer'
         maxLength: 255
       description:
+        description: 'An short description of this tax'
+        type: string
         example: 'This is the best product ever'
         maxLength: 2550
       price:
+        description: 'The price of this tax'
+        type: string
         example: '50.00'
       priceCurrency:
+        description: 'The currency of this tax in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format'
+        type: string
         example: EUR
       percentage:
+        description: 'The tax percentage for this offer as an integer e.g. 9% makes 9'
+        type: int
         example: '9'
-      offers: []
+      offers:
+        description: 'The offers that use this tax'
+        type: \ArrayCollection
     required:
       - name
       - price

@@ -145,10 +145,10 @@ class Product
     private $groups;
 
     /**
-     *  @var string The price of this product
-     *  @example 50.00
+     * @var string The price of this product
+     * @example 50.00
      *
-     *  @ORM\Column(type="decimal", precision=8, scale=2)
+     * @ORM\Column(type="decimal", precision=8, scale=2)
      * @Assert\NotNull
      * @Groups({"read","write"})
      */
@@ -165,7 +165,7 @@ class Product
     private $priceCurrency = 'EUR';
 
     /**
-     * @var int The tax percentage for this product as an integer e.g. 9% makes 9
+     * @var integer The tax percentage for this product as an integer e.g. 9% makes 9
      * @example 9
      *
      * @Assert\NotBlank
@@ -194,7 +194,7 @@ class Product
     private $variations;
 
     /**
-     * @var string The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**
+     * @var string The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**
      * @example simple
      *
      * @ORM\Column
@@ -202,6 +202,9 @@ class Product
      * @Assert\Choice(
      *     choices = { "simple", "set", "virtual","external","ticket","variable","subscription","person","location","service" },
      *     message = "Choose either simple, set, virtual, external, ticket, variable, subscription, person, location or service, got {{ value }}"
+     * )
+     * @Assert\Length(
+     *     max = 15
      * )
      * @ApiFilter(SearchFilter::class, strategy="exact")
      * @ApiFilter(OrderFilter::class)
@@ -263,7 +266,7 @@ class Product
     private $calendar;
 
     /**
-     * @var bool If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
+     * @var boolean If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
      * @example false
      *
      * @ORM\Column(type="boolean")
