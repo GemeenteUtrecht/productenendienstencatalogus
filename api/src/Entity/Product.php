@@ -32,8 +32,8 @@ use Ramsey\Uuid\Uuid;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
- * @ApiFilter(SearchFilter::class, properties={"groups.id": "exact"})
- * @ApiFilter(SearchFilter::class, properties={"sourceOgranization.id": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"type","sku"})
+ * @ApiFilter(SearchFilter::class, properties={"sourceOgranization.id": "exact","groups.id": "exact","type": "exact","sku": "exact"})
  */
 class Product
 {
@@ -56,7 +56,6 @@ class Product
      *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true) //, unique=true
-     * @ApiFilter(SearchFilter::class, strategy="exact")
      */
     private $sku;
 
@@ -130,7 +129,6 @@ class Product
      * )
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
-     * @ApiFilter(SearchFilter::class, strategy="exact")
      */
     private $sourceOrganization;
 
@@ -206,8 +204,6 @@ class Product
      * @Assert\Length(
      *     max = 15
      * )
-     * @ApiFilter(SearchFilter::class, strategy="exact")
-     * @ApiFilter(OrderFilter::class)
      * @Groups({"read", "write"})
      */
     private $type;
