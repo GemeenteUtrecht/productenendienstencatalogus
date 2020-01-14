@@ -8,11 +8,11 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a type of customer.
@@ -35,6 +35,7 @@ class CustomerType
 {
     /**
      * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
@@ -48,6 +49,7 @@ class CustomerType
 
     /**
      * @var string The name of this CustomerType
+     *
      * @example My CustomerType
      *
      * @Groups({"read","write"})
@@ -61,6 +63,7 @@ class CustomerType
 
     /**
      * @var string The description for this CustomerType
+     *
      * @example this is the best customertype ever
      *
      * @Groups({"read","write"})
@@ -85,17 +88,17 @@ class CustomerType
     {
         $this->offers = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
-    	return $this->id;
+        return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
-    	$this->id = $id;
-    	
-    	return $this;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string

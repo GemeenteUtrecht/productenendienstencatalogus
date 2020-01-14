@@ -3,18 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a product.
@@ -39,6 +38,7 @@ class Product
 {
     /**
      * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -52,6 +52,7 @@ class Product
 
     /**
      * @var string The human readable reference for this product, also known as Stock Keeping Unit (SKU)
+     *
      * @example 6666-2019
      *
      * @Groups({"read","write"})
@@ -69,6 +70,7 @@ class Product
 
     /**
      * @var string The name of this Product
+     *
      * @example My product
      *
      * @Assert\NotNull
@@ -82,6 +84,7 @@ class Product
 
     /**
      * @var string An short description of this Product
+     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -94,6 +97,7 @@ class Product
 
     /**
      * @var string The logo of this product
+     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -107,6 +111,7 @@ class Product
 
     /**
      * @var string The movie for this product
+     *
      * @example https://www.youtube.com/embed/RkBZYoMnx5w
      *
      * @Assert\Url
@@ -120,6 +125,7 @@ class Product
 
     /**
      * @var string The RSIN of the organization that owns this product
+     *
      * @example 002851234
      *
      * @Assert\NotNull
@@ -144,6 +150,7 @@ class Product
 
     /**
      * @var string The price of this product
+     *
      * @example 50.00
      *
      * @ORM\Column(type="decimal", precision=8, scale=2)
@@ -154,6 +161,7 @@ class Product
 
     /**
      *  @var string The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *
      * @example EUR
      *
      * @ORM\Column(type="string")
@@ -163,7 +171,8 @@ class Product
     private $priceCurrency = 'EUR';
 
     /**
-     * @var integer The tax percentage for this product as an integer e.g. 9% makes 9
+     * @var int The tax percentage for this product as an integer e.g. 9% makes 9
+     *
      * @example 9
      *
      * @Assert\NotBlank
@@ -193,6 +202,7 @@ class Product
 
     /**
      * @var string The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**
+     *
      * @example simple
      *
      * @ORM\Column
@@ -250,6 +260,7 @@ class Product
 
     /**
      * @var string The uri referring to the calendar of this product.
+     *
      * @example http://example.org/calendar/calendar
      *
      * @Assert\Url
@@ -262,7 +273,8 @@ class Product
     private $calendar;
 
     /**
-     * @var boolean If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
+     * @var bool If the product requires a physical appointment, for example to request travel documents or for the booking of hotel rooms
+     *
      * @example false
      *
      * @ORM\Column(type="boolean")
@@ -303,17 +315,17 @@ class Product
         $this->sets = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
-    	return $this->id;
+        return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
-    	$this->id = $id;
-    	
-    	return $this;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getSku(): ?string

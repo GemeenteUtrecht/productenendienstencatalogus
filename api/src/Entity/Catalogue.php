@@ -3,17 +3,16 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a product catalogue.
@@ -36,6 +35,7 @@ class Catalogue
 {
     /**
      * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Groups({"read"})
@@ -49,6 +49,7 @@ class Catalogue
 
     /**
      * @var string The name of this Catalogue
+     *
      * @example My Catalogue
      *
      * @Assert\NotNull
@@ -62,6 +63,7 @@ class Catalogue
 
     /**
      * @var string An short description of this Catalogue
+     *
      * @example This is the best catalogue ever
      *
      * @Assert\Length(
@@ -74,6 +76,7 @@ class Catalogue
 
     /**
      * @var string The logo for this component
+     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -87,6 +90,7 @@ class Catalogue
 
     /**
      * @var string The RSIN of the organization that provides this catalogue
+     *
      * @example 002851234
      *
      * @Assert\NotNull
@@ -122,17 +126,17 @@ class Catalogue
         $this->groups = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
-    	return $this->id;
+        return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
-    	$this->id = $id;
-    	
-    	return $this;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string

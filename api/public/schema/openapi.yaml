@@ -5177,13 +5177,13 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this Supplier'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
-          description: 'The logo for this component'
+          description: 'The logo for this supplier'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -5198,13 +5198,13 @@ components:
         - kvk
       properties:
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this Supplier'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
-          description: 'The logo for this component'
+          description: 'The logo for this supplier'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -5228,13 +5228,13 @@ components:
             url: 'http://schema.org/identifier'
           type: string
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this Supplier'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
-          description: 'The logo for this component'
+          description: 'The logo for this supplier'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -5258,13 +5258,13 @@ components:
           readOnly: true
           type: string
         name:
-          description: 'The name of this RequestType'
+          description: 'The name of this Supplier'
           type: string
         kvk:
           description: 'The number under which the supplier is registered at the chamber of commerce'
           type: string
         logo:
-          description: 'The logo for this component'
+          description: 'The logo for this supplier'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -5747,7 +5747,8 @@ definitions:
         type: int
         example: '9'
       type:
-        description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
+        description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+
         type: string
         example: simple
         maxLength: 15
@@ -5838,7 +5839,8 @@ definitions:
         type: int
         example: '9'
       type:
-        description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
+        description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+
         type: string
         example: simple
         maxLength: 15

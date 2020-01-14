@@ -2,15 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing a supplier of products.
@@ -33,6 +30,7 @@ class Supplier
 {
     /**
      * @var UuidInterface The Uuid identifier of this supplier
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -44,9 +42,9 @@ class Supplier
      */
     private $id;
 
-
     /**
-     * @var string The name of this RequestType
+     * @var string The name of this Supplier
+     *
      * @example My RequestType
      *
      * @Assert\NotNull
@@ -60,6 +58,7 @@ class Supplier
 
     /**
      * @var string The number under which the supplier is registered at the chamber of commerce
+     *
      * @example 30280353
      *
      * @Assert\NotNull
@@ -72,7 +71,8 @@ class Supplier
     private $kvk;
 
     /**
-     * @var string The logo for this component
+     * @var string The logo for this supplier
+     *
      * @example https://www.my-organization.com/logo.png
      *
      * @Assert\Url
@@ -82,18 +82,18 @@ class Supplier
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logo;    
-    
+    private $logo;
+
     public function getId(): Uuid
     {
-    	return $this->id;
+        return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
-    	$this->id = $id;
-    	
-    	return $this;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getSourceOrganization(): ?string
