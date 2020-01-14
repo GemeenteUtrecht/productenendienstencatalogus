@@ -4835,7 +4835,7 @@ components:
           items:
             $ref: '#/components/schemas/Product-read'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         groupedProducts:
           readOnly: true
@@ -4932,7 +4932,7 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product-write'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         sets:
           writeOnly: true
@@ -5028,7 +5028,7 @@ components:
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         groupedProducts:
           readOnly: true
@@ -5134,7 +5134,7 @@ components:
           description: 'The product that this product is a variation of'
           $ref: '#/components/schemas/Product:jsonld-write'
         type:
-          description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+          description: 'The type of this product. **simple**, **set**, **virtual**, **external**, **ticket**, **variable**, **subscription**, **person**, **location**, **service**'
           type: string
         sets:
           writeOnly: true
@@ -5748,8 +5748,10 @@ definitions:
         example: '9'
       type:
         description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+
         type: string
         example: simple
+        maxLength: 15
       calendar:
         description: 'The uri referring to the calendar of this product.'
         type: string
@@ -5838,8 +5840,10 @@ definitions:
         example: '9'
       type:
         description: 'The type of this product. **simple**: ,**set**: ,**virtual**: ,**external**: ,**ticket**: ,**variable**: ,**subscription**,**person**,**location**,**service**'
+
         type: string
         example: simple
+        maxLength: 15
       calendar:
         description: 'The uri referring to the calendar of this product.'
         type: string
@@ -5879,7 +5883,7 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'The name of this Supplier'
+        description: 'The name of this RequestType'
         type: string
         example: 'My RequestType'
         maxLength: 255
@@ -5889,7 +5893,7 @@ definitions:
         example: '30280353'
         maxLength: 255
       logo:
-        description: 'The logo for this supplier'
+        description: 'The logo for this component'
         type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
@@ -5900,7 +5904,7 @@ definitions:
   Supplier-write:
     properties:
       name:
-        description: 'The name of this Supplier'
+        description: 'The name of this RequestType'
         type: string
         example: 'My RequestType'
         maxLength: 255
@@ -5910,7 +5914,7 @@ definitions:
         example: '30280353'
         maxLength: 255
       logo:
-        description: 'The logo for this supplier'
+        description: 'The logo for this component'
         type: string
         example: 'https://www.my-organization.com/logo.png'
         format: url
