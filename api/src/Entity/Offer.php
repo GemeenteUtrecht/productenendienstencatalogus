@@ -7,11 +7,11 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ramsey\Uuid\Uuid;
 
 /**
  * An entity representing an offer.
@@ -34,6 +34,7 @@ class Offer
 {
     /**
      * @var UuidInterface The UUID identifier of this object
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -47,6 +48,7 @@ class Offer
 
     /**
      * @var string The name of this offer
+     *
      * @example my offer
      *
      * @ORM\Column(type="string", length=255)
@@ -60,6 +62,7 @@ class Offer
 
     /**
      * @var string An short description of this offer
+     *
      * @example This is the best product ever
      *
      * @Assert\Length(
@@ -84,6 +87,7 @@ class Offer
 
     /**
      *  @var string The price of this product
+     *
      *  @example 50.00
      *
      * @Groups({"read","write"})
@@ -95,6 +99,7 @@ class Offer
 
     /**
      *  @var string The currency of this product in an [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format
+     *
      *  @example EUR
      *
      * @Assert\Currency
@@ -119,6 +124,7 @@ class Offer
 
     /**
      * @var DateTime the date this offer ends
+     *
      * @example 20191231
      *
      * @ORM\Column(type="datetime")
@@ -131,6 +137,7 @@ class Offer
 
     /**
      * @var DateTime the date this offer has started
+     *
      * @example 20190101
      *
      * @Assert\NotNull
@@ -163,17 +170,17 @@ class Offer
     {
         $this->eligibleCustomerTypes = new ArrayCollection();
     }
-    
+
     public function getId(): Uuid
     {
-    	return $this->id;
+        return $this->id;
     }
-    
+
     public function setId(Uuid $id): self
     {
-    	$this->id = $id;
-    	
-    	return $this;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string
