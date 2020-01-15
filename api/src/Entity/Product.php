@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @ApiFilter(OrderFilter::class, properties={"type","sku"})
- * @ApiFilter(SearchFilter::class, properties={"sourceOgranization.id": "exact","groups.id": "exact","type": "exact","sku": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"sourceOgranization": "exact","groups.id": "exact","type": "exact","sku": "exact"})
  */
 class Product
 {

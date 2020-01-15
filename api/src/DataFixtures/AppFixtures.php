@@ -278,7 +278,7 @@ class AppFixtures extends Fixture
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/erik.jpg');
+        $product->setLogo('https://huwelijksplanner.online/images/content/ambtenaar/erik.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
         $product->setId($id);
@@ -302,7 +302,7 @@ class AppFixtures extends Fixture
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/ike.jpg');
+        $product->setLogo('https://huwelijksplanner.online/images/content/ambtenaar/ike.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
         $product->setId($id);
@@ -326,7 +326,7 @@ class AppFixtures extends Fixture
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/rene.jpg');
+        $product->setLogo('https://huwelijksplanner.online/images/content/ambtenaar/rene.jpg');
         $product->setMovie('https://www.youtube.com/embed/DAaoMvj1Qbs');
         $manager->persist($product);
         $product->setId($id);
@@ -350,7 +350,7 @@ class AppFixtures extends Fixture
         $product->setPriceCurrency('EUR');
         $product->setTaxPercentage(0);
         $product->setRequiresAppointment(false);
-        $product->setLogo('https://utrecht.trouwplanner.online/images/content/ambtenaar/trouwambtenaar.jpg');
+        $product->setLogo('https://huwelijksplanner.online/images/content/ambtenaar/trouwambtenaar.jpg');
         $product->setMovie('https://www.youtube.com/embed/RkBZYoMnx5w');
         $manager->persist($product);
         $product->setId($id);
