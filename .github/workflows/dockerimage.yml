@@ -131,3 +131,29 @@ jobs:
             release_name: ${{ steps.releasecode.outputs.releasename }}
             draft: false
             prerelease: false
+  create_pr:
+    runs-on: ubuntu-latest
+      name: Create Pull-Request on child repositories
+      #needs: build
+      if: contains( github.ref, 'master' )
+      steps:
+        - uses: actions/checkout@v1
+        - name: Install hub
+          uses: geertvdc/setup-hub@master
+        - name: GitHub ref
+          run: echo $GITHUB_REF
+        - name: Create PR
+#         run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h ConductionNL/productenendienstencatalogus:master -m "$MESSAGE"
+#         run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h $GITHUB_REPOSITORY:$GITHUB_REF -m "$MESSAGE"
+          run: |
+            for repo in $REPOS; do
+              hub pull-request -b $repo:master -h $GITHUB_REPOSITORY:master -m "$MESSAGE"
+            done
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+            GITHUB_USER: ${{ secrets.GITHUB_CI_USER }}
+            GITHUB_REPOSITORY: ${{ github.repository }}
+            GITHUB_REF: ${{ github.ref }}
+            HUB_VERBOSE: true
+            MESSAGE: Automated pull request from GitHub Action
+            REPOS: ${{ secrets.REPOS }}
