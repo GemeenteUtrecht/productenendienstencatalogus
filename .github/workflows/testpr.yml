@@ -6,6 +6,7 @@ on:
             - master
 jobs:
     create_pr:
+        runs-on: ubuntu-latest
         name: Create Pull-Request on child repositories
         #needs: build
         if: contains( github.ref, 'master' )
