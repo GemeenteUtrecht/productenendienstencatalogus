@@ -19,7 +19,7 @@ jobs:
             - name: Create PR
 #              run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h ConductionNL/productenendienstencatalogus:master -m "$MESSAGE"
 #              run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h $GITHUB_REPOSITORY:$GITHUB_REF -m "$MESSAGE"
-#              run: |
+              run: |
                 for repo in $REPOS; do
                   hub pull-request -b $repo:master -h $GITHUB_REPOSITORY:master -m "$MESSAGE"
                 done
