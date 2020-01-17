@@ -15,7 +15,7 @@ jobs:
             - name: Install hub
               uses: geertvdc/setup-hub@master
             - name: Create PR
-              run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -m "Automated pull request from GitHub Action"
+              run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h ConductionNL/productenendienstencatalogus:master -m "Automated pull request from GitHub Action"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   GITHUB_USER: ${{ github.actor }}
