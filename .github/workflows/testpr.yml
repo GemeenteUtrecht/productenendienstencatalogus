@@ -1,0 +1,15 @@
+name: Pull Request Test
+
+on:
+    push:
+        branches:
+            - master
+jobs:
+    create_pr:
+        name: Create Pull-Request on child repositories
+        #needs: build
+        if: contains( github.ref, 'master' )
+        steps:
+            - uses: actions/checkout@v1
+            - name: Create PR
+              run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -m "Automated pull request from GitHub Action"
