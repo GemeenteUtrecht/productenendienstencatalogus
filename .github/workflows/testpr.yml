@@ -17,7 +17,8 @@ jobs:
             - name: Create PR
               run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h $GITHUB_REPOSITORY:$GITHUB_REF -m "Automated pull request from GitHub Action"
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  GITHUB_USER: ${{ github.actor }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_CI_TOKEN }}
+                  GITHUB_USER: ${{ secrets.GITHUB_CI_USER }}
                   GITHUB_REPOSITORY: ${{ github.repository }}
                   GITHUB_REF: ${{ github.ref }}
+                  HUB_VERBOSE: true
