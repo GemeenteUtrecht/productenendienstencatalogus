@@ -14,7 +14,6 @@ jobs:
             - uses: actions/checkout@v1
             - name: Install hub
               uses: geertvdc/setup-hub@master
-              run: echo "$GITHUB_USER"
             - name: Create PR
               run: hub pull-request -b GemeenteUtrecht/productenendienstencatalogus:master -h ConductionNL/productenendienstencatalogus:master -m "Automated pull request from GitHub Action"
               env:
