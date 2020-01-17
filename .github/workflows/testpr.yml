@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Create Pull-Request on child repositories
         #needs: build
-        if: contains( github.ref, 'master' )
+        if: contains( github.ref, 'master' ) && secrets.REPOS != ''
         steps:
             - uses: actions/checkout@v1
             - name: Install hub
