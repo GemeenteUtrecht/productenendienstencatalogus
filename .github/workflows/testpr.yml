@@ -11,6 +11,8 @@ jobs:
         #needs: build
         if: contains( github.ref, 'master' )
         steps:
+            - name: wait some time
+              run: sleep 120
             - uses: actions/checkout@v1
             - name: Install hub
               uses: geertvdc/setup-hub@master
